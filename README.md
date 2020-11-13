@@ -1,1 +1,11 @@
-# Day 1 - Setup Scavenger Hunt App
+# Scavenger Hunt App
+
+**Team Members**
+Krystian Francuz-Harris, Mike Wohl, David Dicken, Jack Nelson, Chandler Puckett<br>
+
+[Asana Task Board](https://app.asana.com/0/1199185554910949/board)<br>
+
+## Project Overview
+User based Android platform scavenger hunt game that allows parents to create a task-oriented experience to entertain their kids while running errands. The user will create a custom “Quest” based on their destination, with augmented reality interactivity and "rewards" when an item is found!
+
+[Project Documents](https://drive.google.com/drive/folders/16NnexZzA5fRYzzEOrDPlrTXU8pRyE5RN)
