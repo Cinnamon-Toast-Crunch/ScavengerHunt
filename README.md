@@ -1,6 +1,6 @@
 # Scavenger Hunt App
 
-**Team Members**
+**Team Members** <br>
 Krystian Francuz-Harris, Mike Wohl, David Dicken, Jack Nelson, Chandler Puckett<br>
 
 [Asana Task Board](https://app.asana.com/0/1199185554910949/board)<br>
