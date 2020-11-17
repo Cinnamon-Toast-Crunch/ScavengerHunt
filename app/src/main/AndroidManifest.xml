@@ -9,6 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ScavengerHunt">
+        <activity android:name=".ScavengerHuntActivity"></activity>
+        <activity android:name=".CreateTaskActivity" />
+        <activity android:name=".CreateLocationActivity" />
+        <activity android:name=".CreateHuntActivity" />
+        <activity android:name=".CreateQuestActivity" />
+        <activity android:name=".ContactActivity" />
+        <activity android:name=".ParentProfileActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".SignupActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
