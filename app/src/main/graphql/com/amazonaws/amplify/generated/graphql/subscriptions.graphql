@@ -1,0 +1,583 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateUser {
+  onCreateUser {
+    id
+    userName
+    email
+    picture
+    quests {
+      items {
+        id
+        userID
+        title
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    locations {
+      items {
+        id
+        userID
+        name
+        lat
+        lon
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    contacts {
+      items {
+        id
+        userID
+        name
+        phoneNumber
+        email
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateUser {
+  onUpdateUser {
+    id
+    userName
+    email
+    picture
+    quests {
+      items {
+        id
+        userID
+        title
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    locations {
+      items {
+        id
+        userID
+        name
+        lat
+        lon
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    contacts {
+      items {
+        id
+        userID
+        name
+        phoneNumber
+        email
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteUser {
+  onDeleteUser {
+    id
+    userName
+    email
+    picture
+    quests {
+      items {
+        id
+        userID
+        title
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    locations {
+      items {
+        id
+        userID
+        name
+        lat
+        lon
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    contacts {
+      items {
+        id
+        userID
+        name
+        phoneNumber
+        email
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateContact {
+  onCreateContact {
+    id
+    userID
+    name
+    phoneNumber
+    email
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateContact {
+  onUpdateContact {
+    id
+    userID
+    name
+    phoneNumber
+    email
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteContact {
+  onDeleteContact {
+    id
+    userID
+    name
+    phoneNumber
+    email
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateQuest {
+  onCreateQuest {
+    id
+    userID
+    title
+    locations {
+      items {
+        id
+        questID
+        locationID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateQuest {
+  onUpdateQuest {
+    id
+    userID
+    title
+    locations {
+      items {
+        id
+        questID
+        locationID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteQuest {
+  onDeleteQuest {
+    id
+    userID
+    title
+    locations {
+      items {
+        id
+        questID
+        locationID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateQuestJoiner {
+  onCreateQuestJoiner {
+    id
+    questID
+    locationID
+    quest {
+      id
+      userID
+      title
+      locations {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    location {
+      id
+      userID
+      name
+      lat
+      lon
+      quests {
+        nextToken
+      }
+      hunts {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateQuestJoiner {
+  onUpdateQuestJoiner {
+    id
+    questID
+    locationID
+    quest {
+      id
+      userID
+      title
+      locations {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    location {
+      id
+      userID
+      name
+      lat
+      lon
+      quests {
+        nextToken
+      }
+      hunts {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteQuestJoiner {
+  onDeleteQuestJoiner {
+    id
+    questID
+    locationID
+    quest {
+      id
+      userID
+      title
+      locations {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    location {
+      id
+      userID
+      name
+      lat
+      lon
+      quests {
+        nextToken
+      }
+      hunts {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateLocation {
+  onCreateLocation {
+    id
+    userID
+    name
+    lat
+    lon
+    quests {
+      items {
+        id
+        questID
+        locationID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    hunts {
+      items {
+        id
+        locationID
+        name
+        totalPoints
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateLocation {
+  onUpdateLocation {
+    id
+    userID
+    name
+    lat
+    lon
+    quests {
+      items {
+        id
+        questID
+        locationID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    hunts {
+      items {
+        id
+        locationID
+        name
+        totalPoints
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteLocation {
+  onDeleteLocation {
+    id
+    userID
+    name
+    lat
+    lon
+    quests {
+      items {
+        id
+        questID
+        locationID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    hunts {
+      items {
+        id
+        locationID
+        name
+        totalPoints
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateHunt {
+  onCreateHunt {
+    id
+    locationID
+    name
+    totalPoints
+    tasks {
+      items {
+        id
+        huntID
+        instruction
+        objective
+        completed
+        pointValue
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateHunt {
+  onUpdateHunt {
+    id
+    locationID
+    name
+    totalPoints
+    tasks {
+      items {
+        id
+        huntID
+        instruction
+        objective
+        completed
+        pointValue
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteHunt {
+  onDeleteHunt {
+    id
+    locationID
+    name
+    totalPoints
+    tasks {
+      items {
+        id
+        huntID
+        instruction
+        objective
+        completed
+        pointValue
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateTask {
+  onCreateTask {
+    id
+    huntID
+    instruction
+    objective
+    completed
+    pointValue
+    hints {
+      items {
+        id
+        taskID
+        content
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateTask {
+  onUpdateTask {
+    id
+    huntID
+    instruction
+    objective
+    completed
+    pointValue
+    hints {
+      items {
+        id
+        taskID
+        content
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteTask {
+  onDeleteTask {
+    id
+    huntID
+    instruction
+    objective
+    completed
+    pointValue
+    hints {
+      items {
+        id
+        taskID
+        content
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateHint {
+  onCreateHint {
+    id
+    taskID
+    content
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateHint {
+  onUpdateHint {
+    id
+    taskID
+    content
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteHint {
+  onDeleteHint {
+    id
+    taskID
+    content
+    createdAt
+    updatedAt
+  }
+}

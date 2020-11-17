@@ -1,0 +1,306 @@
+# this is an auto generated file. This will be overwritten
+query GetUser($id: ID!) {
+  getUser(id: $id) {
+    id
+    userName
+    email
+    picture
+    quests {
+      items {
+        id
+        userID
+        title
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    locations {
+      items {
+        id
+        userID
+        name
+        lat
+        lon
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    contacts {
+      items {
+        id
+        userID
+        name
+        phoneNumber
+        email
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListUsers(
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      userName
+      email
+      picture
+      quests {
+        nextToken
+      }
+      locations {
+        nextToken
+      }
+      contacts {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetContact($id: ID!) {
+  getContact(id: $id) {
+    id
+    userID
+    name
+    phoneNumber
+    email
+    createdAt
+    updatedAt
+  }
+}
+query ListContacts(
+  $filter: ModelContactFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listContacts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      userID
+      name
+      phoneNumber
+      email
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetQuest($id: ID!) {
+  getQuest(id: $id) {
+    id
+    userID
+    title
+    locations {
+      items {
+        id
+        questID
+        locationID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListQuests(
+  $filter: ModelQuestFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listQuests(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      userID
+      title
+      locations {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetLocation($id: ID!) {
+  getLocation(id: $id) {
+    id
+    userID
+    name
+    lat
+    lon
+    quests {
+      items {
+        id
+        questID
+        locationID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    hunts {
+      items {
+        id
+        locationID
+        name
+        totalPoints
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListLocations(
+  $filter: ModelLocationFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listLocations(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      userID
+      name
+      lat
+      lon
+      quests {
+        nextToken
+      }
+      hunts {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetHunt($id: ID!) {
+  getHunt(id: $id) {
+    id
+    locationID
+    name
+    totalPoints
+    tasks {
+      items {
+        id
+        huntID
+        instruction
+        objective
+        completed
+        pointValue
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListHunts(
+  $filter: ModelHuntFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listHunts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      locationID
+      name
+      totalPoints
+      tasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetTask($id: ID!) {
+  getTask(id: $id) {
+    id
+    huntID
+    instruction
+    objective
+    completed
+    pointValue
+    hints {
+      items {
+        id
+        taskID
+        content
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListTasks(
+  $filter: ModelTaskFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listTasks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      huntID
+      instruction
+      objective
+      completed
+      pointValue
+      hints {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetHint($id: ID!) {
+  getHint(id: $id) {
+    id
+    taskID
+    content
+    createdAt
+    updatedAt
+  }
+}
+query ListHints(
+  $filter: ModelHintFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listHints(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      taskID
+      content
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}

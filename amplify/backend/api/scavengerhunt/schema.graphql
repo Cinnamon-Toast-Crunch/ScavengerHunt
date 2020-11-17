@@ -1,0 +1,71 @@
+type User @model {
+  id: ID!
+  userName: String!
+  email: String!
+  picture: String
+
+  quests: [Quest] @connection(keyName: "byUser", fields: ["id"])
+  locations: [Location] @connection(keyName: "byUser", fields: ["id"])
+  contacts: [Contact] @connection(keyName: "byUser", fields: ["id"])
+}
+
+type Contact @model @key(name: "byUser", fields: ["userID"]){
+  id: ID!
+  userID: ID!
+  name: String
+  phoneNumber: String
+  email: String
+}
+
+type Quest @model @key(name: "byUser", fields: ["userID"]) {
+  id: ID!
+  userID: ID!
+  title: String!
+  locations: [QuestJoiner] @connection(keyName: "byQuest", fields: ["id"])
+
+}
+
+type QuestJoiner @model(queries: null)
+@key(name: "byQuest", fields: ["questID", "locationID"])
+@key(name: "byLocation", fields: ["locationID", "questID"]){
+  id: ID!
+  questID: ID!
+  locationID: ID!
+  quest: Quest! @connection(fields: ["questID"])
+  location: Location! @connection(fields: ["locationID"])
+}
+
+
+type Location @model @key(name: "byUser", fields: ["userID"]) {
+  id: ID!
+  userID: ID!
+  name: String!
+  lat: Float
+  lon: Float
+  quests: [QuestJoiner] @connection(keyName: "byLocation", fields: ["id"])
+  hunts: [Hunt] @connection(keyName: "byLocation",fields: ["id"])
+}
+
+type Hunt @model @key(name: "byLocation", fields: ["locationID"]) {
+  id: ID!
+  locationID: ID!
+  name: String!
+  totalPoints: Int
+  tasks: [Task] @connection(keyName: "byHunt", fields: ["id"])
+}
+
+type Task @model @key(name: "byHunt", fields: ["huntID"]) {
+  id: ID!
+  huntID: ID!
+  instruction: String
+  objective: String!
+  completed: Boolean!
+  pointValue: Int
+  hints: [Hint] @connection(keyName: "byTasks", fields: ["id"])
+}
+
+type Hint @model @key(name: "byTasks", fields: ["taskID"]) {
+  id: ID!
+  taskID: ID!
+  content: String
+}
