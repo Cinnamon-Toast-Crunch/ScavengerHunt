@@ -29,13 +29,14 @@ android {
 }
 
 dependencies {
-    //    --- Room ---
+//    --- Room ---
     def room_version = "2.2.5"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-rxjava2:$room_version"
     implementation "androidx.room:room-guava:$room_version"
     testImplementation "androidx.room:room-testing:$room_version"
+
 //    --- Cognito ---
     implementation 'com.amplifyframework:aws-auth-cognito:1.4.1'
     implementation('com.amazonaws:aws-android-sdk-auth-userpools:2.8.+@aar') { transitive = true }
