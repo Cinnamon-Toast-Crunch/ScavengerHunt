@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ScavengerHunt">
         <activity android:name=".ScavengerHuntActivity"></activity>
-        <activity android:name=".CreateTaskActivity" />
+        <activity android:name=".LaunchQuestActivity" />
         <activity android:name=".CreateLocationActivity" />
         <activity android:name=".CreateHuntActivity" />
         <activity android:name=".CreateQuestActivity" />
