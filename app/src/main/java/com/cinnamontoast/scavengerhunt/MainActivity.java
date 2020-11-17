@@ -3,9 +3,11 @@ package com.cinnamontoast.scavengerhunt;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
@@ -24,7 +26,16 @@ public class MainActivity extends AppCompatActivity {
 
         configAWS();
 
-        }
+
+
+        findViewById(R.id.signUpTemp).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openSignUpPage();
+            }
+        });
+
+    }
 
 
     public void configAWS() {
@@ -41,4 +52,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    private void openSignUpPage(){
+        Intent i = new Intent(this, SignupActivity.class);
+        startActivity(i);
+    }
+
 }
