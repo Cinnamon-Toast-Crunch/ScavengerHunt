@@ -17,7 +17,19 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-
+        
+      setupButtons();
+      signUpUser();
+    }
+       
+  
+        public void setupButtons (){
+        Button signUpBtn = findViewById(R.id.signUpBtn);
+        signUpBtn.setOnClickListener(view -> this.startActivity(new Intent(this, ParentProfileActivity.class)));
+        }
+  
+  
+        public void signUpUser(){
         findViewById(R.id.signUpBtn).setOnClickListener(view -> {
             // TODO: Input Verification
 
@@ -45,4 +57,3 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 
-}
