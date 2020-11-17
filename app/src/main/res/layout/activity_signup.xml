@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".SignupActivity">
 
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -136,5 +137,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailLayout" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

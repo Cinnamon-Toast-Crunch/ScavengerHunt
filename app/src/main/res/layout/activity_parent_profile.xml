@@ -6,4 +6,46 @@
     android:layout_height="match_parent"
     tools:context=".ParentProfileActivity">
 
+    <Button
+        android:id="@+id/createquest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create a Quest"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/createlocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create New Location"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createquest"
+        app:layout_constraintVertical_bias="0.334" />
+
+    <Button
+        android:id="@+id/addplayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add a Scavenger"
+        app:layout_constraintBottom_toTopOf="@+id/createlocation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createquest" />
+
+    <Button
+        android:id="@+id/startquest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Quest"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createlocation"
+        app:layout_constraintVertical_bias="0.265" />
 </androidx.constraintlayout.widget.ConstraintLayout>
