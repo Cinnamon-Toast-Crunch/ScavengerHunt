@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements QuestAdapter.Ques
         setupButtons();
         
     }
+    
     public Quest addFakeQuest(String title, User user){
         Quest quest = Quest.builder().userId(user.getId()).title(title).build();
         return quest;
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements QuestAdapter.Ques
     }
 
     @Override
-    public void huntFormatter(Hunt hunt) {
+    public void huntFormatter(Hunt hunt) {}
 
 
     public void setupButtons (){
