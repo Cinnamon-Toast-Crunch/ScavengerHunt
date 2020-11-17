@@ -26,6 +26,7 @@ public class SignInActivity extends AppCompatActivity {
             String username = ((TextView) findViewById(R.id.usernameSignIn)).getText().toString();
             String password = ((TextView) findViewById(R.id.loginPassword)).getText().toString();
 
+            
             Amplify.Auth.signIn(
                     username,
                     password,
