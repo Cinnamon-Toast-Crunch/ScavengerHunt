@@ -1,5 +1,7 @@
 plugins {
     id 'com.android.application'
+    id 'com.apollographql.apollo'
+    id 'com.amplifyframework.amplifytools'
 }
 
 android {
@@ -52,4 +54,6 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation("com.apollographql.apollo:apollo-runtime:2.4.0")
 }

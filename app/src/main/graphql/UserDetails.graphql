@@ -1,0 +1,44 @@
+query GetUserDetails($id: ID!) {
+    getUser(id: $id) {
+        id
+        userName
+        email
+        picture
+        quests {
+            items {
+                id
+                userID
+                title
+                createdAt
+                updatedAt
+            }
+            nextToken
+        }
+        locations {
+            items {
+                id
+                userID
+                name
+                lat
+                lon
+                createdAt
+                updatedAt
+            }
+            nextToken
+        }
+        contacts {
+            items {
+                id
+                userID
+                name
+                phoneNumber
+                email
+                createdAt
+                updatedAt
+            }
+            nextToken
+        }
+        createdAt
+        updatedAt
+    }
+}
