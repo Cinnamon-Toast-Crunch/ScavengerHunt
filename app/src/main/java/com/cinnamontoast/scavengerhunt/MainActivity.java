@@ -26,20 +26,12 @@ public class MainActivity extends AppCompatActivity {
 
         configAWS();
 
-
-
-        findViewById(R.id.signUpTemp).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openSignUpPage();
-            }
-        });
-
     }
 
 
     public void configAWS() {
         //configAWS();
+
         try {
             Amplify.addPlugin(new AWSS3StoragePlugin());
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
@@ -52,10 +44,5 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-    private void openSignUpPage(){
-        Intent i = new Intent(this, SignupActivity.class);
-        startActivity(i);
-    }
-
+    
 }
