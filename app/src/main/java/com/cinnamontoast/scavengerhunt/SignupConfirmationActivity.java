@@ -8,7 +8,6 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.amazonaws.mobile.auth.ui.SignInActivity;
 import com.amplifyframework.core.Amplify;
 
 public class SignupConfirmationActivity extends AppCompatActivity {

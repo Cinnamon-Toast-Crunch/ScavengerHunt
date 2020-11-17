@@ -28,7 +28,8 @@ public class SignupActivity extends AppCompatActivity {
             String email = ((TextView)findViewById(R.id.emailSignUp)).getText().toString();
 
             // TODO: Profile Pic upload + make default pic image clickable to upload / update img
-
+            // TODO: Storing family ID Somewhere for later use?
+            // TODO: get rid of Birthday field? is it necessary?
 
             Amplify.Auth.signUp(
                     username,
