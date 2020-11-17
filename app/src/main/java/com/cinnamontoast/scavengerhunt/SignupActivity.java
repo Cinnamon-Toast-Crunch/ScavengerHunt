@@ -19,6 +19,5 @@ public class SignupActivity extends AppCompatActivity {
     public void setupButtons (){
         Button register = findViewById(R.id.register);
         register.setOnClickListener(view -> this.startActivity(new Intent(this, ParentProfileActivity.class)));
-
     }
 }
