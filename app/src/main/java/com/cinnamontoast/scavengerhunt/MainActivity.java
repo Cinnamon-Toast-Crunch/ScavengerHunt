@@ -5,9 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+
+import android.view.View;
+
+import android.widget.Button;
+
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
@@ -35,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements QuestAdapter.Ques
         setContentView(R.layout.activity_main);
 
         configAWS();
+
         User tempUser = addFakeUser("fakeUserBob", "bob@bob.gov");
         quests.add(addFakeQuest("walmart", tempUser));
         quests.add(addFakeQuest("zoo", tempUser));
@@ -62,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements QuestAdapter.Ques
         huntRecycler.setLayoutManager(new LinearLayoutManager(this));
         huntRecycler.setAdapter(new HuntAdapter(hunts, this));
 
+        setupButtons();
+        
     }
     public Quest addFakeQuest(String title, User user){
         Quest quest = Quest.builder().userId(user.getId()).title(title).build();
@@ -81,8 +90,10 @@ public class MainActivity extends AppCompatActivity implements QuestAdapter.Ques
         return hunt;
     }
 
+
     public void configAWS() {
         //configAWS();
+
         try {
             Amplify.addPlugin(new AWSS3StoragePlugin());
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
@@ -96,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements QuestAdapter.Ques
 
     }
 
+
     @Override
     public void questFormatter(Quest quest) {
 
@@ -108,6 +120,15 @@ public class MainActivity extends AppCompatActivity implements QuestAdapter.Ques
 
     @Override
     public void huntFormatter(Hunt hunt) {
+
+
+    public void setupButtons (){
+        Button login = findViewById(R.id.login);
+        login.setOnClickListener(view -> this.startActivity(new Intent(this, LoginActivity.class)));
+
+        Button signup = findViewById(R.id.signup);
+        signup.setOnClickListener(view -> this.startActivity(new Intent(this, SignupActivity.class)));
+
 
     }
 }
