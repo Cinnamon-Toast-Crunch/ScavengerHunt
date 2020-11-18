@@ -42,37 +42,38 @@ public class MainActivity extends AppCompatActivity implements QuestAdapter.Ques
 
         configAWS();
 
-        User tempUser = addFakeUser("fakeUserBob", "bob@bob.gov");
-        quests.add(addFakeQuest("walmart", tempUser));
-        quests.add(addFakeQuest("zoo", tempUser));
-        quests.add(addFakeQuest("space station", tempUser));
-
-        RecyclerView questRecycler = findViewById(R.id.questRecycler);
-        questRecycler.setLayoutManager(new LinearLayoutManager(this));
-        questRecycler.setAdapter(new QuestAdapter(quests,this));
-
-        Location tempLocation = addFakeLocation("space station", tempUser);
-        locations.add(addFakeLocation("space station", tempUser));
-        locations.add(addFakeLocation("the moon", tempUser));
-        locations.add(addFakeLocation("low earth orbit", tempUser));
-
-        RecyclerView locationRecycler = findViewById(R.id.locationRecycler);
-        locationRecycler.setLayoutManager(new LinearLayoutManager(this));
-        locationRecycler.setAdapter(new LocationAdapter(locations, this));
-
-        Hunt tempHunt = addFakeHunt("find the freeze dried ice cream", 10, tempLocation);
-        hunts.add(addFakeHunt("pilot space station", 15, tempLocation));
-        hunts.add(addFakeHunt("visit the moon", 25, tempLocation));
-        hunts.add(addFakeHunt("enter low earth orbit", 50,tempLocation));
-
-        RecyclerView huntRecycler = findViewById(R.id.huntRecycler);
-        huntRecycler.setLayoutManager(new LinearLayoutManager(this));
-        huntRecycler.setAdapter(new HuntAdapter(hunts, this));
+//        ---- Recycler View Stuff ----
+//        User tempUser = addFakeUser("fakeUserBob", "bob@bob.gov");
+//        quests.add(addFakeQuest("walmart", tempUser));
+//        quests.add(addFakeQuest("zoo", tempUser));
+//        quests.add(addFakeQuest("space station", tempUser));
+//
+//        RecyclerView questRecycler = findViewById(R.id.questRecycler);
+//        questRecycler.setLayoutManager(new LinearLayoutManager(this));
+//        questRecycler.setAdapter(new QuestAdapter(quests,this));
+//
+//        Location tempLocation = addFakeLocation("space station", tempUser);
+//        locations.add(addFakeLocation("space station", tempUser));
+//        locations.add(addFakeLocation("the moon", tempUser));
+//        locations.add(addFakeLocation("low earth orbit", tempUser));
+//
+//        RecyclerView locationRecycler = findViewById(R.id.locationRecycler);
+//        locationRecycler.setLayoutManager(new LinearLayoutManager(this));
+//        locationRecycler.setAdapter(new LocationAdapter(locations, this));
+//
+//        Hunt tempHunt = addFakeHunt("find the freeze dried ice cream", 10, tempLocation);
+//        hunts.add(addFakeHunt("pilot space station", 15, tempLocation));
+//        hunts.add(addFakeHunt("visit the moon", 25, tempLocation));
+//        hunts.add(addFakeHunt("enter low earth orbit", 50,tempLocation));
+//
+//        RecyclerView huntRecycler = findViewById(R.id.huntRecycler);
+//        huntRecycler.setLayoutManager(new LinearLayoutManager(this));
+//        huntRecycler.setAdapter(new HuntAdapter(hunts, this));
 
         setupButtons();
         
     }
-    
+
     public Quest addFakeQuest(String title, User user){
         Quest quest = Quest.builder().userId(user.getId()).title(title).build();
         return quest;

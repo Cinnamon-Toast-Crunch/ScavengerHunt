@@ -74,7 +74,7 @@
         android:layout_height="59dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
-        android:hint="FamilyID (6 digits)"
+        android:hint="FamilyID"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordLayout">
 
@@ -84,7 +84,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="number" />
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
