@@ -7,10 +7,6 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.cinnamontoast.scavengerhunt.R;
-import com.cinnamontoast.scavengerhunt.activities.ContactActivity;
-import com.cinnamontoast.scavengerhunt.activities.CreateLocationActivity;
-import com.cinnamontoast.scavengerhunt.activities.CreateQuestActivity;
-import com.cinnamontoast.scavengerhunt.activities.LaunchQuestActivity;
 
 public class ParentProfileActivity extends AppCompatActivity {
 

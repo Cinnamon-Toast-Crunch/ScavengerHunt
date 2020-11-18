@@ -42,9 +42,9 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_quest);
 
-        buildEmptyQuest();
-        populateLocations();
-        addToQuest();
+//        buildEmptyQuest();
+//        populateLocations();
+//        addToQuest();
 
     }
 

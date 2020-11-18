@@ -22,13 +22,14 @@ public class SignupConfirmationActivity extends AppCompatActivity {
             String username = ((TextView)findViewById(R.id.confirmUser)).getText().toString();
             String code = ((TextView)findViewById(R.id.confirmCode)).getText().toString();
 
+            // TODO: Confirm that this will Auto-Login the user
             Amplify.Auth.confirmSignUp(
                     username,
                     code,
                     result -> {
                         Log.i("Amplify.confirm", result.isSignUpComplete() ? "Confirm Signup Succeeded" :
                                 "Confirm SignUp Not Complete");
-                        startActivity(new Intent(SignupConfirmationActivity.this, SignInActivity.class));
+                        startActivity(new Intent(SignupConfirmationActivity.this, ParentProfileActivity.class));
                     },
                     error -> Log.e("Amplify.confirm", error.toString())
             );

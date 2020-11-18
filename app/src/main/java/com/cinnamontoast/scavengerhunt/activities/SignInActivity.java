@@ -36,7 +36,7 @@ public class SignInActivity extends AppCompatActivity {
                                 "Sign in failed");
                         prefEdit.putString("username",username);
                         prefEdit.apply();
-                        startActivity(new Intent(SignInActivity.this, MainActivity.class));
+                        startActivity(new Intent(SignInActivity.this, ParentProfileActivity.class));
                     },
                     error -> Log.e("Amplify.login", error.toString())
             );
