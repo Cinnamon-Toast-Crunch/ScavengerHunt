@@ -13,12 +13,8 @@ public class CreateQuestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_quest);
 
-        setupButtons();
-    }
-
-    public void setupButtons (){
-        Button savequest = findViewById(R.id.savequest);
-        savequest.setOnClickListener(view -> this.startActivity(new Intent(this, ParentProfileActivity.class)));
 
     }
+
+
 }
