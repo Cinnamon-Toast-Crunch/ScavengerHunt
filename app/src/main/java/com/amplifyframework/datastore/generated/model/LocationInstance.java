@@ -16,32 +16,32 @@ import com.amplifyframework.core.model.query.predicate.QueryField;
 
 import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 
-/** This is an auto generated class representing the Location type in your schema. */
+/** This is an auto generated class representing the LocationInstance type in your schema. */
 @SuppressWarnings("all")
-@ModelConfig(pluralName = "Locations")
-@Index(name = "byUser", fields = {"userID"})
-public final class Location implements Model {
+@ModelConfig(pluralName = "LocationInstances")
+@Index(name = "byQuest", fields = {"questID"})
+public final class LocationInstance implements Model {
   public static final QueryField ID = field("id");
-  public static final QueryField USER_ID = field("userID");
+  public static final QueryField QUEST_ID = field("questID");
   public static final QueryField NAME = field("name");
   public static final QueryField LAT = field("lat");
   public static final QueryField LON = field("lon");
   public static final QueryField TOTAL_POINTS = field("totalPoints");
   public static final QueryField PRIVATE = field("private");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="ID", isRequired = true) String userID;
+  private final @ModelField(targetType="ID", isRequired = true) String questID;
   private final @ModelField(targetType="String", isRequired = true) String name;
   private final @ModelField(targetType="Float") Float lat;
   private final @ModelField(targetType="Float") Float lon;
   private final @ModelField(targetType="Int") Integer totalPoints;
   private final @ModelField(targetType="Boolean") Boolean private;
-  private final @ModelField(targetType="Task") @HasMany(associatedWith = "locationID", type = Task.class) List<Task> tasks = null;
+  private final @ModelField(targetType="TaskJoiner") @HasMany(associatedWith = "locationInstance", type = TaskJoiner.class) List<TaskJoiner> tasks = null;
   public String getId() {
       return id;
   }
   
-  public String getUserId() {
-      return userID;
+  public String getQuestId() {
+      return questID;
   }
   
   public String getName() {
@@ -64,13 +64,13 @@ public final class Location implements Model {
       return private;
   }
   
-  public List<Task> getTasks() {
+  public List<TaskJoiner> getTasks() {
       return tasks;
   }
   
-  private Location(String id, String userID, String name, Float lat, Float lon, Integer totalPoints, Boolean private) {
+  private LocationInstance(String id, String questID, String name, Float lat, Float lon, Integer totalPoints, Boolean private) {
     this.id = id;
-    this.userID = userID;
+    this.questID = questID;
     this.name = name;
     this.lat = lat;
     this.lon = lon;
@@ -85,14 +85,14 @@ public final class Location implements Model {
       } else if(obj == null || getClass() != obj.getClass()) {
         return false;
       } else {
-      Location location = (Location) obj;
-      return ObjectsCompat.equals(getId(), location.getId()) &&
-              ObjectsCompat.equals(getUserId(), location.getUserId()) &&
-              ObjectsCompat.equals(getName(), location.getName()) &&
-              ObjectsCompat.equals(getLat(), location.getLat()) &&
-              ObjectsCompat.equals(getLon(), location.getLon()) &&
-              ObjectsCompat.equals(getTotalPoints(), location.getTotalPoints()) &&
-              ObjectsCompat.equals(getPrivate(), location.getPrivate());
+      LocationInstance locationInstance = (LocationInstance) obj;
+      return ObjectsCompat.equals(getId(), locationInstance.getId()) &&
+              ObjectsCompat.equals(getQuestId(), locationInstance.getQuestId()) &&
+              ObjectsCompat.equals(getName(), locationInstance.getName()) &&
+              ObjectsCompat.equals(getLat(), locationInstance.getLat()) &&
+              ObjectsCompat.equals(getLon(), locationInstance.getLon()) &&
+              ObjectsCompat.equals(getTotalPoints(), locationInstance.getTotalPoints()) &&
+              ObjectsCompat.equals(getPrivate(), locationInstance.getPrivate());
       }
   }
   
@@ -100,7 +100,7 @@ public final class Location implements Model {
    public int hashCode() {
     return new StringBuilder()
       .append(getId())
-      .append(getUserId())
+      .append(getQuestId())
       .append(getName())
       .append(getLat())
       .append(getLon())
@@ -113,9 +113,9 @@ public final class Location implements Model {
   @Override
    public String toString() {
     return new StringBuilder()
-      .append("Location {")
+      .append("LocationInstance {")
       .append("id=" + String.valueOf(getId()) + ", ")
-      .append("userID=" + String.valueOf(getUserId()) + ", ")
+      .append("questID=" + String.valueOf(getQuestId()) + ", ")
       .append("name=" + String.valueOf(getName()) + ", ")
       .append("lat=" + String.valueOf(getLat()) + ", ")
       .append("lon=" + String.valueOf(getLon()) + ", ")
@@ -125,7 +125,7 @@ public final class Location implements Model {
       .toString();
   }
   
-  public static UserIdStep builder() {
+  public static QuestIdStep builder() {
       return new Builder();
   }
   
@@ -138,7 +138,7 @@ public final class Location implements Model {
    * @return an instance of this model with only ID populated
    * @throws IllegalArgumentException Checks that ID is in the proper format
    */
-  public static Location justId(String id) {
+  public static LocationInstance justId(String id) {
     try {
       UUID.fromString(id); // Check that ID is in the UUID format - if not an exception is thrown
     } catch (Exception exception) {
@@ -148,7 +148,7 @@ public final class Location implements Model {
               "creating a new object, use the standard builder method and leave the ID field blank."
       );
     }
-    return new Location(
+    return new LocationInstance(
       id,
       null,
       null,
@@ -161,15 +161,15 @@ public final class Location implements Model {
   
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
-      userID,
+      questID,
       name,
       lat,
       lon,
       totalPoints,
       private);
   }
-  public interface UserIdStep {
-    NameStep userId(String userId);
+  public interface QuestIdStep {
+    NameStep questId(String questId);
   }
   
 
@@ -179,7 +179,7 @@ public final class Location implements Model {
   
 
   public interface BuildStep {
-    Location build();
+    LocationInstance build();
     BuildStep id(String id) throws IllegalArgumentException;
     BuildStep lat(Float lat);
     BuildStep lon(Float lon);
@@ -188,21 +188,21 @@ public final class Location implements Model {
   }
   
 
-  public static class Builder implements UserIdStep, NameStep, BuildStep {
+  public static class Builder implements QuestIdStep, NameStep, BuildStep {
     private String id;
-    private String userID;
+    private String questID;
     private String name;
     private Float lat;
     private Float lon;
     private Integer totalPoints;
     private Boolean private;
     @Override
-     public Location build() {
+     public LocationInstance build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
         
-        return new Location(
+        return new LocationInstance(
           id,
-          userID,
+          questID,
           name,
           lat,
           lon,
@@ -211,9 +211,9 @@ public final class Location implements Model {
     }
     
     @Override
-     public NameStep userId(String userId) {
-        Objects.requireNonNull(userId);
-        this.userID = userId;
+     public NameStep questId(String questId) {
+        Objects.requireNonNull(questId);
+        this.questID = questId;
         return this;
     }
     
@@ -271,9 +271,9 @@ public final class Location implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String userId, String name, Float lat, Float lon, Integer totalPoints, Boolean private) {
+    private CopyOfBuilder(String id, String questId, String name, Float lat, Float lon, Integer totalPoints, Boolean private) {
       super.id(id);
-      super.userId(userId)
+      super.questId(questId)
         .name(name)
         .lat(lat)
         .lon(lon)
@@ -282,8 +282,8 @@ public final class Location implements Model {
     }
     
     @Override
-     public CopyOfBuilder userId(String userId) {
-      return (CopyOfBuilder) super.userId(userId);
+     public CopyOfBuilder questId(String questId) {
+      return (CopyOfBuilder) super.questId(questId);
     }
     
     @Override
