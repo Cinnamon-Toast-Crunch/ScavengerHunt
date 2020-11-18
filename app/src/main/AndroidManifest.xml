@@ -13,12 +13,9 @@
         <activity android:name=".activities.SignupConfirmationActivity" />
         <activity android:name=".activities.ScavengerHuntActivity" />
         <activity android:name=".activities.LaunchQuestActivity" />
-        <activity android:name=".activities.CreateLocationActivity" />
-        <activity android:name=".activities.CreateHuntActivity" />
         <activity android:name=".activities.CreateQuestActivity" />
         <activity android:name=".activities.ContactActivity" />
         <activity android:name=".activities.ParentProfileActivity" />
-        <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.SignupActivity" />
         <activity android:name=".activities.MainActivity">
             <intent-filter>
