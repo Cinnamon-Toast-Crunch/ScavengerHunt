@@ -10,6 +10,7 @@ query GetUser($id: ID!) {
         id
         userID
         title
+        private
         createdAt
         updatedAt
       }
@@ -22,6 +23,8 @@ query GetUser($id: ID!) {
         name
         lat
         lon
+        totalPoints
+        private
         createdAt
         updatedAt
       }
@@ -98,44 +101,6 @@ query ListContacts(
     nextToken
   }
 }
-query GetQuest($id: ID!) {
-  getQuest(id: $id) {
-    id
-    userID
-    title
-    locations {
-      items {
-        id
-        questID
-        locationID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    createdAt
-    updatedAt
-  }
-}
-query ListQuests(
-  $filter: ModelQuestFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listQuests(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      userID
-      title
-      locations {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    nextToken
-  }
-}
 query GetLocation($id: ID!) {
   getLocation(id: $id) {
     id
@@ -143,22 +108,16 @@ query GetLocation($id: ID!) {
     name
     lat
     lon
-    quests {
-      items {
-        id
-        questID
-        locationID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    hunts {
+    totalPoints
+    private
+    tasks {
       items {
         id
         locationID
-        name
-        totalPoints
+        instruction
+        objective
+        completed
+        pointValue
         createdAt
         updatedAt
       }
@@ -180,52 +139,8 @@ query ListLocations(
       name
       lat
       lon
-      quests {
-        nextToken
-      }
-      hunts {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    nextToken
-  }
-}
-query GetHunt($id: ID!) {
-  getHunt(id: $id) {
-    id
-    locationID
-    name
-    totalPoints
-    tasks {
-      items {
-        id
-        huntID
-        instruction
-        objective
-        completed
-        pointValue
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    createdAt
-    updatedAt
-  }
-}
-query ListHunts(
-  $filter: ModelHuntFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listHunts(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      locationID
-      name
       totalPoints
+      private
       tasks {
         nextToken
       }
@@ -238,7 +153,7 @@ query ListHunts(
 query GetTask($id: ID!) {
   getTask(id: $id) {
     id
-    huntID
+    locationID
     instruction
     objective
     completed
@@ -248,6 +163,16 @@ query GetTask($id: ID!) {
         id
         taskID
         content
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    locations {
+      items {
+        id
+        locationInstanceID
+        taskID
         createdAt
         updatedAt
       }
@@ -265,12 +190,15 @@ query ListTasks(
   listTasks(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      huntID
+      locationID
       instruction
       objective
       completed
       pointValue
       hints {
+        nextToken
+      }
+      locations {
         nextToken
       }
       createdAt
@@ -298,6 +226,96 @@ query ListHints(
       id
       taskID
       content
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetQuest($id: ID!) {
+  getQuest(id: $id) {
+    id
+    userID
+    title
+    private
+    locations {
+      items {
+        id
+        questID
+        name
+        lat
+        lon
+        totalPoints
+        private
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListQuests(
+  $filter: ModelQuestFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listQuests(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      userID
+      title
+      private
+      locations {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetLocationInstance($id: ID!) {
+  getLocationInstance(id: $id) {
+    id
+    questID
+    name
+    lat
+    lon
+    totalPoints
+    private
+    tasks {
+      items {
+        id
+        locationInstanceID
+        taskID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListLocationInstances(
+  $filter: ModelLocationInstanceFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listLocationInstances(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      questID
+      name
+      lat
+      lon
+      totalPoints
+      private
+      tasks {
+        nextToken
+      }
       createdAt
       updatedAt
     }

@@ -8,10 +8,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.amplifyframework.datastore.generated.model.Hunt;
-import com.amplifyframework.datastore.generated.model.Location;
-import com.amplifyframework.datastore.generated.model.Quest;
-
 import java.util.ArrayList;
 
 public class HuntAdapter extends RecyclerView.Adapter<HuntAdapter.HuntViewHolder> {

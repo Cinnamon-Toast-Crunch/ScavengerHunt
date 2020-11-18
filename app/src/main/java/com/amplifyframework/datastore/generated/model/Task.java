@@ -19,27 +19,28 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 /** This is an auto generated class representing the Task type in your schema. */
 @SuppressWarnings("all")
 @ModelConfig(pluralName = "Tasks")
-@Index(name = "byHunt", fields = {"huntID"})
+@Index(name = "byLocation", fields = {"locationID"})
 public final class Task implements Model {
   public static final QueryField ID = field("id");
-  public static final QueryField HUNT_ID = field("huntID");
+  public static final QueryField LOCATION_ID = field("locationID");
   public static final QueryField INSTRUCTION = field("instruction");
   public static final QueryField OBJECTIVE = field("objective");
   public static final QueryField COMPLETED = field("completed");
   public static final QueryField POINT_VALUE = field("pointValue");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="ID", isRequired = true) String huntID;
+  private final @ModelField(targetType="ID", isRequired = true) String locationID;
   private final @ModelField(targetType="String") String instruction;
   private final @ModelField(targetType="String", isRequired = true) String objective;
   private final @ModelField(targetType="Boolean", isRequired = true) Boolean completed;
   private final @ModelField(targetType="Int") Integer pointValue;
   private final @ModelField(targetType="Hint") @HasMany(associatedWith = "taskID", type = Hint.class) List<Hint> hints = null;
+  private final @ModelField(targetType="TaskJoiner") @HasMany(associatedWith = "task", type = TaskJoiner.class) List<TaskJoiner> locations = null;
   public String getId() {
       return id;
   }
   
-  public String getHuntId() {
-      return huntID;
+  public String getLocationId() {
+      return locationID;
   }
   
   public String getInstruction() {
@@ -62,9 +63,13 @@ public final class Task implements Model {
       return hints;
   }
   
-  private Task(String id, String huntID, String instruction, String objective, Boolean completed, Integer pointValue) {
+  public List<TaskJoiner> getLocations() {
+      return locations;
+  }
+  
+  private Task(String id, String locationID, String instruction, String objective, Boolean completed, Integer pointValue) {
     this.id = id;
-    this.huntID = huntID;
+    this.locationID = locationID;
     this.instruction = instruction;
     this.objective = objective;
     this.completed = completed;
@@ -80,7 +85,7 @@ public final class Task implements Model {
       } else {
       Task task = (Task) obj;
       return ObjectsCompat.equals(getId(), task.getId()) &&
-              ObjectsCompat.equals(getHuntId(), task.getHuntId()) &&
+              ObjectsCompat.equals(getLocationId(), task.getLocationId()) &&
               ObjectsCompat.equals(getInstruction(), task.getInstruction()) &&
               ObjectsCompat.equals(getObjective(), task.getObjective()) &&
               ObjectsCompat.equals(getCompleted(), task.getCompleted()) &&
@@ -92,7 +97,7 @@ public final class Task implements Model {
    public int hashCode() {
     return new StringBuilder()
       .append(getId())
-      .append(getHuntId())
+      .append(getLocationId())
       .append(getInstruction())
       .append(getObjective())
       .append(getCompleted())
@@ -106,7 +111,7 @@ public final class Task implements Model {
     return new StringBuilder()
       .append("Task {")
       .append("id=" + String.valueOf(getId()) + ", ")
-      .append("huntID=" + String.valueOf(getHuntId()) + ", ")
+      .append("locationID=" + String.valueOf(getLocationId()) + ", ")
       .append("instruction=" + String.valueOf(getInstruction()) + ", ")
       .append("objective=" + String.valueOf(getObjective()) + ", ")
       .append("completed=" + String.valueOf(getCompleted()) + ", ")
@@ -115,7 +120,7 @@ public final class Task implements Model {
       .toString();
   }
   
-  public static HuntIdStep builder() {
+  public static LocationIdStep builder() {
       return new Builder();
   }
   
@@ -150,14 +155,14 @@ public final class Task implements Model {
   
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
-      huntID,
+      locationID,
       instruction,
       objective,
       completed,
       pointValue);
   }
-  public interface HuntIdStep {
-    ObjectiveStep huntId(String huntId);
+  public interface LocationIdStep {
+    ObjectiveStep locationId(String locationId);
   }
   
 
@@ -179,9 +184,9 @@ public final class Task implements Model {
   }
   
 
-  public static class Builder implements HuntIdStep, ObjectiveStep, CompletedStep, BuildStep {
+  public static class Builder implements LocationIdStep, ObjectiveStep, CompletedStep, BuildStep {
     private String id;
-    private String huntID;
+    private String locationID;
     private String objective;
     private Boolean completed;
     private String instruction;
@@ -192,7 +197,7 @@ public final class Task implements Model {
         
         return new Task(
           id,
-          huntID,
+          locationID,
           instruction,
           objective,
           completed,
@@ -200,9 +205,9 @@ public final class Task implements Model {
     }
     
     @Override
-     public ObjectiveStep huntId(String huntId) {
-        Objects.requireNonNull(huntId);
-        this.huntID = huntId;
+     public ObjectiveStep locationId(String locationId) {
+        Objects.requireNonNull(locationId);
+        this.locationID = locationId;
         return this;
     }
     
@@ -255,9 +260,9 @@ public final class Task implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String huntId, String instruction, String objective, Boolean completed, Integer pointValue) {
+    private CopyOfBuilder(String id, String locationId, String instruction, String objective, Boolean completed, Integer pointValue) {
       super.id(id);
-      super.huntId(huntId)
+      super.locationId(locationId)
         .objective(objective)
         .completed(completed)
         .instruction(instruction)
@@ -265,8 +270,8 @@ public final class Task implements Model {
     }
     
     @Override
-     public CopyOfBuilder huntId(String huntId) {
-      return (CopyOfBuilder) super.huntId(huntId);
+     public CopyOfBuilder locationId(String locationId) {
+      return (CopyOfBuilder) super.locationId(locationId);
     }
     
     @Override

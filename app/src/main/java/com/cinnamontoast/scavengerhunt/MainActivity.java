@@ -2,15 +2,11 @@ package com.cinnamontoast.scavengerhunt;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-
-import android.view.View;
 
 import android.widget.Button;
 
@@ -19,7 +15,6 @@ import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
-import com.amplifyframework.datastore.generated.model.Hunt;
 import com.amplifyframework.datastore.generated.model.Location;
 import com.amplifyframework.datastore.generated.model.Quest;
 import com.amplifyframework.datastore.generated.model.User;
