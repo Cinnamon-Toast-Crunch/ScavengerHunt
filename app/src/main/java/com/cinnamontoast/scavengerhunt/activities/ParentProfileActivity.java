@@ -26,9 +26,6 @@ public class ParentProfileActivity extends AppCompatActivity {
         Button createquest = findViewById(R.id.createquest);
         createquest.setOnClickListener(view -> this.startActivity(new Intent(this, CreateQuestActivity.class)));
 
-        Button createlocation = findViewById(R.id.createlocation);
-        createlocation.setOnClickListener(view -> this.startActivity(new Intent(this, CreateLocationActivity.class)));
-
         Button addplayer = findViewById(R.id.addplayer);
         addplayer.setOnClickListener(view -> this.startActivity(new Intent(this, ContactActivity.class)));
 

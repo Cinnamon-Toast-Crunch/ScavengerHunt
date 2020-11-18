@@ -21,18 +21,16 @@ import com.amplifyframework.datastore.generated.model.Location;
 import com.amplifyframework.datastore.generated.model.Quest;
 import com.amplifyframework.datastore.generated.model.User;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
-import com.cinnamontoast.scavengerhunt.adapters.HuntAdapter;
 import com.cinnamontoast.scavengerhunt.adapters.LocationAdapter;
 import com.cinnamontoast.scavengerhunt.adapters.QuestAdapter;
 import com.cinnamontoast.scavengerhunt.R;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements QuestAdapter.QuestListFormatter, LocationAdapter.LocationListFormatter, HuntAdapter.HuntListFormatter {
+public class MainActivity extends AppCompatActivity implements QuestAdapter.QuestListFormatter, LocationAdapter.LocationListFormatter {
 
     ArrayList<Quest> quests = new ArrayList<>();
     ArrayList<Location> locations = new ArrayList<>();
-    ArrayList<Hunt> hunts = new ArrayList<>();
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -90,12 +88,6 @@ public class MainActivity extends AppCompatActivity implements QuestAdapter.Ques
         return location;
     }
 
-    public Hunt addFakeHunt(String name, Integer totalPoints, Location location) {
-        Hunt hunt = Hunt.builder().locationId(location.getId()).name(name).totalPoints(totalPoints).build();
-        return hunt;
-    }
-
-
     public void configAWS() {
         //configAWS();
 
@@ -122,11 +114,6 @@ public class MainActivity extends AppCompatActivity implements QuestAdapter.Ques
     public void locationFormatter(Location location) {
 
     }
-
-    @Override
-    public void huntFormatter(Hunt hunt) {
-    }
-
 
     public void setupButtons() {
         Button login = findViewById(R.id.login);
