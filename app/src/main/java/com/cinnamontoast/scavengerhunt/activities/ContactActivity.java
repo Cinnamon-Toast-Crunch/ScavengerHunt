@@ -1,4 +1,4 @@
-package com.cinnamontoast.scavengerhunt;
+package com.cinnamontoast.scavengerhunt.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,8 +13,7 @@ import android.widget.Toast;
 
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Contact;
-
-import org.w3c.dom.Text;
+import com.cinnamontoast.scavengerhunt.R;
 
 public class ContactActivity extends AppCompatActivity {
 
@@ -52,7 +51,6 @@ public class ContactActivity extends AppCompatActivity {
             toast.show();
             this.startActivity(new Intent(this, ParentProfileActivity.class));
         });
-
     }
 
     public void makeToast (){

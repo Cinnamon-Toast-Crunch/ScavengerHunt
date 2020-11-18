@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateQuestActivity">
+    tools:context=".activities.CreateQuestActivity">
 
     <TextView
         android:id="@+id/textView8"
@@ -46,6 +46,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/locationRecyler"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
@@ -62,8 +63,10 @@
         app:layout_constraintStart_toEndOf="@+id/linearLayout3">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/itemRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
     </LinearLayout>
 
     <Button
@@ -93,5 +96,25 @@
         android:text="Quest Preview"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/saveQuest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Quest"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+        app:layout_constraintVertical_bias="0.16" />
+
+    <Button
+        android:id="@+id/addToQuest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add to Quest"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+        tools:layout_editor_absoluteX="257dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
