@@ -13,6 +13,7 @@ mutation CreateUser(
         id
         userID
         title
+        private
         createdAt
         updatedAt
       }
@@ -25,6 +26,8 @@ mutation CreateUser(
         name
         lat
         lon
+        totalPoints
+        private
         createdAt
         updatedAt
       }
@@ -60,6 +63,7 @@ mutation UpdateUser(
         id
         userID
         title
+        private
         createdAt
         updatedAt
       }
@@ -72,6 +76,8 @@ mutation UpdateUser(
         name
         lat
         lon
+        totalPoints
+        private
         createdAt
         updatedAt
       }
@@ -107,6 +113,7 @@ mutation DeleteUser(
         id
         userID
         title
+        private
         createdAt
         updatedAt
       }
@@ -119,6 +126,8 @@ mutation DeleteUser(
         name
         lat
         lon
+        totalPoints
+        private
         createdAt
         updatedAt
       }
@@ -182,183 +191,6 @@ mutation DeleteContact(
     updatedAt
   }
 }
-mutation CreateQuest(
-  $input: CreateQuestInput!
-  $condition: ModelQuestConditionInput
-) {
-  createQuest(input: $input, condition: $condition) {
-    id
-    userID
-    title
-    locations {
-      items {
-        id
-        questID
-        locationID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    createdAt
-    updatedAt
-  }
-}
-mutation UpdateQuest(
-  $input: UpdateQuestInput!
-  $condition: ModelQuestConditionInput
-) {
-  updateQuest(input: $input, condition: $condition) {
-    id
-    userID
-    title
-    locations {
-      items {
-        id
-        questID
-        locationID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    createdAt
-    updatedAt
-  }
-}
-mutation DeleteQuest(
-  $input: DeleteQuestInput!
-  $condition: ModelQuestConditionInput
-) {
-  deleteQuest(input: $input, condition: $condition) {
-    id
-    userID
-    title
-    locations {
-      items {
-        id
-        questID
-        locationID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    createdAt
-    updatedAt
-  }
-}
-mutation CreateQuestJoiner(
-  $input: CreateQuestJoinerInput!
-  $condition: ModelQuestJoinerConditionInput
-) {
-  createQuestJoiner(input: $input, condition: $condition) {
-    id
-    questID
-    locationID
-    quest {
-      id
-      userID
-      title
-      locations {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    location {
-      id
-      userID
-      name
-      lat
-      lon
-      quests {
-        nextToken
-      }
-      hunts {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-mutation UpdateQuestJoiner(
-  $input: UpdateQuestJoinerInput!
-  $condition: ModelQuestJoinerConditionInput
-) {
-  updateQuestJoiner(input: $input, condition: $condition) {
-    id
-    questID
-    locationID
-    quest {
-      id
-      userID
-      title
-      locations {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    location {
-      id
-      userID
-      name
-      lat
-      lon
-      quests {
-        nextToken
-      }
-      hunts {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-mutation DeleteQuestJoiner(
-  $input: DeleteQuestJoinerInput!
-  $condition: ModelQuestJoinerConditionInput
-) {
-  deleteQuestJoiner(input: $input, condition: $condition) {
-    id
-    questID
-    locationID
-    quest {
-      id
-      userID
-      title
-      locations {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    location {
-      id
-      userID
-      name
-      lat
-      lon
-      quests {
-        nextToken
-      }
-      hunts {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
 mutation CreateLocation(
   $input: CreateLocationInput!
   $condition: ModelLocationConditionInput
@@ -369,22 +201,16 @@ mutation CreateLocation(
     name
     lat
     lon
-    quests {
-      items {
-        id
-        questID
-        locationID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    hunts {
+    totalPoints
+    private
+    tasks {
       items {
         id
         locationID
-        name
-        totalPoints
+        instruction
+        objective
+        completed
+        pointValue
         createdAt
         updatedAt
       }
@@ -404,22 +230,16 @@ mutation UpdateLocation(
     name
     lat
     lon
-    quests {
-      items {
-        id
-        questID
-        locationID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    hunts {
+    totalPoints
+    private
+    tasks {
       items {
         id
         locationID
-        name
-        totalPoints
+        instruction
+        objective
+        completed
+        pointValue
         createdAt
         updatedAt
       }
@@ -439,96 +259,12 @@ mutation DeleteLocation(
     name
     lat
     lon
-    quests {
-      items {
-        id
-        questID
-        locationID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    hunts {
+    totalPoints
+    private
+    tasks {
       items {
         id
         locationID
-        name
-        totalPoints
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    createdAt
-    updatedAt
-  }
-}
-mutation CreateHunt(
-  $input: CreateHuntInput!
-  $condition: ModelHuntConditionInput
-) {
-  createHunt(input: $input, condition: $condition) {
-    id
-    locationID
-    name
-    totalPoints
-    tasks {
-      items {
-        id
-        huntID
-        instruction
-        objective
-        completed
-        pointValue
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    createdAt
-    updatedAt
-  }
-}
-mutation UpdateHunt(
-  $input: UpdateHuntInput!
-  $condition: ModelHuntConditionInput
-) {
-  updateHunt(input: $input, condition: $condition) {
-    id
-    locationID
-    name
-    totalPoints
-    tasks {
-      items {
-        id
-        huntID
-        instruction
-        objective
-        completed
-        pointValue
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    createdAt
-    updatedAt
-  }
-}
-mutation DeleteHunt(
-  $input: DeleteHuntInput!
-  $condition: ModelHuntConditionInput
-) {
-  deleteHunt(input: $input, condition: $condition) {
-    id
-    locationID
-    name
-    totalPoints
-    tasks {
-      items {
-        id
-        huntID
         instruction
         objective
         completed
@@ -548,7 +284,7 @@ mutation CreateTask(
 ) {
   createTask(input: $input, condition: $condition) {
     id
-    huntID
+    locationID
     instruction
     objective
     completed
@@ -558,6 +294,16 @@ mutation CreateTask(
         id
         taskID
         content
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    locations {
+      items {
+        id
+        locationInstanceID
+        taskID
         createdAt
         updatedAt
       }
@@ -573,7 +319,7 @@ mutation UpdateTask(
 ) {
   updateTask(input: $input, condition: $condition) {
     id
-    huntID
+    locationID
     instruction
     objective
     completed
@@ -583,6 +329,16 @@ mutation UpdateTask(
         id
         taskID
         content
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    locations {
+      items {
+        id
+        locationInstanceID
+        taskID
         createdAt
         updatedAt
       }
@@ -598,7 +354,7 @@ mutation DeleteTask(
 ) {
   deleteTask(input: $input, condition: $condition) {
     id
-    huntID
+    locationID
     instruction
     objective
     completed
@@ -608,6 +364,16 @@ mutation DeleteTask(
         id
         taskID
         content
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    locations {
+      items {
+        id
+        locationInstanceID
+        taskID
         createdAt
         updatedAt
       }
@@ -649,6 +415,291 @@ mutation DeleteHint(
     id
     taskID
     content
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateQuest(
+  $input: CreateQuestInput!
+  $condition: ModelQuestConditionInput
+) {
+  createQuest(input: $input, condition: $condition) {
+    id
+    userID
+    title
+    private
+    locations {
+      items {
+        id
+        questID
+        name
+        lat
+        lon
+        totalPoints
+        private
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateQuest(
+  $input: UpdateQuestInput!
+  $condition: ModelQuestConditionInput
+) {
+  updateQuest(input: $input, condition: $condition) {
+    id
+    userID
+    title
+    private
+    locations {
+      items {
+        id
+        questID
+        name
+        lat
+        lon
+        totalPoints
+        private
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteQuest(
+  $input: DeleteQuestInput!
+  $condition: ModelQuestConditionInput
+) {
+  deleteQuest(input: $input, condition: $condition) {
+    id
+    userID
+    title
+    private
+    locations {
+      items {
+        id
+        questID
+        name
+        lat
+        lon
+        totalPoints
+        private
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateLocationInstance(
+  $input: CreateLocationInstanceInput!
+  $condition: ModelLocationInstanceConditionInput
+) {
+  createLocationInstance(input: $input, condition: $condition) {
+    id
+    questID
+    name
+    lat
+    lon
+    totalPoints
+    private
+    tasks {
+      items {
+        id
+        locationInstanceID
+        taskID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateLocationInstance(
+  $input: UpdateLocationInstanceInput!
+  $condition: ModelLocationInstanceConditionInput
+) {
+  updateLocationInstance(input: $input, condition: $condition) {
+    id
+    questID
+    name
+    lat
+    lon
+    totalPoints
+    private
+    tasks {
+      items {
+        id
+        locationInstanceID
+        taskID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteLocationInstance(
+  $input: DeleteLocationInstanceInput!
+  $condition: ModelLocationInstanceConditionInput
+) {
+  deleteLocationInstance(input: $input, condition: $condition) {
+    id
+    questID
+    name
+    lat
+    lon
+    totalPoints
+    private
+    tasks {
+      items {
+        id
+        locationInstanceID
+        taskID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateTaskJoiner(
+  $input: CreateTaskJoinerInput!
+  $condition: ModelTaskJoinerConditionInput
+) {
+  createTaskJoiner(input: $input, condition: $condition) {
+    id
+    locationInstanceID
+    taskID
+    locationInstance {
+      id
+      questID
+      name
+      lat
+      lon
+      totalPoints
+      private
+      tasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    task {
+      id
+      locationID
+      instruction
+      objective
+      completed
+      pointValue
+      hints {
+        nextToken
+      }
+      locations {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateTaskJoiner(
+  $input: UpdateTaskJoinerInput!
+  $condition: ModelTaskJoinerConditionInput
+) {
+  updateTaskJoiner(input: $input, condition: $condition) {
+    id
+    locationInstanceID
+    taskID
+    locationInstance {
+      id
+      questID
+      name
+      lat
+      lon
+      totalPoints
+      private
+      tasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    task {
+      id
+      locationID
+      instruction
+      objective
+      completed
+      pointValue
+      hints {
+        nextToken
+      }
+      locations {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteTaskJoiner(
+  $input: DeleteTaskJoinerInput!
+  $condition: ModelTaskJoinerConditionInput
+) {
+  deleteTaskJoiner(input: $input, condition: $condition) {
+    id
+    locationInstanceID
+    taskID
+    locationInstance {
+      id
+      questID
+      name
+      lat
+      lon
+      totalPoints
+      private
+      tasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    task {
+      id
+      locationID
+      instruction
+      objective
+      completed
+      pointValue
+      hints {
+        nextToken
+      }
+      locations {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }

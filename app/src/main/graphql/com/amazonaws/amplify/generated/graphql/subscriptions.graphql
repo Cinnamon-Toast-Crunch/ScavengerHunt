@@ -10,6 +10,7 @@ subscription OnCreateUser {
         id
         userID
         title
+        private
         createdAt
         updatedAt
       }
@@ -22,6 +23,8 @@ subscription OnCreateUser {
         name
         lat
         lon
+        totalPoints
+        private
         createdAt
         updatedAt
       }
@@ -54,6 +57,7 @@ subscription OnUpdateUser {
         id
         userID
         title
+        private
         createdAt
         updatedAt
       }
@@ -66,6 +70,8 @@ subscription OnUpdateUser {
         name
         lat
         lon
+        totalPoints
+        private
         createdAt
         updatedAt
       }
@@ -98,6 +104,7 @@ subscription OnDeleteUser {
         id
         userID
         title
+        private
         createdAt
         updatedAt
       }
@@ -110,6 +117,8 @@ subscription OnDeleteUser {
         name
         lat
         lon
+        totalPoints
+        private
         createdAt
         updatedAt
       }
@@ -164,165 +173,6 @@ subscription OnDeleteContact {
     updatedAt
   }
 }
-subscription OnCreateQuest {
-  onCreateQuest {
-    id
-    userID
-    title
-    locations {
-      items {
-        id
-        questID
-        locationID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdateQuest {
-  onUpdateQuest {
-    id
-    userID
-    title
-    locations {
-      items {
-        id
-        questID
-        locationID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteQuest {
-  onDeleteQuest {
-    id
-    userID
-    title
-    locations {
-      items {
-        id
-        questID
-        locationID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnCreateQuestJoiner {
-  onCreateQuestJoiner {
-    id
-    questID
-    locationID
-    quest {
-      id
-      userID
-      title
-      locations {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    location {
-      id
-      userID
-      name
-      lat
-      lon
-      quests {
-        nextToken
-      }
-      hunts {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdateQuestJoiner {
-  onUpdateQuestJoiner {
-    id
-    questID
-    locationID
-    quest {
-      id
-      userID
-      title
-      locations {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    location {
-      id
-      userID
-      name
-      lat
-      lon
-      quests {
-        nextToken
-      }
-      hunts {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteQuestJoiner {
-  onDeleteQuestJoiner {
-    id
-    questID
-    locationID
-    quest {
-      id
-      userID
-      title
-      locations {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    location {
-      id
-      userID
-      name
-      lat
-      lon
-      quests {
-        nextToken
-      }
-      hunts {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
 subscription OnCreateLocation {
   onCreateLocation {
     id
@@ -330,22 +180,16 @@ subscription OnCreateLocation {
     name
     lat
     lon
-    quests {
-      items {
-        id
-        questID
-        locationID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    hunts {
+    totalPoints
+    private
+    tasks {
       items {
         id
         locationID
-        name
-        totalPoints
+        instruction
+        objective
+        completed
+        pointValue
         createdAt
         updatedAt
       }
@@ -362,22 +206,16 @@ subscription OnUpdateLocation {
     name
     lat
     lon
-    quests {
-      items {
-        id
-        questID
-        locationID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    hunts {
+    totalPoints
+    private
+    tasks {
       items {
         id
         locationID
-        name
-        totalPoints
+        instruction
+        objective
+        completed
+        pointValue
         createdAt
         updatedAt
       }
@@ -394,87 +232,12 @@ subscription OnDeleteLocation {
     name
     lat
     lon
-    quests {
-      items {
-        id
-        questID
-        locationID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    hunts {
+    totalPoints
+    private
+    tasks {
       items {
         id
         locationID
-        name
-        totalPoints
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnCreateHunt {
-  onCreateHunt {
-    id
-    locationID
-    name
-    totalPoints
-    tasks {
-      items {
-        id
-        huntID
-        instruction
-        objective
-        completed
-        pointValue
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdateHunt {
-  onUpdateHunt {
-    id
-    locationID
-    name
-    totalPoints
-    tasks {
-      items {
-        id
-        huntID
-        instruction
-        objective
-        completed
-        pointValue
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteHunt {
-  onDeleteHunt {
-    id
-    locationID
-    name
-    totalPoints
-    tasks {
-      items {
-        id
-        huntID
         instruction
         objective
         completed
@@ -491,7 +254,7 @@ subscription OnDeleteHunt {
 subscription OnCreateTask {
   onCreateTask {
     id
-    huntID
+    locationID
     instruction
     objective
     completed
@@ -501,6 +264,16 @@ subscription OnCreateTask {
         id
         taskID
         content
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    locations {
+      items {
+        id
+        locationInstanceID
+        taskID
         createdAt
         updatedAt
       }
@@ -513,7 +286,7 @@ subscription OnCreateTask {
 subscription OnUpdateTask {
   onUpdateTask {
     id
-    huntID
+    locationID
     instruction
     objective
     completed
@@ -528,6 +301,16 @@ subscription OnUpdateTask {
       }
       nextToken
     }
+    locations {
+      items {
+        id
+        locationInstanceID
+        taskID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -535,7 +318,7 @@ subscription OnUpdateTask {
 subscription OnDeleteTask {
   onDeleteTask {
     id
-    huntID
+    locationID
     instruction
     objective
     completed
@@ -545,6 +328,16 @@ subscription OnDeleteTask {
         id
         taskID
         content
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    locations {
+      items {
+        id
+        locationInstanceID
+        taskID
         createdAt
         updatedAt
       }
@@ -577,6 +370,264 @@ subscription OnDeleteHint {
     id
     taskID
     content
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateQuest {
+  onCreateQuest {
+    id
+    userID
+    title
+    private
+    locations {
+      items {
+        id
+        questID
+        name
+        lat
+        lon
+        totalPoints
+        private
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateQuest {
+  onUpdateQuest {
+    id
+    userID
+    title
+    private
+    locations {
+      items {
+        id
+        questID
+        name
+        lat
+        lon
+        totalPoints
+        private
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteQuest {
+  onDeleteQuest {
+    id
+    userID
+    title
+    private
+    locations {
+      items {
+        id
+        questID
+        name
+        lat
+        lon
+        totalPoints
+        private
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateLocationInstance {
+  onCreateLocationInstance {
+    id
+    questID
+    name
+    lat
+    lon
+    totalPoints
+    private
+    tasks {
+      items {
+        id
+        locationInstanceID
+        taskID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateLocationInstance {
+  onUpdateLocationInstance {
+    id
+    questID
+    name
+    lat
+    lon
+    totalPoints
+    private
+    tasks {
+      items {
+        id
+        locationInstanceID
+        taskID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteLocationInstance {
+  onDeleteLocationInstance {
+    id
+    questID
+    name
+    lat
+    lon
+    totalPoints
+    private
+    tasks {
+      items {
+        id
+        locationInstanceID
+        taskID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateTaskJoiner {
+  onCreateTaskJoiner {
+    id
+    locationInstanceID
+    taskID
+    locationInstance {
+      id
+      questID
+      name
+      lat
+      lon
+      totalPoints
+      private
+      tasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    task {
+      id
+      locationID
+      instruction
+      objective
+      completed
+      pointValue
+      hints {
+        nextToken
+      }
+      locations {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateTaskJoiner {
+  onUpdateTaskJoiner {
+    id
+    locationInstanceID
+    taskID
+    locationInstance {
+      id
+      questID
+      name
+      lat
+      lon
+      totalPoints
+      private
+      tasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    task {
+      id
+      locationID
+      instruction
+      objective
+      completed
+      pointValue
+      hints {
+        nextToken
+      }
+      locations {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteTaskJoiner {
+  onDeleteTaskJoiner {
+    id
+    locationInstanceID
+    taskID
+    locationInstance {
+      id
+      questID
+      name
+      lat
+      lon
+      totalPoints
+      private
+      tasks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    task {
+      id
+      locationID
+      instruction
+      objective
+      completed
+      pointValue
+      hints {
+        nextToken
+      }
+      locations {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }

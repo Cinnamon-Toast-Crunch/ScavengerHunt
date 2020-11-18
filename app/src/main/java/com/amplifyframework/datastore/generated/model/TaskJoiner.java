@@ -1,6 +1,6 @@
 package com.amplifyframework.datastore.generated.model;
 
-import com.amplifyframework.core.model.annotations.HasMany;
+import com.amplifyframework.core.model.annotations.BelongsTo;
 
 import java.util.List;
 import java.util.UUID;
@@ -16,45 +16,34 @@ import com.amplifyframework.core.model.query.predicate.QueryField;
 
 import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 
-/** This is an auto generated class representing the Hunt type in your schema. */
+/** This is an auto generated class representing the TaskJoiner type in your schema. */
 @SuppressWarnings("all")
-@ModelConfig(pluralName = "Hunts")
-@Index(name = "byLocation", fields = {"locationID"})
-public final class Hunt implements Model {
+@ModelConfig(pluralName = "TaskJoiners")
+@Index(name = "byLocationInstance", fields = {"locationInstanceID","taskID"})
+@Index(name = "byTask", fields = {"taskID","locationInstanceID"})
+public final class TaskJoiner implements Model {
   public static final QueryField ID = field("id");
-  public static final QueryField LOCATION_ID = field("locationID");
-  public static final QueryField NAME = field("name");
-  public static final QueryField TOTAL_POINTS = field("totalPoints");
+  public static final QueryField LOCATION_INSTANCE = field("locationInstanceID");
+  public static final QueryField TASK = field("taskID");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="ID", isRequired = true) String locationID;
-  private final @ModelField(targetType="String", isRequired = true) String name;
-  private final @ModelField(targetType="Int") Integer totalPoints;
-  private final @ModelField(targetType="Task") @HasMany(associatedWith = "huntID", type = Task.class) List<Task> tasks = null;
+  private final @ModelField(targetType="LocationInstance", isRequired = true) @BelongsTo(targetName = "locationInstanceID", type = LocationInstance.class) LocationInstance locationInstance;
+  private final @ModelField(targetType="Task", isRequired = true) @BelongsTo(targetName = "taskID", type = Task.class) Task task;
   public String getId() {
       return id;
   }
   
-  public String getLocationId() {
-      return locationID;
+  public LocationInstance getLocationInstance() {
+      return locationInstance;
   }
   
-  public String getName() {
-      return name;
+  public Task getTask() {
+      return task;
   }
   
-  public Integer getTotalPoints() {
-      return totalPoints;
-  }
-  
-  public List<Task> getTasks() {
-      return tasks;
-  }
-  
-  private Hunt(String id, String locationID, String name, Integer totalPoints) {
+  private TaskJoiner(String id, LocationInstance locationInstance, Task task) {
     this.id = id;
-    this.locationID = locationID;
-    this.name = name;
-    this.totalPoints = totalPoints;
+    this.locationInstance = locationInstance;
+    this.task = task;
   }
   
   @Override
@@ -64,11 +53,10 @@ public final class Hunt implements Model {
       } else if(obj == null || getClass() != obj.getClass()) {
         return false;
       } else {
-      Hunt hunt = (Hunt) obj;
-      return ObjectsCompat.equals(getId(), hunt.getId()) &&
-              ObjectsCompat.equals(getLocationId(), hunt.getLocationId()) &&
-              ObjectsCompat.equals(getName(), hunt.getName()) &&
-              ObjectsCompat.equals(getTotalPoints(), hunt.getTotalPoints());
+      TaskJoiner taskJoiner = (TaskJoiner) obj;
+      return ObjectsCompat.equals(getId(), taskJoiner.getId()) &&
+              ObjectsCompat.equals(getLocationInstance(), taskJoiner.getLocationInstance()) &&
+              ObjectsCompat.equals(getTask(), taskJoiner.getTask());
       }
   }
   
@@ -76,9 +64,8 @@ public final class Hunt implements Model {
    public int hashCode() {
     return new StringBuilder()
       .append(getId())
-      .append(getLocationId())
-      .append(getName())
-      .append(getTotalPoints())
+      .append(getLocationInstance())
+      .append(getTask())
       .toString()
       .hashCode();
   }
@@ -86,16 +73,15 @@ public final class Hunt implements Model {
   @Override
    public String toString() {
     return new StringBuilder()
-      .append("Hunt {")
+      .append("TaskJoiner {")
       .append("id=" + String.valueOf(getId()) + ", ")
-      .append("locationID=" + String.valueOf(getLocationId()) + ", ")
-      .append("name=" + String.valueOf(getName()) + ", ")
-      .append("totalPoints=" + String.valueOf(getTotalPoints()))
+      .append("locationInstance=" + String.valueOf(getLocationInstance()) + ", ")
+      .append("task=" + String.valueOf(getTask()))
       .append("}")
       .toString();
   }
   
-  public static LocationIdStep builder() {
+  public static LocationInstanceStep builder() {
       return new Builder();
   }
   
@@ -108,7 +94,7 @@ public final class Hunt implements Model {
    * @return an instance of this model with only ID populated
    * @throws IllegalArgumentException Checks that ID is in the proper format
    */
-  public static Hunt justId(String id) {
+  public static TaskJoiner justId(String id) {
     try {
       UUID.fromString(id); // Check that ID is in the UUID format - if not an exception is thrown
     } catch (Exception exception) {
@@ -118,9 +104,8 @@ public final class Hunt implements Model {
               "creating a new object, use the standard builder method and leave the ID field blank."
       );
     }
-    return new Hunt(
+    return new TaskJoiner(
       id,
-      null,
       null,
       null
     );
@@ -128,60 +113,50 @@ public final class Hunt implements Model {
   
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
-      locationID,
-      name,
-      totalPoints);
+      locationInstance,
+      task);
   }
-  public interface LocationIdStep {
-    NameStep locationId(String locationId);
+  public interface LocationInstanceStep {
+    TaskStep locationInstance(LocationInstance locationInstance);
   }
   
 
-  public interface NameStep {
-    BuildStep name(String name);
+  public interface TaskStep {
+    BuildStep task(Task task);
   }
   
 
   public interface BuildStep {
-    Hunt build();
+    TaskJoiner build();
     BuildStep id(String id) throws IllegalArgumentException;
-    BuildStep totalPoints(Integer totalPoints);
   }
   
 
-  public static class Builder implements LocationIdStep, NameStep, BuildStep {
+  public static class Builder implements LocationInstanceStep, TaskStep, BuildStep {
     private String id;
-    private String locationID;
-    private String name;
-    private Integer totalPoints;
+    private LocationInstance locationInstance;
+    private Task task;
     @Override
-     public Hunt build() {
+     public TaskJoiner build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
         
-        return new Hunt(
+        return new TaskJoiner(
           id,
-          locationID,
-          name,
-          totalPoints);
+          locationInstance,
+          task);
     }
     
     @Override
-     public NameStep locationId(String locationId) {
-        Objects.requireNonNull(locationId);
-        this.locationID = locationId;
+     public TaskStep locationInstance(LocationInstance locationInstance) {
+        Objects.requireNonNull(locationInstance);
+        this.locationInstance = locationInstance;
         return this;
     }
     
     @Override
-     public BuildStep name(String name) {
-        Objects.requireNonNull(name);
-        this.name = name;
-        return this;
-    }
-    
-    @Override
-     public BuildStep totalPoints(Integer totalPoints) {
-        this.totalPoints = totalPoints;
+     public BuildStep task(Task task) {
+        Objects.requireNonNull(task);
+        this.task = task;
         return this;
     }
     
@@ -208,26 +183,20 @@ public final class Hunt implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String locationId, String name, Integer totalPoints) {
+    private CopyOfBuilder(String id, LocationInstance locationInstance, Task task) {
       super.id(id);
-      super.locationId(locationId)
-        .name(name)
-        .totalPoints(totalPoints);
+      super.locationInstance(locationInstance)
+        .task(task);
     }
     
     @Override
-     public CopyOfBuilder locationId(String locationId) {
-      return (CopyOfBuilder) super.locationId(locationId);
+     public CopyOfBuilder locationInstance(LocationInstance locationInstance) {
+      return (CopyOfBuilder) super.locationInstance(locationInstance);
     }
     
     @Override
-     public CopyOfBuilder name(String name) {
-      return (CopyOfBuilder) super.name(name);
-    }
-    
-    @Override
-     public CopyOfBuilder totalPoints(Integer totalPoints) {
-      return (CopyOfBuilder) super.totalPoints(totalPoints);
+     public CopyOfBuilder task(Task task) {
+      return (CopyOfBuilder) super.task(task);
     }
   }
   
