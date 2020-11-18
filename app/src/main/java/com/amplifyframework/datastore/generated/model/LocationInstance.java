@@ -27,14 +27,12 @@ public final class LocationInstance implements Model {
   public static final QueryField LAT = field("lat");
   public static final QueryField LON = field("lon");
   public static final QueryField TOTAL_POINTS = field("totalPoints");
-  public static final QueryField PRIVATE = field("private");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="ID", isRequired = true) String questID;
   private final @ModelField(targetType="String", isRequired = true) String name;
   private final @ModelField(targetType="Float") Float lat;
   private final @ModelField(targetType="Float") Float lon;
   private final @ModelField(targetType="Int") Integer totalPoints;
-  private final @ModelField(targetType="Boolean") Boolean private;
   private final @ModelField(targetType="TaskJoiner") @HasMany(associatedWith = "locationInstance", type = TaskJoiner.class) List<TaskJoiner> tasks = null;
   public String getId() {
       return id;
@@ -60,22 +58,17 @@ public final class LocationInstance implements Model {
       return totalPoints;
   }
   
-  public Boolean getPrivate() {
-      return private;
-  }
-  
   public List<TaskJoiner> getTasks() {
       return tasks;
   }
   
-  private LocationInstance(String id, String questID, String name, Float lat, Float lon, Integer totalPoints, Boolean private) {
+  private LocationInstance(String id, String questID, String name, Float lat, Float lon, Integer totalPoints) {
     this.id = id;
     this.questID = questID;
     this.name = name;
     this.lat = lat;
     this.lon = lon;
     this.totalPoints = totalPoints;
-    this.private = private;
   }
   
   @Override
@@ -91,8 +84,7 @@ public final class LocationInstance implements Model {
               ObjectsCompat.equals(getName(), locationInstance.getName()) &&
               ObjectsCompat.equals(getLat(), locationInstance.getLat()) &&
               ObjectsCompat.equals(getLon(), locationInstance.getLon()) &&
-              ObjectsCompat.equals(getTotalPoints(), locationInstance.getTotalPoints()) &&
-              ObjectsCompat.equals(getPrivate(), locationInstance.getPrivate());
+              ObjectsCompat.equals(getTotalPoints(), locationInstance.getTotalPoints());
       }
   }
   
@@ -105,7 +97,6 @@ public final class LocationInstance implements Model {
       .append(getLat())
       .append(getLon())
       .append(getTotalPoints())
-      .append(getPrivate())
       .toString()
       .hashCode();
   }
@@ -119,8 +110,7 @@ public final class LocationInstance implements Model {
       .append("name=" + String.valueOf(getName()) + ", ")
       .append("lat=" + String.valueOf(getLat()) + ", ")
       .append("lon=" + String.valueOf(getLon()) + ", ")
-      .append("totalPoints=" + String.valueOf(getTotalPoints()) + ", ")
-      .append("private=" + String.valueOf(getPrivate()))
+      .append("totalPoints=" + String.valueOf(getTotalPoints()))
       .append("}")
       .toString();
   }
@@ -154,7 +144,6 @@ public final class LocationInstance implements Model {
       null,
       null,
       null,
-      null,
       null
     );
   }
@@ -165,8 +154,7 @@ public final class LocationInstance implements Model {
       name,
       lat,
       lon,
-      totalPoints,
-      private);
+      totalPoints);
   }
   public interface QuestIdStep {
     NameStep questId(String questId);
@@ -184,7 +172,6 @@ public final class LocationInstance implements Model {
     BuildStep lat(Float lat);
     BuildStep lon(Float lon);
     BuildStep totalPoints(Integer totalPoints);
-    BuildStep private(Boolean private);
   }
   
 
@@ -195,7 +182,6 @@ public final class LocationInstance implements Model {
     private Float lat;
     private Float lon;
     private Integer totalPoints;
-    private Boolean private;
     @Override
      public LocationInstance build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -206,8 +192,7 @@ public final class LocationInstance implements Model {
           name,
           lat,
           lon,
-          totalPoints,
-          private);
+          totalPoints);
     }
     
     @Override
@@ -242,12 +227,6 @@ public final class LocationInstance implements Model {
         return this;
     }
     
-    @Override
-     public BuildStep private(Boolean private) {
-        this.private = private;
-        return this;
-    }
-    
     /** 
      * WARNING: Do not set ID when creating a new object. Leave this blank and one will be auto generated for you.
      * This should only be set when referring to an already existing object.
@@ -271,14 +250,13 @@ public final class LocationInstance implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String questId, String name, Float lat, Float lon, Integer totalPoints, Boolean private) {
+    private CopyOfBuilder(String id, String questId, String name, Float lat, Float lon, Integer totalPoints) {
       super.id(id);
       super.questId(questId)
         .name(name)
         .lat(lat)
         .lon(lon)
-        .totalPoints(totalPoints)
-        .private(private);
+        .totalPoints(totalPoints);
     }
     
     @Override
@@ -304,11 +282,6 @@ public final class LocationInstance implements Model {
     @Override
      public CopyOfBuilder totalPoints(Integer totalPoints) {
       return (CopyOfBuilder) super.totalPoints(totalPoints);
-    }
-    
-    @Override
-     public CopyOfBuilder private(Boolean private) {
-      return (CopyOfBuilder) super.private(private);
     }
   }
   

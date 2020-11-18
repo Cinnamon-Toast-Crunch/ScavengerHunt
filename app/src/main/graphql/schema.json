@@ -1684,16 +1684,6 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "private",
-                        "description": null,
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "ModelBooleanInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
                         "name": "and",
                         "description": null,
                         "type": {
@@ -2079,18 +2069,6 @@
                         "type": {
                             "kind": "SCALAR",
                             "name": "Int",
-                            "ofType": null
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "private",
-                        "description": null,
-                        "args": [],
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "Boolean",
                             "ofType": null
                         },
                         "isDeprecated": false,
@@ -3052,16 +3030,6 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "private",
-                        "description": null,
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "ModelBooleanInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
                         "name": "and",
                         "description": null,
                         "type": {
@@ -3227,18 +3195,6 @@
                         "type": {
                             "kind": "SCALAR",
                             "name": "Int",
-                            "ofType": null
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "private",
-                        "description": null,
-                        "args": [],
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "Boolean",
                             "ofType": null
                         },
                         "isDeprecated": false,
@@ -5286,16 +5242,6 @@
                             "ofType": null
                         },
                         "defaultValue": null
-                    },
-                    {
-                        "name": "private",
-                        "description": null,
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "Boolean",
-                            "ofType": null
-                        },
-                        "defaultValue": null
                     }
                 ],
                 "interfaces": null,
@@ -5354,16 +5300,6 @@
                         "type": {
                             "kind": "INPUT_OBJECT",
                             "name": "ModelIntInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
-                        "name": "private",
-                        "description": null,
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "ModelBooleanInput",
                             "ofType": null
                         },
                         "defaultValue": null
@@ -5477,16 +5413,6 @@
                         "type": {
                             "kind": "SCALAR",
                             "name": "Int",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
-                        "name": "private",
-                        "description": null,
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "Boolean",
                             "ofType": null
                         },
                         "defaultValue": null
@@ -6262,16 +6188,6 @@
                             "ofType": null
                         },
                         "defaultValue": null
-                    },
-                    {
-                        "name": "private",
-                        "description": null,
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "Boolean",
-                            "ofType": null
-                        },
-                        "defaultValue": null
                     }
                 ],
                 "interfaces": null,
@@ -6330,16 +6246,6 @@
                         "type": {
                             "kind": "INPUT_OBJECT",
                             "name": "ModelIntInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
-                        "name": "private",
-                        "description": null,
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "ModelBooleanInput",
                             "ofType": null
                         },
                         "defaultValue": null
@@ -6453,16 +6359,6 @@
                         "type": {
                             "kind": "SCALAR",
                             "name": "Int",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
-                        "name": "private",
-                        "description": null,
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "Boolean",
                             "ofType": null
                         },
                         "defaultValue": null

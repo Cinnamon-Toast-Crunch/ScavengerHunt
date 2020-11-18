@@ -24,7 +24,6 @@ subscription OnCreateUser {
         lat
         lon
         totalPoints
-        private
         createdAt
         updatedAt
       }
@@ -71,7 +70,6 @@ subscription OnUpdateUser {
         lat
         lon
         totalPoints
-        private
         createdAt
         updatedAt
       }
@@ -118,7 +116,6 @@ subscription OnDeleteUser {
         lat
         lon
         totalPoints
-        private
         createdAt
         updatedAt
       }
@@ -181,7 +178,6 @@ subscription OnCreateLocation {
     lat
     lon
     totalPoints
-    private
     tasks {
       items {
         id
@@ -207,7 +203,6 @@ subscription OnUpdateLocation {
     lat
     lon
     totalPoints
-    private
     tasks {
       items {
         id
@@ -233,7 +228,6 @@ subscription OnDeleteLocation {
     lat
     lon
     totalPoints
-    private
     tasks {
       items {
         id
@@ -388,7 +382,6 @@ subscription OnCreateQuest {
         lat
         lon
         totalPoints
-        private
         createdAt
         updatedAt
       }
@@ -412,7 +405,6 @@ subscription OnUpdateQuest {
         lat
         lon
         totalPoints
-        private
         createdAt
         updatedAt
       }
@@ -436,7 +428,6 @@ subscription OnDeleteQuest {
         lat
         lon
         totalPoints
-        private
         createdAt
         updatedAt
       }
@@ -454,7 +445,6 @@ subscription OnCreateLocationInstance {
     lat
     lon
     totalPoints
-    private
     tasks {
       items {
         id
@@ -477,7 +467,6 @@ subscription OnUpdateLocationInstance {
     lat
     lon
     totalPoints
-    private
     tasks {
       items {
         id
@@ -500,7 +489,6 @@ subscription OnDeleteLocationInstance {
     lat
     lon
     totalPoints
-    private
     tasks {
       items {
         id
@@ -527,7 +515,6 @@ subscription OnCreateTaskJoiner {
       lat
       lon
       totalPoints
-      private
       tasks {
         nextToken
       }
@@ -566,7 +553,6 @@ subscription OnUpdateTaskJoiner {
       lat
       lon
       totalPoints
-      private
       tasks {
         nextToken
       }
@@ -605,7 +591,6 @@ subscription OnDeleteTaskJoiner {
       lat
       lon
       totalPoints
-      private
       tasks {
         nextToken
       }
