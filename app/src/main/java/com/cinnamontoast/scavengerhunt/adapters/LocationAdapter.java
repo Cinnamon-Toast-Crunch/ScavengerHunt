@@ -1,4 +1,4 @@
-package com.cinnamontoast.scavengerhunt;
+package com.cinnamontoast.scavengerhunt.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amplifyframework.datastore.generated.model.Location;
-import com.amplifyframework.datastore.generated.model.Quest;
+import com.cinnamontoast.scavengerhunt.R;
 
 import java.util.ArrayList;
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignupConfirmationActivity">
+    tools:context=".activities.SignupConfirmationActivity">
 
     <TextView
         android:id="@+id/textView2"

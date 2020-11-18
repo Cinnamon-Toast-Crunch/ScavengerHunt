@@ -1,4 +1,4 @@
-package com.cinnamontoast.scavengerhunt;
+package com.cinnamontoast.scavengerhunt.activities;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,16 +9,22 @@ import android.os.Bundle;
 import android.util.Log;
 
 import android.widget.Button;
+import android.widget.TextView;
 
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Contact;
 import com.amplifyframework.datastore.generated.model.Location;
 import com.amplifyframework.datastore.generated.model.Quest;
 import com.amplifyframework.datastore.generated.model.User;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
+import com.cinnamontoast.scavengerhunt.adapters.HuntAdapter;
+import com.cinnamontoast.scavengerhunt.adapters.LocationAdapter;
+import com.cinnamontoast.scavengerhunt.adapters.QuestAdapter;
+import com.cinnamontoast.scavengerhunt.R;
 
 import java.util.ArrayList;
 
@@ -66,23 +72,25 @@ public class MainActivity extends AppCompatActivity implements QuestAdapter.Ques
 //        huntRecycler.setAdapter(new HuntAdapter(hunts, this));
 
         setupButtons();
-        
+
     }
 
-    public Quest addFakeQuest(String title, User user){
+    public Quest addFakeQuest(String title, User user) {
         Quest quest = Quest.builder().userId(user.getId()).title(title).build();
         return quest;
     }
 
-    public User addFakeUser(String username, String email){
+    public User addFakeUser(String username, String email) {
         User user = User.builder().userName(username).email(email).build();
         return user;
     }
-    public Location addFakeLocation(String name, User user){
+
+    public Location addFakeLocation(String name, User user) {
         Location location = Location.builder().userId(user.getId()).name(name).build();
         return location;
     }
-    public Hunt addFakeHunt(String name, Integer totalPoints, Location location){
+
+    public Hunt addFakeHunt(String name, Integer totalPoints, Location location) {
         Hunt hunt = Hunt.builder().locationId(location.getId()).name(name).totalPoints(totalPoints).build();
         return hunt;
     }
@@ -116,10 +124,11 @@ public class MainActivity extends AppCompatActivity implements QuestAdapter.Ques
     }
 
     @Override
-    public void huntFormatter(Hunt hunt) {}
+    public void huntFormatter(Hunt hunt) {
+    }
 
 
-    public void setupButtons (){
+    public void setupButtons() {
         Button login = findViewById(R.id.login);
         login.setOnClickListener(view -> this.startActivity(new Intent(this, LoginActivity.class)));
 
@@ -128,4 +137,8 @@ public class MainActivity extends AppCompatActivity implements QuestAdapter.Ques
 
 
     }
-}
+
+
+
+
+}// End of on create

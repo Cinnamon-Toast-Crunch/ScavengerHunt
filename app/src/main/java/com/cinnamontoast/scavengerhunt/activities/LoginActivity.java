@@ -1,10 +1,12 @@
-package com.cinnamontoast.scavengerhunt;
+package com.cinnamontoast.scavengerhunt.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+
+import com.cinnamontoast.scavengerhunt.R;
 
 public class LoginActivity extends AppCompatActivity {
 

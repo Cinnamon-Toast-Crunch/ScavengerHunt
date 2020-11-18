@@ -1,16 +1,16 @@
-package com.cinnamontoast.scavengerhunt;
+package com.cinnamontoast.scavengerhunt.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
+import com.cinnamontoast.scavengerhunt.R;
 
 public class SignupActivity extends AppCompatActivity {
 

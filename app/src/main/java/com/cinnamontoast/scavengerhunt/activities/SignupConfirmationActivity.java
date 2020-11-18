@@ -1,4 +1,4 @@
-package com.cinnamontoast.scavengerhunt;
+package com.cinnamontoast.scavengerhunt.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.amplifyframework.core.Amplify;
+import com.cinnamontoast.scavengerhunt.R;
 
 public class SignupConfirmationActivity extends AppCompatActivity {
 

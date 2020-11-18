@@ -1,10 +1,16 @@
-package com.cinnamontoast.scavengerhunt;
+package com.cinnamontoast.scavengerhunt.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+
+import com.cinnamontoast.scavengerhunt.R;
+import com.cinnamontoast.scavengerhunt.activities.ContactActivity;
+import com.cinnamontoast.scavengerhunt.activities.CreateLocationActivity;
+import com.cinnamontoast.scavengerhunt.activities.CreateQuestActivity;
+import com.cinnamontoast.scavengerhunt.activities.LaunchQuestActivity;
 
 public class ParentProfileActivity extends AppCompatActivity {
 
