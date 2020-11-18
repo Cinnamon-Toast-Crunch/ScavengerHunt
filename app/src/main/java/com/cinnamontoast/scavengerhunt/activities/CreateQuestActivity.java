@@ -29,7 +29,7 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
         TaskAdapter.TaskListFormatter {
 
     Location selectedLocation;
-    ArrayList<Task> selectedTask = new ArrayList<>();
+    ArrayList<Task> selectedTasks = new ArrayList<>();
     ArrayList<Task> viewTasks = new ArrayList<>();
     ArrayList<Location> viewLocation = new ArrayList<>();
 
@@ -46,6 +46,14 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
         populateLocations();
         addToQuest();
 
+    }
+
+    //================= Build empty quest ====================
+    public void buildEmptyQuest(){
+        emptyQuest = Quest.builder()
+                .userId(Amplify.Auth.getCurrentUser().getUserId())
+                .title("")
+                .build();
     }
 
     //================= Populate Location Recycler ===========
@@ -69,25 +77,20 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
         );
 
     }
-    //================= Build empty quest ====================
-    public void buildEmptyQuest(){
-        emptyQuest = Quest.builder()
-                .userId(Amplify.Auth.getCurrentUser().getUserId())
-                .title("")
-                .build();
-    }
-    //================= Grab Location ========================
+
+    //======== Grab Location from recyclerview ===========
     @Override
     public void locationFormatter(Location location) {
 
         selectedLocation = location;
-        selectedTask.clear();
+        selectedTasks.clear();
+        viewTasks.clear();
+        pointTotal = 0;
 
         //=================== Populate task recycler ========
         Amplify.API.query(
                 ModelQuery.list(Task.class),
                 response -> {
-                    viewTasks.clear();
                     for(Task task : response.getData()){
                         if(task.getLocationId().equals(location.getId())){
                             viewTasks.add(task);
@@ -107,11 +110,11 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
     //====================== Build Task Arraylist ==========
     @Override
     public void taskFormatter(Task task) {
-       if(selectedTask.contains(task)) {
-           selectedTask.remove(task);
+       if(selectedTasks.contains(task)) {
+           selectedTasks.remove(task);
            pointTotal -= task.getPointValue();
        }else{
-           selectedTask.add(task);
+           selectedTasks.add(task);
            pointTotal += task.getPointValue();
        }
     }
@@ -130,7 +133,7 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
                 .totalPoints(pointTotal)
                 .build();
 
-        for(Task task : selectedTask){
+        for(Task task : selectedTasks){
             TaskJoiner joiner = TaskJoiner.builder()
                     .locationInstance(instance)
                     .task(task)
@@ -140,8 +143,9 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
                     response -> Log.i("MyAmplify", "Joined Task"),
                     error -> Log.e("MyAmplify", "Failed to join"));
         }
-        selectedTask.clear();
+        selectedTasks.clear();
         selectedLocation = null;
+        pointTotal = 0;
         });
     }
 }
