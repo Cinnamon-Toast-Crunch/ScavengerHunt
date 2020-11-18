@@ -41,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/createquest" />
 
     <Button
-        android:id="@+id/startquest"
+        android:id="@+id/startquestBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
@@ -59,7 +59,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/startquest"
+        app:layout_constraintBottom_toTopOf="@+id/startquestBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addplayer"
         app:layout_constraintVertical_bias="0.511">
