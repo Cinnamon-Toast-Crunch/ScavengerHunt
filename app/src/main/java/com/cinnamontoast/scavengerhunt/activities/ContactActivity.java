@@ -39,13 +39,11 @@ public class ContactActivity extends AppCompatActivity {
 
             String userName = ((TextView) findViewById(R.id.playername)).getText().toString();
             String phoneNumber = ((TextView) findViewById(R.id.phonenumber)).getText().toString();
-            String email = ((TextView) findViewById(R.id.email)).getText().toString();
 
             Contact newContact = Contact.builder()
                     .userId(Amplify.Auth.getCurrentUser().getUserId())
                     .name(userName)
                     .phoneNumber(phoneNumber)
-                    .email(email)
                     .build();
 
             toast.show();

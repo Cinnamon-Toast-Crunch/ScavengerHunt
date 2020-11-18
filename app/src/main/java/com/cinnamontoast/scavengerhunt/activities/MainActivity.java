@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements QuestAdapter.Ques
 
     public void setupButtons() {
         Button login = findViewById(R.id.login);
-        login.setOnClickListener(view -> this.startActivity(new Intent(this, LoginActivity.class)));
+        login.setOnClickListener(view -> this.startActivity(new Intent(this, SignInActivity.class)));
 
         Button signup = findViewById(R.id.signup);
         signup.setOnClickListener(view -> this.startActivity(new Intent(this, SignupActivity.class)));
