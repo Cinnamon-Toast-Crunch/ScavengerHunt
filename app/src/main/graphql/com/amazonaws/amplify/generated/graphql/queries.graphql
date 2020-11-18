@@ -10,7 +10,6 @@ query GetUser($id: ID!) {
         id
         userID
         title
-        private
         createdAt
         updatedAt
       }
@@ -24,7 +23,6 @@ query GetUser($id: ID!) {
         lat
         lon
         totalPoints
-        private
         createdAt
         updatedAt
       }
@@ -109,7 +107,6 @@ query GetLocation($id: ID!) {
     lat
     lon
     totalPoints
-    private
     tasks {
       items {
         id
@@ -140,7 +137,6 @@ query ListLocations(
       lat
       lon
       totalPoints
-      private
       tasks {
         nextToken
       }
@@ -237,7 +233,6 @@ query GetQuest($id: ID!) {
     id
     userID
     title
-    private
     locations {
       items {
         id
@@ -246,7 +241,6 @@ query GetQuest($id: ID!) {
         lat
         lon
         totalPoints
-        private
         createdAt
         updatedAt
       }
@@ -266,7 +260,6 @@ query ListQuests(
       id
       userID
       title
-      private
       locations {
         nextToken
       }
@@ -284,7 +277,6 @@ query GetLocationInstance($id: ID!) {
     lat
     lon
     totalPoints
-    private
     tasks {
       items {
         id
@@ -312,7 +304,6 @@ query ListLocationInstances(
       lat
       lon
       totalPoints
-      private
       tasks {
         nextToken
       }

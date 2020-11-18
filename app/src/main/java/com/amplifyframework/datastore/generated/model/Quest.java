@@ -24,11 +24,9 @@ public final class Quest implements Model {
   public static final QueryField ID = field("id");
   public static final QueryField USER_ID = field("userID");
   public static final QueryField TITLE = field("title");
-  public static final QueryField PRIVATE = field("private");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="ID", isRequired = true) String userID;
   private final @ModelField(targetType="String", isRequired = true) String title;
-  private final @ModelField(targetType="Boolean") Boolean private;
   private final @ModelField(targetType="LocationInstance") @HasMany(associatedWith = "questID", type = LocationInstance.class) List<LocationInstance> locations = null;
   public String getId() {
       return id;
@@ -42,19 +40,14 @@ public final class Quest implements Model {
       return title;
   }
   
-  public Boolean getPrivate() {
-      return private;
-  }
-  
   public List<LocationInstance> getLocations() {
       return locations;
   }
   
-  private Quest(String id, String userID, String title, Boolean private) {
+  private Quest(String id, String userID, String title) {
     this.id = id;
     this.userID = userID;
     this.title = title;
-    this.private = private;
   }
   
   @Override
@@ -67,8 +60,7 @@ public final class Quest implements Model {
       Quest quest = (Quest) obj;
       return ObjectsCompat.equals(getId(), quest.getId()) &&
               ObjectsCompat.equals(getUserId(), quest.getUserId()) &&
-              ObjectsCompat.equals(getTitle(), quest.getTitle()) &&
-              ObjectsCompat.equals(getPrivate(), quest.getPrivate());
+              ObjectsCompat.equals(getTitle(), quest.getTitle());
       }
   }
   
@@ -78,7 +70,6 @@ public final class Quest implements Model {
       .append(getId())
       .append(getUserId())
       .append(getTitle())
-      .append(getPrivate())
       .toString()
       .hashCode();
   }
@@ -89,8 +80,7 @@ public final class Quest implements Model {
       .append("Quest {")
       .append("id=" + String.valueOf(getId()) + ", ")
       .append("userID=" + String.valueOf(getUserId()) + ", ")
-      .append("title=" + String.valueOf(getTitle()) + ", ")
-      .append("private=" + String.valueOf(getPrivate()))
+      .append("title=" + String.valueOf(getTitle()))
       .append("}")
       .toString();
   }
@@ -121,7 +111,6 @@ public final class Quest implements Model {
     return new Quest(
       id,
       null,
-      null,
       null
     );
   }
@@ -129,8 +118,7 @@ public final class Quest implements Model {
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
       userID,
-      title,
-      private);
+      title);
   }
   public interface UserIdStep {
     TitleStep userId(String userId);
@@ -145,7 +133,6 @@ public final class Quest implements Model {
   public interface BuildStep {
     Quest build();
     BuildStep id(String id) throws IllegalArgumentException;
-    BuildStep private(Boolean private);
   }
   
 
@@ -153,7 +140,6 @@ public final class Quest implements Model {
     private String id;
     private String userID;
     private String title;
-    private Boolean private;
     @Override
      public Quest build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -161,8 +147,7 @@ public final class Quest implements Model {
         return new Quest(
           id,
           userID,
-          title,
-          private);
+          title);
     }
     
     @Override
@@ -176,12 +161,6 @@ public final class Quest implements Model {
      public BuildStep title(String title) {
         Objects.requireNonNull(title);
         this.title = title;
-        return this;
-    }
-    
-    @Override
-     public BuildStep private(Boolean private) {
-        this.private = private;
         return this;
     }
     
@@ -208,11 +187,10 @@ public final class Quest implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String userId, String title, Boolean private) {
+    private CopyOfBuilder(String id, String userId, String title) {
       super.id(id);
       super.userId(userId)
-        .title(title)
-        .private(private);
+        .title(title);
     }
     
     @Override
@@ -223,11 +201,6 @@ public final class Quest implements Model {
     @Override
      public CopyOfBuilder title(String title) {
       return (CopyOfBuilder) super.title(title);
-    }
-    
-    @Override
-     public CopyOfBuilder private(Boolean private) {
-      return (CopyOfBuilder) super.private(private);
     }
   }
   
