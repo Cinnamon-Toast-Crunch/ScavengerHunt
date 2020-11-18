@@ -10,7 +10,6 @@ query GetUser($id: ID!) {
         id
         userID
         title
-        private
         createdAt
         updatedAt
       }
@@ -234,7 +233,6 @@ query GetQuest($id: ID!) {
     id
     userID
     title
-    private
     locations {
       items {
         id
@@ -262,7 +260,6 @@ query ListQuests(
       id
       userID
       title
-      private
       locations {
         nextToken
       }

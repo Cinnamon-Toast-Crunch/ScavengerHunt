@@ -13,7 +13,6 @@ mutation CreateUser(
         id
         userID
         title
-        private
         createdAt
         updatedAt
       }
@@ -62,7 +61,6 @@ mutation UpdateUser(
         id
         userID
         title
-        private
         createdAt
         updatedAt
       }
@@ -111,7 +109,6 @@ mutation DeleteUser(
         id
         userID
         title
-        private
         createdAt
         updatedAt
       }
@@ -421,7 +418,6 @@ mutation CreateQuest(
     id
     userID
     title
-    private
     locations {
       items {
         id
@@ -447,7 +443,6 @@ mutation UpdateQuest(
     id
     userID
     title
-    private
     locations {
       items {
         id
@@ -473,7 +468,6 @@ mutation DeleteQuest(
     id
     userID
     title
-    private
     locations {
       items {
         id
