@@ -26,13 +26,17 @@ public final class Quest implements Model {
   public static final QueryField TITLE = field("title");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="ID", isRequired = true) String userID;
-  private final @ModelField(targetType="String", isRequired = true) String title;
+  private  @ModelField(targetType="String", isRequired = true) String title;
   private final @ModelField(targetType="LocationInstance") @HasMany(associatedWith = "questID", type = LocationInstance.class) List<LocationInstance> locations = null;
   public String getId() {
       return id;
   }
-  
-  public String getUserId() {
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getUserId() {
       return userID;
   }
   
@@ -203,5 +207,7 @@ public final class Quest implements Model {
       return (CopyOfBuilder) super.title(title);
     }
   }
+
+
   
 }
