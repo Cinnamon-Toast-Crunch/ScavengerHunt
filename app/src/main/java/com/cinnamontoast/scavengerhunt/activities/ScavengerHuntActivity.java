@@ -30,6 +30,7 @@ public class ScavengerHuntActivity extends AppCompatActivity {
         String appLinkAction = appLinkIntent.getAction();
         Uri appLinkData = appLinkIntent.getData();
 
+        // This pulls the unique Quest ID from the query param link
         Intent intent = getIntent();
         String action = intent.getAction();
         Uri data = intent.getData();
@@ -40,36 +41,6 @@ public class ScavengerHuntActivity extends AppCompatActivity {
         // Grab the Quest ID from the Intent
         // Query AWS
         // Save it to Room & run the quest off of Room
-
-//       ----- FIREBASE ZOMBIE CODE MIGHT NOT NEED IT -----
-//        FirebaseDynamicLinks.getInstance()
-//                .getDynamicLink(getIntent())
-//                .addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
-//                    @Override
-//                    public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
-//                        // Get deep link from result (may be null if no link is found)
-//                        Uri deepLink = null;
-//                        if (pendingDynamicLinkData != null) {
-//                            deepLink = pendingDynamicLinkData.getLink();
-//                        }
-//
-//
-//                        // Handle the deep link. For example, open the linked
-//                        // content, or apply promotional credit to the user's
-//                        // account.
-//                        // ...
-//
-//                        // ...
-//
-//
-//                    }
-//                })
-//                .addOnFailureListener(this, new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.e(TAG, "getDynamicLink:onFailure", e);
-//                    }
-//                });
 
     }
 }
