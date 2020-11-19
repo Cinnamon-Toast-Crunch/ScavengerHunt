@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.cinnamontoast.scavengerhunt.R;
+import com.google.firebase.dynamiclinks.DynamicLink;
 
 public class ParentProfileActivity extends AppCompatActivity {
 
@@ -24,8 +26,15 @@ public class ParentProfileActivity extends AppCompatActivity {
     // TODO: research how to pass the data for the recycler view. maybe as an intent? w/ putExtra
 
     String phoneNo = "+12062519102";
-    String message = "https://scavengerhuntstart.page.link/start";
+    String questId = "0";
+    String message = "https://scavengerhuntstart.page.link/start?questID=" + questId;
     Button sendBtn;
+
+    // Quest ID will come from highlighting the Quest in the recycler view
+    // contacts will come from highlighting the Contacts on the right side of the recycler
+    // TODO: Where is the list data for the task items coming from?
+//     - send the Quest ID --> quest ID Querys the data from AWS
+    // TODO: How exactly to transport it
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +45,11 @@ public class ParentProfileActivity extends AppCompatActivity {
 
         sendBtn = (Button) findViewById(R.id.startquestBtn);
 
+
         sendBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+
+                setQuestId("687457"); // TODO: pull this from the recycler view
                 sendSMSMessage();
                 Log.i("----- DEEP LINK SMS ----", "DEEP LINK SENT to " + phoneNo + " message of " + message );
             }
@@ -89,6 +101,11 @@ public class ParentProfileActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    public void setQuestId(String questId){
+        this.questId = questId;
+        this.message = message + questId;
     }
 
 }
