@@ -17,9 +17,8 @@ import com.cinnamontoast.scavengerhunt.R;
 
 public class ContactActivity extends AppCompatActivity {
 
-    SharedPreferences preferences;
-    SharedPreferences.Editor preferencesEditor;
-
+//    SharedPreferences preferences;
+//    SharedPreferences.Editor preferencesEditor;
     Toast toast;
 
     @Override
@@ -27,8 +26,9 @@ public class ContactActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
 
-        preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        preferencesEditor = preferences.edit();
+
+//        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        preferencesEditor = preferences.edit();
 
         setupButtons();
     }

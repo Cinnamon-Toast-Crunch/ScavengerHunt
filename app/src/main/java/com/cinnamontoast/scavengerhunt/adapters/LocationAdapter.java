@@ -1,8 +1,13 @@
 package com.cinnamontoast.scavengerhunt.adapters;
 
+import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,8 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.amplifyframework.datastore.generated.model.Location;
 import com.cinnamontoast.scavengerhunt.R;
+import com.cinnamontoast.scavengerhunt.activities.CreateQuestActivity;
 
 import java.util.ArrayList;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+import static androidx.core.content.ContextCompat.getSystemService;
 
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.LocationViewHolder> {
 
@@ -49,14 +58,16 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
         return locationForRecycler.size();
     }
 
-    public static class LocationViewHolder extends RecyclerView.ViewHolder{
+    public static class LocationViewHolder extends RecyclerView.ViewHolder {
         public Location location;
 
         public LocationViewHolder(@NonNull View itemView) {
             super(itemView);
         }
     }
-    public static interface LocationListFormatter{
+
+    public static interface LocationListFormatter {
         public void locationFormatter(Location location);
     }
+
 }
