@@ -19,6 +19,10 @@ import com.cinnamontoast.scavengerhunt.R;
 public class ParentProfileActivity extends AppCompatActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 1;
+
+    // TODO: figure out how to pass it an array of phone numbers
+    // TODO: research how to pass the data for the recycler view. maybe as an intent? w/ putExtra
+
     String phoneNo = "+12062519102";
     String message = "https://scavengerhuntstart.page.link/start";
     Button sendBtn;
