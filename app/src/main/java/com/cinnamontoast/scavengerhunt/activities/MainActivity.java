@@ -25,6 +25,8 @@ import com.amplifyframework.datastore.generated.model.Contact;
 import com.amplifyframework.datastore.generated.model.Location;
 import com.amplifyframework.datastore.generated.model.LocationInstance;
 import com.amplifyframework.datastore.generated.model.Quest;
+import com.amplifyframework.datastore.generated.model.Task;
+import com.amplifyframework.datastore.generated.model.TaskJoiner;
 import com.amplifyframework.datastore.generated.model.User;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 import com.cinnamontoast.scavengerhunt.adapters.LocationAdapter;
@@ -137,6 +139,25 @@ public class MainActivity extends AppCompatActivity implements QuestAdapter.Ques
 //        Amplify.API.mutate(ModelMutation.create(location1), r -> {}, e -> {});
 //        Amplify.API.mutate(ModelMutation.create(location2), r -> {}, e -> {});
 //        Amplify.API.mutate(ModelMutation.create(location3), r -> {}, e -> {});
+//
+//
+//        Location location = Location.builder()
+//                .userId(Amplify.Auth.getCurrentUser().getUserId()).name("snoqualmie").build();
+//
+//        Task task = Task.builder()
+//                .locationId(location.getId()).objective("go snowshoeing").completed(false).build();
+//
+//        Task task2 = Task.builder()
+//                .locationId(location.getId()).objective("find a snowy owl").completed(true).build();
+//
+//        Amplify.API.mutate(ModelMutation.create(location), r -> {}, e -> {});
+//        Amplify.API.mutate(ModelMutation.create(task), r -> {}, e -> {});
+//        Amplify.API.mutate(ModelMutation.create(task2), r -> {}, e -> {});
+//        TaskJoiner join1 = TaskJoiner.builder().locationInstance(location1).task(task).build();
+//        TaskJoiner join2 = TaskJoiner.builder().locationInstance(location1).task(task2).build();
+//        Amplify.API.mutate(ModelMutation.create(join1), r -> {}, e -> {});
+//        Amplify.API.mutate(ModelMutation.create(join2), r -> {}, e -> {});
+
 
 
         checkIfUserSignedIn();
