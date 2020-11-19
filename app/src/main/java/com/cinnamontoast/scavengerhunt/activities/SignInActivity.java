@@ -32,7 +32,7 @@ public class SignInActivity extends AppCompatActivity {
                     username,
                     password,
                     result -> {
-                        Log.i("Amplify.login", result.isSignInComplete() ? "Sign In Succesful" :
+                        Log.i("Amplify.login", result.isSignInComplete() ? "Sign In Successful" :
                                 "Sign in failed");
                         prefEdit.putString("username",username);
                         prefEdit.apply();

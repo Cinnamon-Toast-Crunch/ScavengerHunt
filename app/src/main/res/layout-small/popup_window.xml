@@ -3,7 +3,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout2"
+    android:id="@+id/createquest"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#2196F3"
@@ -30,8 +30,9 @@
         android:layout_marginTop="12dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/textView14"
-        tools:layout_editor_absoluteX="146dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <EditText
         android:id="@+id/newItemPoints"
@@ -40,8 +41,9 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintTop_toBottomOf="@+id/newItemName"
-        tools:layout_editor_absoluteX="146dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newItemName" />
 
     <TextView
         android:id="@+id/textView15"
@@ -72,8 +74,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Create Another Item"
-        app:layout_constraintTop_toBottomOf="@+id/addHint"
-        tools:layout_editor_absoluteX="34dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addHint" />
 
     <Button
         android:id="@+id/saveAndReturn"
@@ -82,6 +84,7 @@
         android:layout_marginStart="48dp"
         android:text="Save/Return"
         app:layout_constraintBottom_toBottomOf="@+id/anotherItem"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/anotherItem"
         app:layout_constraintTop_toTopOf="@+id/anotherItem"
         app:layout_constraintVertical_bias="1.0" />
@@ -105,8 +108,9 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/newItemPoints"
-        tools:layout_editor_absoluteX="146dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newItemPoints" />
 
     <Button
         android:id="@+id/addHint"
@@ -114,7 +118,7 @@
         android:layout_height="38dp"
         android:layout_marginTop="8dp"
         android:text="Add Another Hint"
-        app:layout_constraintTop_toBottomOf="@+id/hint"
-        tools:layout_editor_absoluteX="160dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hint" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
