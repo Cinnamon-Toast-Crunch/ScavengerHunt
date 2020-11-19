@@ -46,6 +46,7 @@ public class ParentProfileActivity extends AppCompatActivity implements QuestAda
     String questId = "0";
     String smsEndpoint = "https://scavengerhuntstart.page.link/start?questID=";
     String message = smsEndpoint + questId;
+    String[] numbers = {"12062519102","18649928355","15556842648","19815426325"};
     Button sendBtn;
 
     // Quest ID will come from highlighting the Quest in the recycler view
@@ -71,7 +72,10 @@ public class ParentProfileActivity extends AppCompatActivity implements QuestAda
 
         sendBtn = (Button) findViewById(R.id.startquestBtn);
 
-
+        // request & set SMS permissions for the app
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.SEND_SMS},
+                MY_PERMISSIONS_REQUEST_SEND_SMS);
 
         sendBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -81,10 +85,13 @@ public class ParentProfileActivity extends AppCompatActivity implements QuestAda
                 } else {
                     // grab Quest Id
                     String getId = selectedQuest.getId();
-
                     setQuestId(getId); // TODO: pull this from the recycler view
-                    sendSMSMessage();
-                    Log.i("----- DEEP LINK SMS ----", "DEEP LINK SENT to " + phoneNo + " message of " + message );
+
+                    if (checkPermission(Manifest.permission.SEND_SMS)){
+                        sendSMSMessage();
+                        Toast.makeText(getApplicationContext(), "SMS sent.", Toast.LENGTH_LONG).show();
+                    }
+
                 }
 
             }
@@ -114,40 +121,12 @@ public class ParentProfileActivity extends AppCompatActivity implements QuestAda
 //    ----- SEND SMS METHODS -----
     protected void sendSMSMessage() {
 
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.SEND_SMS)
-                != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.SEND_SMS)) {
-            } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.SEND_SMS},
-                        MY_PERMISSIONS_REQUEST_SEND_SMS);
-            }
+        SmsManager sms = SmsManager.getDefault();
+        for (String number : numbers){
+            sms.sendTextMessage(number,null,message,null,null);
+            Log.i("----- DEEP LINK SMS ----", "DEEP LINK SENT to " + number + " message of " + message );
         }
-
     }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_SEND_SMS: {
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(phoneNo, null, message, null, null);
-                    Toast.makeText(getApplicationContext(), "SMS sent.",
-                            Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getApplicationContext(),
-                            "SMS failed, please try again.", Toast.LENGTH_LONG).show();
-                    return;
-                }
-            }
-        }
-
-    }
-
 
     public void setQuestId(String questId){
         this.questId = questId;
@@ -193,6 +172,11 @@ public class ParentProfileActivity extends AppCompatActivity implements QuestAda
                 error -> {
                     Log.e("MyAmplify", "uh oh", error);
                 });
+    }
+
+    public boolean checkPermission(String permission){
+        int check = ContextCompat.checkSelfPermission(this,permission);
+        return (check == PackageManager.PERMISSION_GRANTED);
     }
 
     public void queryUserPlayers() {
