@@ -30,4 +30,7 @@ public interface LTaskDao {
     @Transaction
     @Query("SELECT * FROM ltask")
     public List<LTaskWithLHints> getLTaskWithLHints();
+
+    @Query("SELECT * FROM ltask ORDER BY id DESC LIMIT 1")
+    public LTask getLastTask();
 }
