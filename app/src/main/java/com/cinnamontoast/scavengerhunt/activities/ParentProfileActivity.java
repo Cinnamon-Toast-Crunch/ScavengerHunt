@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -207,6 +208,17 @@ public class ParentProfileActivity extends AppCompatActivity implements QuestAda
         // save to global quest
         selectedQuest = quest;
         Log.i("MyAmplify.selectedQuest", selectedQuest.toString());
+    }
+
+    @Override
+    public void questHighlighter(View questView, Quest quest) {
+        if (selectedQuest == quest) {
+            questView.setBackgroundColor(Color.RED);
+        } else {
+            questView.setBackgroundColor(Color.GREEN);
+
+        }
+
     }
 
     @Override
