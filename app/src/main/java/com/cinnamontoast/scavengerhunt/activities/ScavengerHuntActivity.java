@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
@@ -33,6 +35,7 @@ public class ScavengerHuntActivity extends AppCompatActivity {
     private static final String TAG = "no worky";
     public Quest retrievedQuest;
     public LDatabase roomDb;
+    ArrayList<String> locationList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +63,21 @@ public class ScavengerHuntActivity extends AppCompatActivity {
         // Query AWS
         getQuestFromCloud(questId);
 
-        // Save it to Room & run the quest off of Room
+
+
+        // ------- Save it to Room & run the quest off of Room -------
+        // ------- Location Spinner -------
+        
+//        LQuest currentQuest = retrieveQuestFromRoom();
+//        for (LLocation location : currentQuest.lLocationList){
+//            locationList.add(location.name);
+//        }
+
+//        for (String place : locationList) Log.i("LOCAL ARRAY -- ", place);
+
+
+//        Spinner spinner = findViewById(R.id.locationSpinner);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, locationList);
 
     }
 
