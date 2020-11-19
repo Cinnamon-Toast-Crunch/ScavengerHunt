@@ -67,7 +67,7 @@ public class ScavengerHuntActivity extends AppCompatActivity {
 
         // ------- Save it to Room & run the quest off of Room -------
         // ------- Location Spinner -------
-        
+
 //        LQuest currentQuest = retrieveQuestFromRoom();
 //        for (LLocation location : currentQuest.lLocationList){
 //            locationList.add(location.name);
