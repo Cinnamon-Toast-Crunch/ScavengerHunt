@@ -8,7 +8,9 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.User;
 import com.cinnamontoast.scavengerhunt.R;
 
 public class SignupConfirmationActivity extends AppCompatActivity {
@@ -29,10 +31,28 @@ public class SignupConfirmationActivity extends AppCompatActivity {
                     result -> {
                         Log.i("Amplify.confirm", result.isSignUpComplete() ? "Confirm Signup Succeeded" :
                                 "Confirm SignUp Not Complete");
+                        copySignedInUserToModel();
                         startActivity(new Intent(SignupConfirmationActivity.this, ParentProfileActivity.class));
                     },
                     error -> Log.e("Amplify.confirm", error.toString())
             );
         });
+    }
+
+    public void autoSignInOnConfirmation() {
+
+    }
+
+    public void copySignedInUserToModel() {
+        User newUser = User.builder()
+                .userName(Amplify.Auth.getCurrentUser().getUsername())
+                .email("placeholder")
+                .id(Amplify.Auth.getCurrentUser().getUserId())
+                .build();
+
+        Amplify.API.mutate(ModelMutation.create(newUser),
+                r -> Log.i("MyAmplify", "User Model Created"),
+                e -> Log.e("MyAmplify", "Failed to duplicate User model", e));
+
     }
 }
