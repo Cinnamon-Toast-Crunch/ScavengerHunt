@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements QuestAdapter.Ques
 
     ArrayList<Quest> quests = new ArrayList<>();
     ArrayList<Location> locations = new ArrayList<>();
-    LDatabase roomDb;
+//    LDatabase roomDb;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -90,9 +90,9 @@ public class MainActivity extends AppCompatActivity implements QuestAdapter.Ques
         setupButtons();
 
         //still working in onCreate for testing. Dummy data below
-        roomDb = Room.databaseBuilder(getApplicationContext(), LDatabase.class, "scavengerlocal")
+//        roomDb = Room.databaseBuilder(getApplicationContext(), LDatabase.class, "scavengerlocal")
 //        .fallbackToDestructiveMigration()
-                .allowMainThreadQueries().build();
+//                .allowMainThreadQueries().build();
 //        LQuest quest = new LQuest("forest quest");
 //        roomDb.lQuestDao().saveLQuest(quest);
 //
@@ -170,27 +170,16 @@ public class MainActivity extends AppCompatActivity implements QuestAdapter.Ques
         }
     }
 
-    public LQuest retrieveQuestFromRoom(int questId){
-        List<LQuestWithLLocations> questFromDatabase = roomDb.lQuestDao().getLQuestsWithLocations();
-        LQuest newQuest = null;
-        for(LQuestWithLLocations q : questFromDatabase){
-            if(q.lQuest.id == questId){
-//                newQuest = q.lQuest;
-                newQuest = new LQuest(q);
-//                for(LLocationWithLTasks l : q.lLocations){
-//                    Log.i("room", q.lQuest.toString());
-//                    q.lQuest.lLocationList.add(l.lLocation);
-//                    for(LTaskWithLHints t : l.lTasks){
-//                        l.lLocation.lTaskList.add(t.lTask);
-//                        for(LHint h : t.lHints){
-//                            t.lTask.lHintList.add(h);
-//                        }
-//                    }
-//                }
-            }
-        }
-        return newQuest;
-    }
+//    public LQuest retrieveQuestFromRoom(int questId){
+//        List<LQuestWithLLocations> questFromDatabase = roomDb.lQuestDao().getLQuestsWithLocations();
+//        LQuest newQuest = null;
+//        for(LQuestWithLLocations q : questFromDatabase){
+//            if(q.lQuest.id == questId){
+//                newQuest = new LQuest(q);
+//            }
+//        }
+//        return newQuest;
+//    }
 
     public Quest addFakeQuest(String title, User user) {
         Quest quest = Quest.builder().userId(user.getId()).title(title).build();
