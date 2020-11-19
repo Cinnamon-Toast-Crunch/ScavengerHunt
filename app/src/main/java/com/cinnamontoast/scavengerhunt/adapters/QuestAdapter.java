@@ -31,8 +31,8 @@ public class QuestAdapter extends RecyclerView.Adapter<QuestAdapter.QuestViewHol
         .inflate(R.layout.fragment_quest, parent, false);
         QuestViewHolder questViewHolder = new QuestViewHolder(view);
         view.setOnClickListener(v -> {
+            questListFormatter.questHighlighter(view, questViewHolder.quest);
             questListFormatter.questFormatter(questViewHolder.quest);
-
         });
         return questViewHolder;
     }
@@ -58,5 +58,6 @@ public class QuestAdapter extends RecyclerView.Adapter<QuestAdapter.QuestViewHol
     }
     public static interface QuestListFormatter{
         public void questFormatter(Quest quest);
+        public void questHighlighter(View questView, Quest quest);
     }
 }
