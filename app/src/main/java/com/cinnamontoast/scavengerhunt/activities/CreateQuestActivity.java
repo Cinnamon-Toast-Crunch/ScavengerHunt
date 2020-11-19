@@ -74,6 +74,8 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
     int pointTotal;
     Quest emptyQuest;
 
+    Button itemButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +89,9 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
         locationHandler = createHandler(locationRecycler);
         questHandler = createHandler(questRecycler);
         buildEmptyQuest();
+        itemButton = findViewById(R.id.makeNewItem);
+        itemButton.setVisibility(View.INVISIBLE);
+
         populateLocations();
         addToQuest();
         saveQuest();
@@ -175,6 +180,7 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
                             response -> Log.i("MyAmplify", "Location created"),
                             error -> Log.e("MyAmplify", "Failed to create Location"));
 
+                    setLocationRecycler();
                     populateLocations();
                     popupWindow.dismiss();
                 });
@@ -194,8 +200,8 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
                 layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
                 ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.popup_window, null);
 
-                popupWindow = new PopupWindow(container, 1000, 1500, true);
-                popupWindow.showAtLocation(constraintLayout,Gravity.NO_GRAVITY, 600, 600);
+                popupWindow = new PopupWindow(container, 900, 1000, true);
+                popupWindow.showAtLocation(constraintLayout,Gravity.NO_GRAVITY, 100, 600);
 
                 //--------- Save and Stay button
                 Button saveAndStay = container.findViewById(R.id.anotherItem);
@@ -362,6 +368,7 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
         pointTotal = 0;
 
         populateTasks(location);
+        itemButton.setVisibility(View.VISIBLE);
     }
 
     //================= Populate Task recycler =============
@@ -402,9 +409,18 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
         saveQuest.setOnClickListener(v -> {
 
             String title = ((TextView)findViewById(R.id.inputQuestName)).getText().toString();
-            if(title == ""){
+            if(title.isEmpty()){
                 Context context = getApplicationContext();
                 CharSequence text = "Please enter a name for this quest.";
+                int duration = Toast.LENGTH_LONG;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
+            }else if (questLocations.size() == 0) {
+
+                Context context = getApplicationContext();
+                CharSequence text = "Your quest is empty, please add a location.";
                 int duration = Toast.LENGTH_LONG;
 
                 Toast toast = Toast.makeText(context, text, duration);
@@ -434,6 +450,14 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
         Button addToQuest = findViewById(R.id.addToQuest);
         addToQuest.setOnClickListener(v -> {
 
+        if(selectedTasks.size() == 0){
+            Context context = getApplicationContext();
+            CharSequence text = "Please select/create an item for this location.";
+            int duration = Toast.LENGTH_LONG;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }else {
         LocationInstance instance = LocationInstance.builder()
                 .questId(emptyQuest.getId())
                 .name(selectedLocation.getName())
@@ -452,83 +476,26 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
                     response -> Log.i("MyAmplify", "Joined Task"),
                     error -> Log.e("MyAmplify", "Failed to join"));
         }
+            Context context = getApplicationContext();
+            CharSequence text = selectedTasks.size() + " items have been added to your quest.";
+            int duration = Toast.LENGTH_LONG;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
         selectedTasks.clear();
         pointTotal = 0;
         questLocations.add(selectedLocation);
         questPreview();
         selectedLocation = null;
+        itemButton.setVisibility(View.INVISIBLE);
+        viewTasks.clear();
+        populateLocations();
+        setTaskRecycler();
+        setLocationRecycler();
+
+
+        }
         });
     }
-
-
-
-    //=====================================================================
-//    public void onButtonShowPopupWindowClick(View view) {
-//
-//        // inflate the layout of the popup window
-//        LayoutInflater inflater = (LayoutInflater)
-//                getSystemService(LAYOUT_INFLATER_SERVICE);
-//        View popupView = inflater.inflate(R.layout.popup_window, null);
-//
-//        // create the popup window
-//        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-//        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-//        boolean focusable = true; // lets taps outside the popup also dismiss it
-//        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-//
-//        // show the popup window
-//        // which view you pass in doesn't matter, it is only used for the window tolken
-//        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-//
-//        // dismiss the popup window when touched
-//        popupView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                popupWindow.dismiss();
-//                return true;
-//            }
-//        });
-//    }
-
-
-    //======================================================================
-//    class ShowPopUp extends CreateQuestActivity {
-//        PopupWindow popUp;
-//        boolean click = true;
-//
-//        @Override
-//        public void onCreate(Bundle savedInstanceState) {
-//            super.onCreate(savedInstanceState);
-//            popUp = new PopupWindow(this);
-//            LinearLayout layout = new LinearLayout(this);
-//            LinearLayout mainLayout = new LinearLayout(this);
-//            TextView tv = new TextView(this);
-//            Button but = new Button(this);
-//            but.setText("Click Me");
-//            but.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if (click) {
-//                        popUp.showAtLocation(layout, Gravity.BOTTOM, 10, 10);
-//                        popUp.update(50, 50, 300, 80);
-//                        click = false;
-//                    } else {
-//                        popUp.dismiss();
-//                        click = true;
-//                    }
-//                }
-//            });
-//
-//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-//                    LinearLayout.LayoutParams.WRAP_CONTENT);
-//            layout.setOrientation(LinearLayout.VERTICAL);
-//            tv.setText("Hi this is a sample text for popup window");
-//            layout.addView(tv, params);
-//            popUp.setContentView(layout);
-//            // popUp.showAtLocation(layout, Gravity.BOTTOM, 10, 10);
-//            mainLayout.addView(but, params);
-//            setContentView(mainLayout);
-//        }
-//    }
 
 }
