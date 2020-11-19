@@ -3,7 +3,9 @@ package com.cinnamontoast.scavengerhunt.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -14,10 +16,16 @@ import com.cinnamontoast.scavengerhunt.R;
 
 public class SignupActivity extends AppCompatActivity {
 
+    SharedPreferences preferences;
+    SharedPreferences.Editor prefEdit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        prefEdit = preferences.edit();
 
         signUpUser();
     }
@@ -42,6 +50,9 @@ public class SignupActivity extends AppCompatActivity {
                     AuthSignUpOptions.builder().userAttribute(AuthUserAttributeKey.email(), email).build(),
                     result -> {
                         Log.i("Amplify.signup", "Result : " + result.toString());
+                        prefEdit.putString("username",username);
+                        prefEdit.putString("password",password);
+                        prefEdit.apply();
                         startActivity(new Intent(SignupActivity.this,
                                 SignupConfirmationActivity.class));
                     },
