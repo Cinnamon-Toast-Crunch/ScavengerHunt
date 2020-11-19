@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/frameLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragments.NewItemFragment"
+        tools:ignore="MissingDefaultResource">
+
+        <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="398dp"
+        android:layout_height="376dp"
+        android:text="@string/hello_blank_fragment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
+
+    <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create New Item"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintBottom_toBottomOf="@+id/textView13"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.054" />
+
+    <EditText
+        android:id="@+id/newItemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintTop_toBottomOf="@+id/textView14"
+        tools:layout_editor_absoluteX="146dp" />
+
+    <EditText
+        android:id="@+id/newItemPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintTop_toBottomOf="@+id/newItemName"
+        tools:layout_editor_absoluteX="146dp" />
+
+    <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name:"
+            app:layout_constraintBottom_toBottomOf="@+id/newItemName"
+            app:layout_constraintEnd_toStartOf="@+id/newItemName"
+            app:layout_constraintHorizontal_bias="0.647"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/newItemName"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Point Value"
+            app:layout_constraintBottom_toBottomOf="@+id/newItemPoints"
+            app:layout_constraintEnd_toStartOf="@+id/newItemPoints"
+            app:layout_constraintHorizontal_bias="0.647"
+            app:layout_constraintStart_toStartOf="@+id/textView13"
+            app:layout_constraintTop_toTopOf="@+id/newItemPoints"
+            app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/anotherItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Another Item"
+        app:layout_constraintBottom_toBottomOf="@+id/textView13"
+        app:layout_constraintTop_toBottomOf="@+id/addHint"
+        app:layout_constraintVertical_bias="0.509"
+        tools:layout_editor_absoluteX="33dp" />
+
+    <Button
+            android:id="@+id/saveAndReturn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:text="Save/Return"
+            app:layout_constraintBottom_toBottomOf="@+id/anotherItem"
+            app:layout_constraintStart_toEndOf="@+id/anotherItem"
+            app:layout_constraintTop_toTopOf="@+id/anotherItem"
+            app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hint (optional)"
+        app:layout_constraintBottom_toBottomOf="@+id/hint"
+        app:layout_constraintTop_toTopOf="@+id/hint"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="33dp" />
+
+    <EditText
+        android:id="@+id/hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintTop_toBottomOf="@+id/newItemPoints"
+        tools:layout_editor_absoluteX="146dp" />
+
+    <Button
+        android:id="@+id/addHint"
+        android:layout_width="199dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="8dp"
+        android:text="Add Another Hint"
+        app:layout_constraintTop_toBottomOf="@+id/hint"
+        tools:layout_editor_absoluteX="160dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
