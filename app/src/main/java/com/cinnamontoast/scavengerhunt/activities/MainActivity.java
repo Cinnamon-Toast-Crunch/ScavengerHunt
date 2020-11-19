@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Contact;
@@ -138,6 +139,14 @@ public class MainActivity extends AppCompatActivity implements QuestAdapter.Ques
 //        Amplify.API.mutate(ModelMutation.create(location3), r -> {}, e -> {});
 
 
+        checkIfUserSignedIn();
+
+    }
+
+    public void checkIfUserSignedIn() {
+        if (Amplify.Auth.getCurrentUser() != null) {
+            startActivity(new Intent(MainActivity.this, ParentProfileActivity.class));
+        }
     }
 
     public LQuest retrieveQuestFromRoom(int questId){
