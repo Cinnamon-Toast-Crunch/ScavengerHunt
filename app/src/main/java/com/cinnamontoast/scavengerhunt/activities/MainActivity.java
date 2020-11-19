@@ -109,8 +109,8 @@ public class MainActivity extends AppCompatActivity implements QuestAdapter.Ques
 //        List<LQuestWithLLocations> questLocationsList = roomDb.lQuestDao().getLQuestsWithLocations();
 //        Log.i("room", questLocationsList.toString());
 
-        LQuest uniqueQuest = retrieveQuestFromRoom(1);
-        Log.i("room", uniqueQuest.toString());
+//        LQuest uniqueQuest = retrieveQuestFromRoom(1);
+//        Log.i("room", uniqueQuest.toString());
 
     }
 
