@@ -15,7 +15,6 @@
         <activity android:name=".activities.SignInActivity"></activity>
         <activity android:name=".activities.SignupConfirmationActivity" />
 
-        <activity android:name=".activities.LaunchQuestActivity" />
         <activity android:name=".activities.CreateQuestActivity" />
         <activity android:name=".activities.ContactActivity" />
         <activity android:name=".activities.ParentProfileActivity" />
