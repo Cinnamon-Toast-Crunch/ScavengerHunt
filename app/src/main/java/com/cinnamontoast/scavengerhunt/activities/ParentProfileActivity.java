@@ -20,6 +20,7 @@ import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -42,7 +43,7 @@ public class ParentProfileActivity extends AppCompatActivity implements QuestAda
     // TODO: figure out how to pass it an array of phone numbers
     // TODO: research how to pass the data for the recycler view. maybe as an intent? w/ putExtra
 
-    String phoneNo = "+12062519102";
+    String phoneNo = "+19496836174";
     String questId = "0";
     String smsEndpoint = "https://scavengerhuntstart.page.link/start?questID=";
     String message = smsEndpoint + questId;
@@ -115,6 +116,14 @@ public class ParentProfileActivity extends AppCompatActivity implements QuestAda
         Button addplayer = findViewById(R.id.addplayer);
         addplayer.setOnClickListener(view -> this.startActivity(new Intent(this, ContactActivity.class)));
 
+        ImageButton logoutButton = findViewById(R.id.logout);
+        logoutButton.setOnClickListener(view -> {
+            Amplify.Auth.signOut(
+                    () -> Log.i("Amplify.logout", "successful logout"),
+                    error -> Log.e("Amplify.logout", "logout unsuccessful")
+            );
+            this.startActivity(new Intent(this, MainActivity.class));
+        });
     }
 
 
@@ -163,9 +172,9 @@ public class ParentProfileActivity extends AppCompatActivity implements QuestAda
                 response -> {
                     for (Quest quest : response.getData()) {
                         // TODO: only display Auth user's quests
-//                        if (quest.getUserId() == Amplify.Auth.getCurrentUser().getUserId()) {
+                        if (quest.getUserId().equals(Amplify.Auth.getCurrentUser().getUserId())) {
                             questOptions.add(quest);
-//                        }
+                        }
                     }
                     questHandler.sendEmptyMessage(1);
                 },
@@ -184,9 +193,9 @@ public class ParentProfileActivity extends AppCompatActivity implements QuestAda
                 response -> {
                     for (Contact contact : response.getData()) {
                         // TODO: only display Auth user's contacts
-//                        if (contact.getUserId() == Amplify.Auth.getCurrentUser().getUserId()) {
+                        if (contact.getUserId().equals(Amplify.Auth.getCurrentUser().getUserId())) {
                             playerOptions.add(contact);
-//                        }
+                        }
                     }
                     playerHandler.sendEmptyMessage(1);
                 },

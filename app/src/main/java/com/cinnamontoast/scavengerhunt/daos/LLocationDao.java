@@ -30,4 +30,7 @@ public interface LLocationDao {
     @Transaction
     @Query("SELECT * FROM llocation")
     public List<LLocationWithLTasks> getLLocationsWithLTasks();
+
+    @Query("SELECT * FROM llocation ORDER BY id DESC LIMIT 1")
+    public LLocation getLastLocation();
 }
