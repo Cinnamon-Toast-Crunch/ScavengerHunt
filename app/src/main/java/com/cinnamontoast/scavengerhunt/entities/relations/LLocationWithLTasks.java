@@ -11,6 +11,14 @@ import java.util.List;
 public class LLocationWithLTasks {
     @Embedded
     public LLocation lLocation;
-    @Relation(parentColumn = "id", entityColumn = "lLocationId")
-    public List<LTask> lTasks;
+    @Relation(parentColumn = "id", entityColumn = "lLocationId", entity = LTask.class)
+    public List<LTaskWithLHints> lTasks;
+
+    @Override
+    public String toString() {
+        return "LLocationWithLTasks{" +
+                "lLocation=" + lLocation +
+                ", lTasks=" + lTasks +
+                '}';
+    }
 }

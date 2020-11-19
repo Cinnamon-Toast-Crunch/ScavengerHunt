@@ -2,6 +2,8 @@ package com.cinnamontoast.scavengerhunt.activities;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Query;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Build;
@@ -24,13 +26,23 @@ import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 import com.cinnamontoast.scavengerhunt.adapters.LocationAdapter;
 import com.cinnamontoast.scavengerhunt.adapters.QuestAdapter;
 import com.cinnamontoast.scavengerhunt.R;
+import com.cinnamontoast.scavengerhunt.database.LDatabase;
+import com.cinnamontoast.scavengerhunt.entities.LHint;
+import com.cinnamontoast.scavengerhunt.entities.LLocation;
+import com.cinnamontoast.scavengerhunt.entities.LQuest;
+import com.cinnamontoast.scavengerhunt.entities.LTask;
+import com.cinnamontoast.scavengerhunt.entities.relations.LLocationWithLTasks;
+import com.cinnamontoast.scavengerhunt.entities.relations.LQuestWithLLocations;
+import com.cinnamontoast.scavengerhunt.entities.relations.LTaskWithLHints;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements QuestAdapter.QuestListFormatter, LocationAdapter.LocationListFormatter {
 
     ArrayList<Quest> quests = new ArrayList<>();
     ArrayList<Location> locations = new ArrayList<>();
+    LDatabase roomDb;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -71,6 +83,57 @@ public class MainActivity extends AppCompatActivity implements QuestAdapter.Ques
 
         setupButtons();
 
+        //still working in onCreate for testing. Dummy data below
+        roomDb = Room.databaseBuilder(getApplicationContext(), LDatabase.class, "scavengerlocal")
+//        .fallbackToDestructiveMigration()
+                .allowMainThreadQueries().build();
+//        LQuest quest = new LQuest("forest quest");
+//        roomDb.lQuestDao().saveLQuest(quest);
+//
+//        LLocation location1 = new LLocation("forage the lion's mane mushroom", 15, (float)47.8609, (float)129.9348, 1);
+//        LLocation location2 = new LLocation("commune with the great horned owl", 50, (float)47.8609, (float)129.9348, 1);
+//        roomDb.lLocationDao().saveLLocation(location1);
+//        roomDb.lLocationDao().saveLLocation(location2);
+//
+//        LTask task1loc1 = new LTask("you must find the mushroom on a pine tree", "look for needles and duff", false, 15, "img.url", 1);
+//        LTask task2loc1 = new LTask("find the owl and learn from her", "she is in the trees", false, 50, "img.url", 1);
+//        roomDb.lTaskDao().saveLTask(task1loc1);
+//        roomDb.lTaskDao().saveLTask(task2loc1);
+//
+//        LHint hint1task1 = new LHint("Check that big tree over there", 1);
+//        LHint hint2task1 = new LHint("Not that tree. The other one", 1);
+//        roomDb.lHintDao().saveLHint(hint1task1);
+//        roomDb.lHintDao().saveLHint(hint2task1);
+//
+//        List<LQuest> questList = roomDb.lQuestDao().getAll();
+//        List<LQuestWithLLocations> questLocationsList = roomDb.lQuestDao().getLQuestsWithLocations();
+//        Log.i("room", questLocationsList.toString());
+
+        LQuest uniqueQuest = retrieveQuestFromRoom(1);
+        Log.i("room", uniqueQuest.toString());
+
+    }
+
+    public LQuest retrieveQuestFromRoom(int questId){
+        List<LQuestWithLLocations> questFromDatabase = roomDb.lQuestDao().getLQuestsWithLocations();
+        LQuest newQuest = null;
+        for(LQuestWithLLocations q : questFromDatabase){
+            if(q.lQuest.id == questId){
+//                newQuest = q.lQuest;
+                newQuest = new LQuest(q);
+//                for(LLocationWithLTasks l : q.lLocations){
+//                    Log.i("room", q.lQuest.toString());
+//                    q.lQuest.lLocationList.add(l.lLocation);
+//                    for(LTaskWithLHints t : l.lTasks){
+//                        l.lLocation.lTaskList.add(t.lTask);
+//                        for(LHint h : t.lHints){
+//                            t.lTask.lHintList.add(h);
+//                        }
+//                    }
+//                }
+            }
+        }
+        return newQuest;
     }
 
     public Quest addFakeQuest(String title, User user) {

@@ -28,4 +28,7 @@ public interface LQuestDao {
     @Transaction
     @Query("SELECT * FROM lquest")
     public List<LQuestWithLLocations> getLQuestsWithLocations();
+
+    @Query("SELECT * FROM lquest WHERE id = 1")
+    public LQuest getOneQuest();
 }

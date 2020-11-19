@@ -14,7 +14,7 @@ import java.util.List;
 
 @Dao
 public interface LHintDao {
-    @Insert public void saveLQuest(LHint lHint);
+    @Insert public void saveLHint(LHint lHint);
 
     @Query("SELECT * FROM lhint")
     List<LHint> getAll();

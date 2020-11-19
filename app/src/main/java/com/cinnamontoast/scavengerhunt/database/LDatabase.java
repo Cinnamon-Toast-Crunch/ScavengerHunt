@@ -11,7 +11,7 @@ import com.cinnamontoast.scavengerhunt.entities.LLocation;
 import com.cinnamontoast.scavengerhunt.entities.LQuest;
 import com.cinnamontoast.scavengerhunt.entities.LTask;
 
-@androidx.room.Database(entities = {LQuest.class, LLocation.class, LTask.class, LHint.class}, version=1)
+@androidx.room.Database(entities = {LQuest.class, LLocation.class, LTask.class, LHint.class}, version=2)
 public abstract class LDatabase extends RoomDatabase {
     public abstract LQuestDao lQuestDao();
     public abstract LLocationDao lLocationDao();

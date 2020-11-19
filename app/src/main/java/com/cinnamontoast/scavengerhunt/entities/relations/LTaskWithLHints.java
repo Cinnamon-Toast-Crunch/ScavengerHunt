@@ -12,6 +12,14 @@ import java.util.List;
 public class LTaskWithLHints {
     @Embedded
     public LTask lTask;
-    @Relation(parentColumn = "id", entityColumn = "lTaskId")
+    @Relation(parentColumn = "id", entityColumn = "lTaskId", entity = LHint.class)
     public List<LHint> lHints;
+
+    @Override
+    public String toString() {
+        return "LTaskWithLHints{" +
+                "lTask=" + lTask +
+                ", lHints=" + lHints +
+                '}';
+    }
 }
