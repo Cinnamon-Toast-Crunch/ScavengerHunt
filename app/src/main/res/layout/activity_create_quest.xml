@@ -26,11 +26,10 @@
         android:layout_height="105dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="80dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/locationPopup"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/questPreview"
@@ -44,9 +43,9 @@
         android:layout_height="130dp"
         android:layout_marginStart="24dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout4"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationPopup">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/locationRecycler"
@@ -59,11 +58,10 @@
         android:layout_width="180dp"
         android:layout_height="130dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="80dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout3">
+        app:layout_constraintStart_toEndOf="@+id/linearLayout3"
+        app:layout_constraintTop_toBottomOf="@+id/makeNewItem">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/taskRecycler"
@@ -77,9 +75,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="80dp"
         android:text="Add Location"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+        app:layout_constraintVertical_bias="0.39" />
 
     <Button
         android:id="@+id/makeNewItem"
@@ -89,26 +90,28 @@
         android:layout_marginBottom="-1dp"
         android:text="add items"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/locationPopup" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="14dp"
         android:text="Quest Preview"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout6" />
 
     <Button
         android:id="@+id/saveQuest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="16dp"
         android:text="Save Quest"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
     <Button
         android:id="@+id/addToQuest"
@@ -116,21 +119,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:text="Add to Quest"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-        app:layout_constraintVertical_bias="0.468" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
-        android:text="this button hides / shows frags"
-        app:layout_constraintBottom_toTopOf="@+id/makeNewItem"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout6"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="24dp"
