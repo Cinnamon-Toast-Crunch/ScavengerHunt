@@ -18,7 +18,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     ArrayList<Task> taskForRecycler;
     TaskListFormatter taskListFormatter;
 
-    public TaskAdapter(ArrayList<Task> taskForRecycler, TaskListFormatter huntListFormatter) {
+    public TaskAdapter(ArrayList<Task> taskForRecycler, TaskListFormatter taskListFormatter) {
         this.taskForRecycler = taskForRecycler;
         this.taskListFormatter = taskListFormatter;
     }

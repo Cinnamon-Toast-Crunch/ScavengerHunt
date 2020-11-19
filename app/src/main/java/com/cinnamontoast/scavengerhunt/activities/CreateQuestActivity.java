@@ -79,6 +79,7 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_quest);
 
+
         setQuestRecycler();
         setTaskRecycler();
         setLocationRecycler();
@@ -139,8 +140,8 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
                 layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
                 ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.location_popup, null);
 
-                popupWindow = new PopupWindow(container, 1500, 1500, true);
-                popupWindow.showAtLocation(constraintLayout, Gravity.NO_GRAVITY, 600, 600);
+                popupWindow = new PopupWindow(container, 900, 1000, true);
+                popupWindow.showAtLocation(constraintLayout, Gravity.NO_GRAVITY, 100, 600);
 
                 //------- Create location button
                 Button createloc = container.findViewById(R.id.createNewLoc);
@@ -185,7 +186,7 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
     public void newItemPopup(){
         Button newItem = findViewById(R.id.makeNewItem);
 
-        constraintLayout = (ConstraintLayout) findViewById(R.id.frameLayout2);
+        constraintLayout = (ConstraintLayout) findViewById(R.id.createquest);
 
         newItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -291,6 +292,7 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
                                 response -> Log.i("MyAmplify", "Hint created"),
                                 error -> Log.e("MyAmplify", "Failed to create hint"));
                     }
+                    viewTasks.clear();
                     populateTasks(selectedLocation);
                    popupWindow.dismiss();
                 });
@@ -399,7 +401,7 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
         Button saveQuest = findViewById(R.id.saveQuest);
         saveQuest.setOnClickListener(v -> {
 
-            String title = findViewById(R.id.inputQuestName).toString();
+            String title = ((TextView)findViewById(R.id.inputQuestName)).getText().toString();
             if(title == ""){
                 Context context = getApplicationContext();
                 CharSequence text = "Please enter a name for this quest.";
