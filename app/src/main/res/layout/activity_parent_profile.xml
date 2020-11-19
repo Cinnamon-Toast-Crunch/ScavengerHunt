@@ -65,6 +65,7 @@
         app:layout_constraintVertical_bias="0.511">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/profileQuestRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
@@ -124,6 +125,7 @@
         app:layout_constraintTop_toTopOf="@+id/linearLayout">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/profilePlayerRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>

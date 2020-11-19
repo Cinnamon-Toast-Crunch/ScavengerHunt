@@ -16,10 +16,12 @@ import android.widget.TextView;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Contact;
 import com.amplifyframework.datastore.generated.model.Location;
+import com.amplifyframework.datastore.generated.model.LocationInstance;
 import com.amplifyframework.datastore.generated.model.Quest;
 import com.amplifyframework.datastore.generated.model.User;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
@@ -111,6 +113,29 @@ public class MainActivity extends AppCompatActivity implements QuestAdapter.Ques
 
 //        LQuest uniqueQuest = retrieveQuestFromRoom(1);
 //        Log.i("room", uniqueQuest.toString());
+
+        // ------ adding test data to dynamoDB ---------
+//        Quest quest1 = Quest.builder().userId(Amplify.Auth.getCurrentUser().getUserId())
+//                .title("space quest").build();
+//        Quest quest2 = Quest.builder().userId(Amplify.Auth.getCurrentUser().getUserId())
+//                .title("forest quest").build();
+//
+//        LocationInstance location1 = LocationInstance.builder()
+//                .questId(quest1.getId())
+//                .name("moon").build();
+//        LocationInstance location2 = LocationInstance.builder()
+//                .questId(quest1.getId())
+//                .name("mars").build();
+//        LocationInstance location3 = LocationInstance.builder()
+//                .questId(quest2.getId())
+//                .name("rain forest").build();
+//
+//        Amplify.API.mutate(ModelMutation.create(quest1), r -> {}, e -> {});
+//        Amplify.API.mutate(ModelMutation.create(quest2), r -> {}, e -> {});
+//        Amplify.API.mutate(ModelMutation.create(location1), r -> {}, e -> {});
+//        Amplify.API.mutate(ModelMutation.create(location2), r -> {}, e -> {});
+//        Amplify.API.mutate(ModelMutation.create(location3), r -> {}, e -> {});
+
 
     }
 
