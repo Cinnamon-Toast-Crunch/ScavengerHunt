@@ -44,7 +44,8 @@ public class ParentProfileActivity extends AppCompatActivity implements QuestAda
 
     String phoneNo = "+12062519102";
     String questId = "0";
-    String message = "https://scavengerhuntstart.page.link/start?questID=" + questId;
+    String smsEndpoint = "https://scavengerhuntstart.page.link/start?questID=";
+    String message = smsEndpoint + questId;
     Button sendBtn;
 
     // Quest ID will come from highlighting the Quest in the recycler view
@@ -71,12 +72,21 @@ public class ParentProfileActivity extends AppCompatActivity implements QuestAda
         sendBtn = (Button) findViewById(R.id.startquestBtn);
 
 
+
         sendBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
-                setQuestId("687457"); // TODO: pull this from the recycler view
-                sendSMSMessage();
-                Log.i("----- DEEP LINK SMS ----", "DEEP LINK SENT to " + phoneNo + " message of " + message );
+                if (selectedQuest == null){
+                    Toast.makeText(getApplicationContext(), "Please Select A Quest", Toast.LENGTH_LONG).show();
+                } else {
+                    // grab Quest Id
+                    String getId = selectedQuest.getId();
+
+                    setQuestId(getId); // TODO: pull this from the recycler view
+                    sendSMSMessage();
+                    Log.i("----- DEEP LINK SMS ----", "DEEP LINK SENT to " + phoneNo + " message of " + message );
+                }
+
             }
         });
 
@@ -138,9 +148,10 @@ public class ParentProfileActivity extends AppCompatActivity implements QuestAda
 
     }
 
+
     public void setQuestId(String questId){
         this.questId = questId;
-        this.message = message + questId;
+        this.message = smsEndpoint + questId;
     }
 
     public void setupQuestRecycler() {
