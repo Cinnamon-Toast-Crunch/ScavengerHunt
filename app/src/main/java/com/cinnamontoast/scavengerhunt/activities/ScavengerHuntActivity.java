@@ -30,6 +30,16 @@ public class ScavengerHuntActivity extends AppCompatActivity {
         String appLinkAction = appLinkIntent.getAction();
         Uri appLinkData = appLinkIntent.getData();
 
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        Uri data = intent.getData();
+        String questId = data.getQueryParameter("questID");
+
+        Log.i("-- FROM LINK ---", "Custom questId is : " + questId);
+
+        // Grab the Quest ID from the Intent
+        // Query AWS
+        // Save it to Room & run the quest off of Room
 
 //       ----- FIREBASE ZOMBIE CODE MIGHT NOT NEED IT -----
 //        FirebaseDynamicLinks.getInstance()
