@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cinnamontoast.scavengerhunt">
 
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +14,7 @@
         android:theme="@style/Theme.ScavengerHunt">
         <activity android:name=".activities.SignInActivity"></activity>
         <activity android:name=".activities.SignupConfirmationActivity" />
-        <activity android:name=".activities.ScavengerHuntActivity" />
+
         <activity android:name=".activities.LaunchQuestActivity" />
         <activity android:name=".activities.CreateQuestActivity" />
         <activity android:name=".activities.ContactActivity" />
@@ -24,6 +27,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".activities.ScavengerHuntActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="https"
+                    android:host="scavengerhuntstart.page.link"
+                    android:path="/start" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -31,6 +32,7 @@ android {
 dependencies {
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.firebase:firebase-dynamic-links:19.0.0'
 
 //    --- Room ---
 
