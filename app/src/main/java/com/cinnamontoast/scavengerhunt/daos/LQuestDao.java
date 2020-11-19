@@ -31,4 +31,7 @@ public interface LQuestDao {
 
     @Query("SELECT * FROM lquest WHERE id = 1")
     public LQuest getOneQuest();
+
+    @Query("SELECT * FROM lquest ORDER BY id DESC LIMIT 1")
+    public LQuest getLastQuest();
 }
