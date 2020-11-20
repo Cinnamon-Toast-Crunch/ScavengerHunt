@@ -11,7 +11,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -26,13 +25,10 @@ import android.widget.Toast;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Contact;
-import com.amplifyframework.datastore.generated.model.Location;
 import com.amplifyframework.datastore.generated.model.Quest;
 import com.cinnamontoast.scavengerhunt.R;
 import com.cinnamontoast.scavengerhunt.adapters.ContactAdapter;
-import com.cinnamontoast.scavengerhunt.adapters.LocationAdapter;
 import com.cinnamontoast.scavengerhunt.adapters.QuestAdapter;
-import com.google.firebase.dynamiclinks.DynamicLink;
 
 import java.util.ArrayList;
 
@@ -90,10 +86,11 @@ public class ParentProfileActivity extends AppCompatActivity implements QuestAda
 
                     if (checkPermission(Manifest.permission.SEND_SMS)){
                         sendSMSMessage();
-                        Toast.makeText(getApplicationContext(), "SMS sent.", Toast.LENGTH_LONG).show();
                     }
 
                 }
+
+                Toast.makeText(getApplicationContext(), "SMS sent.", Toast.LENGTH_LONG).show();
 
             }
         });
@@ -116,7 +113,7 @@ public class ParentProfileActivity extends AppCompatActivity implements QuestAda
         Button addplayer = findViewById(R.id.addplayer);
         addplayer.setOnClickListener(view -> this.startActivity(new Intent(this, ContactActivity.class)));
 
-        ImageButton logoutButton = findViewById(R.id.logout);
+        ImageButton logoutButton = findViewById(R.id.logoutBtn);
         logoutButton.setOnClickListener(view -> {
             Amplify.Auth.signOut(
                     () -> Log.i("Amplify.logout", "successful logout"),

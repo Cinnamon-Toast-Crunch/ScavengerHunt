@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#7284CD85"
     tools:context=".activities.ParentProfileActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -58,6 +59,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
+        android:background="#73FFFFFF"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/startquestBtn"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,6 +79,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="8dp"
         android:text="User Quests"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -99,6 +103,8 @@
         android:layout_marginBottom="40dp"
         android:text="Profile Page"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/profile_image2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -110,6 +116,7 @@
         android:layout_width="182dp"
         android:layout_height="119dp"
         android:layout_marginEnd="24dp"
+        android:background="#73FFFFFF"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/linearLayout"
@@ -131,7 +138,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageButton
-        android:id="@+id/logout"
+        android:id="@+id/logoutBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"

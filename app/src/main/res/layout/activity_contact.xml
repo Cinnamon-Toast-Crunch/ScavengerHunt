@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#7284CD85"
     tools:context=".activities.ContactActivity">
 
     <TextView
@@ -15,6 +16,8 @@
         android:fontFamily="sans-serif-light"
         android:text="Add A Scavenger"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

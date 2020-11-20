@@ -36,8 +36,6 @@ public class SignupActivity extends AppCompatActivity {
 
             String username = ((TextView) findViewById(R.id.usernameSignUp)).getText().toString();
             String password = ((TextView) findViewById(R.id.passwordSignUp)).getText().toString();
-            String familyId = ((TextView) findViewById(R.id.familyIdSignUp)).getText().toString();
-            String dob = ((TextView) findViewById(R.id.birthdaySignUp)).getText().toString();
             String email = ((TextView) findViewById(R.id.emailSignUp)).getText().toString();
 
             // TODO: Profile Pic upload + make default pic image clickable to upload / update img
