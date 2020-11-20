@@ -42,7 +42,7 @@ public class LTaskAdapter extends RecyclerView.Adapter<LTaskAdapter.LTaskViewHol
     public void onBindViewHolder(@NonNull LTaskViewHolder holder, int position) {
         holder.lTask = lTasksForRecycler.get(position);
         ((TextView) holder.itemView.findViewById(R.id.lTaskRecyclerName)).setText(holder.lTask.objective);
-        ((TextView) holder.itemView.findViewById(R.id.lTaskRecyclerPoints)).setText(holder.lTask.pointValue);
+        ((TextView) holder.itemView.findViewById(R.id.lTaskRecyclerPoints)).setText(Integer.toString(holder.lTask.pointValue));
 
     }
 
