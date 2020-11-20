@@ -72,17 +72,17 @@ public class ScavengerHuntActivity extends AppCompatActivity {
         // ------- Save it to Room & run the quest off of Room -------
         // ------- Location Spinner -------
 
-//        LQuest currentQuest = retrieveQuestFromRoom();
-//        for (LLocation location : currentQuest.lLocationList){
-//            locationList.add(location.name);
-//        }
+        LQuest recentQuest = roomDb.lQuestDao().getLastQuest();
+        Integer id = recentQuest.id;
+        LQuest currentQuest = retrieveQuestFromRoom(id);
+        for (LLocation location : currentQuest.lLocationList){
+            locationList.add(location.name);
+        }
 
-//        for (String place : locationList) Log.i("LOCAL ARRAY -- ", place);
-
+        for (String place : locationList) Log.i("LOCAL ARRAY -- ", place);
 
 //        Spinner spinner = findViewById(R.id.locationSpinner);
 //        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, locationList);
-
 
     }
 
