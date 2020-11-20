@@ -31,8 +31,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
                 .inflate(R.layout.fragment_contact, parent, false);
         ContactViewHolder contactViewHolder = new ContactViewHolder(view);
         view.setOnClickListener(v -> {
-            contactListFormatter.contactFormatter(contactViewHolder.contact);
             contactListFormatter.contactHighlighter(view, contactViewHolder.contact);
+            contactListFormatter.contactFormatter(contactViewHolder.contact);
         });
         return contactViewHolder;
     }
