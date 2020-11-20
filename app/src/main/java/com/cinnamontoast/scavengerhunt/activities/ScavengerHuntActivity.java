@@ -2,12 +2,14 @@ package com.cinnamontoast.scavengerhunt.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -20,6 +22,7 @@ import com.amplifyframework.datastore.generated.model.Quest;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.TaskJoiner;
 import com.cinnamontoast.scavengerhunt.R;
+import com.cinnamontoast.scavengerhunt.adapters.LTaskAdapter;
 import com.cinnamontoast.scavengerhunt.database.LDatabase;
 import com.cinnamontoast.scavengerhunt.entities.LHint;
 import com.cinnamontoast.scavengerhunt.entities.LLocation;
@@ -35,7 +38,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ScavengerHuntActivity extends AppCompatActivity {
+public class ScavengerHuntActivity extends AppCompatActivity implements LTaskAdapter.LTaskListFormatter {
 
     private static final String TAG = "no worky";
     public Quest retrievedQuest;
@@ -43,13 +46,15 @@ public class ScavengerHuntActivity extends AppCompatActivity {
     ArrayList<String> locationList = new ArrayList<>();
     public HashMap<String, Task> tasksByJoiner = new HashMap<>();
     String referenceQuestId;
+    RecyclerView taskRecycler;
+    ArrayList<LTask> lTasksInFocus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scavenger_hunt);
         roomDb = Room.databaseBuilder(getApplicationContext(), LDatabase.class, "scavengerlocal")
-//        .fallbackToDestructiveMigration()
+                .fallbackToDestructiveMigration()
                 .allowMainThreadQueries().build();
 
 
@@ -68,16 +73,35 @@ public class ScavengerHuntActivity extends AppCompatActivity {
 
         Log.i("-- FROM LINK ---", "Custom questId is : " + questId);
 
-        // Query AWS
+        // Query AWS and Save it to Room
         referenceQuestId = questId;
         queryTasks();
 //        getQuestFromCloud(referenceQuestId);
 
+        // setup recycler view to listen for task updates
 
 
-        // ------- Save it to Room & run the quest off of Room -------
+        // ------- Run the quest off of Room -------
         // ------- Location Spinner -------
 
+        // ---- moving to method ---
+//        LQuest recentQuest = roomDb.lQuestDao().getLastQuest();
+//        Integer id = recentQuest.id;
+//        LQuest currentQuest = retrieveQuestFromRoom(id);
+//        for (LLocation location : currentQuest.lLocationList){
+//            locationList.add(location.name);
+//        }
+//
+//        for (String place : locationList) Log.i("LOCAL ARRAY -- ", place);
+        // ----
+
+//        Spinner spinner = findViewById(R.id.locationSpinner);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, locationList);
+
+    }
+
+    public void activateQuest() {
+        // ------- Run the quest off of Room -------
         LQuest recentQuest = roomDb.lQuestDao().getLastQuest();
         Integer id = recentQuest.id;
         LQuest currentQuest = retrieveQuestFromRoom(id);
@@ -85,11 +109,11 @@ public class ScavengerHuntActivity extends AppCompatActivity {
             locationList.add(location.name);
         }
 
+        // ------- Location Spinner -------
         for (String place : locationList) Log.i("LOCAL ARRAY -- ", place);
 
 //        Spinner spinner = findViewById(R.id.locationSpinner);
 //        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, locationList);
-
     }
 
     public void queryTasks() {
@@ -100,12 +124,7 @@ public class ScavengerHuntActivity extends AppCompatActivity {
 
                     for (Task task : response.getData()) {
                         Log.i("TaskBeforeJoiner", task.toString());
-                        if (task.getLocations() != null) {
-                            for (TaskJoiner joiner : task.getLocations()){
-//                                Log.i("JoinerAfterTask", joiner.toString());
-                                tasksByJoiner.put(joiner.getId(), task);
-                            }
-                        }
+                        tasksByJoiner.put(task.getId(), task);
                     }
                     Log.i("taskjoinerQuery", tasksByJoiner.toString());
                     getQuestFromCloud(referenceQuestId);
@@ -152,28 +171,6 @@ public class ScavengerHuntActivity extends AppCompatActivity {
         for (LocationInstance location : retrievedQuest.getLocations()) {
             copyLocationToLocal(location, quest.id);
         }
-
-//        LLocation location1 = new LLocation("forage the lion's mane mushroom", 15, (float)47.8609, (float)129.9348, 1);
-//        LLocation location2 = new LLocation("commune with the great horned owl", 50, (float)47.8609, (float)129.9348, 1);
-//        roomDb.lLocationDao().saveLLocation(location1);
-//        roomDb.lLocationDao().saveLLocation(location2);
-//
-//        LTask task1loc1 = new LTask("you must find the mushroom on a pine tree", "look for needles and duff", false, 15, "img.url", 1);
-//        LTask task2loc1 = new LTask("find the owl and learn from her", "she is in the trees", false, 50, "img.url", 1);
-//        roomDb.lTaskDao().saveLTask(task1loc1);
-//        roomDb.lTaskDao().saveLTask(task2loc1);
-//
-//        LHint hint1task1 = new LHint("Check that big tree over there", 1);
-//        LHint hint2task1 = new LHint("Not that tree. The other one", 1);
-//        roomDb.lHintDao().saveLHint(hint1task1);
-//        roomDb.lHintDao().saveLHint(hint2task1);
-//
-//        List<LQuest> questList = roomDb.lQuestDao().getAll();
-//        List<LQuestWithLLocations> questLocationsList = roomDb.lQuestDao().getLQuestsWithLocations();
-//        Log.i("room", questLocationsList.toString());
-//
-//        LQuest uniqueQuest = retrieveQuestFromRoom(1);
-//        Log.i("room", uniqueQuest.toString());
     }
 
     public void copyLocationToLocal(LocationInstance locationInstance, int lastQuestId){
@@ -186,11 +183,12 @@ public class ScavengerHuntActivity extends AppCompatActivity {
                 lastQuestId);
         roomDb.lLocationDao().saveLLocation(location);
         location = roomDb.lLocationDao().getLastLocation();
+        String[] taskIdArray = locationInstance.getTaskList().split(",");
         Log.i("receivedLocationInstance", locationInstance.toString());
         Log.i("newLocation", location.toString());
-        for (TaskJoiner taskJoiner : locationInstance.getTasks()) {
+        for (String taskJoiner : taskIdArray) {
             Log.i("incomingJoiner", taskJoiner.toString());
-            Task task = tasksByJoiner.get(taskJoiner.getId());
+            Task task = tasksByJoiner.get(taskJoiner);
             copyTaskToLocal(task, location.id);
         }
     }
@@ -230,15 +228,27 @@ public class ScavengerHuntActivity extends AppCompatActivity {
     //Grabs the questId
     public void getQuestFromCloud(String questId){
         Amplify.API.query(ModelQuery.get(Quest.class, questId),
-                response -> {Log.i("logggg", "got quest");
-                retrievedQuest = response.getData();
-                Log.i("logggg", retrievedQuest.toString());
-                Log.i("logggg", retrievedQuest.getLocations().toString());
-                copyQuestToLocal();
-                LQuest check = roomDb.lQuestDao().getLastQuest();
-                Log.i("logggg", check.toString());
+                response -> {
+                    Log.i("logggg", "got quest");
+                    retrievedQuest = response.getData();
+                    Log.i("logggg", retrievedQuest.toString());
+                    Log.i("logggg", retrievedQuest.getLocations().toString());
+                    copyQuestToLocal();
+                    LQuest check = roomDb.lQuestDao().getLastQuest();
+                    Log.i("logggg", check.toString());
+                    activateQuest();
                 },
                 error -> {Log.e("logggg", "failed to get quest", error);
                 });
+    }
+
+    @Override
+    public void lTaskFormatter(LTask lTask) {
+        
+    }
+
+    @Override
+    public void lTaskHighlighter(View lTaskView, LTask lTask) {
+
     }
 }
