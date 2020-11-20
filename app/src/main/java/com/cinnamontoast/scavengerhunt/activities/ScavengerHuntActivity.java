@@ -2,15 +2,21 @@ package com.cinnamontoast.scavengerhunt.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -22,7 +28,9 @@ import com.amplifyframework.datastore.generated.model.Quest;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.amplifyframework.datastore.generated.model.TaskJoiner;
 import com.cinnamontoast.scavengerhunt.R;
+import com.cinnamontoast.scavengerhunt.adapters.LLocationAdapter;
 import com.cinnamontoast.scavengerhunt.adapters.LTaskAdapter;
+import com.cinnamontoast.scavengerhunt.adapters.QuestAdapter;
 import com.cinnamontoast.scavengerhunt.database.LDatabase;
 import com.cinnamontoast.scavengerhunt.entities.LHint;
 import com.cinnamontoast.scavengerhunt.entities.LLocation;
@@ -38,7 +46,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ScavengerHuntActivity extends AppCompatActivity implements LTaskAdapter.LTaskListFormatter {
+public class ScavengerHuntActivity extends AppCompatActivity implements LTaskAdapter.LTaskListFormatter, LLocationAdapter.LLocationListFormatter {
 
     private static final String TAG = "no worky";
     public Quest retrievedQuest;
@@ -47,7 +55,15 @@ public class ScavengerHuntActivity extends AppCompatActivity implements LTaskAda
     public HashMap<String, Task> tasksByJoiner = new HashMap<>();
     String referenceQuestId;
     RecyclerView taskRecycler;
-    ArrayList<LTask> lTasksInFocus;
+    Handler taskRecyclerHandler;
+    ArrayList<LTask> thisLocationTaskList;
+
+    Spinner spinner;
+
+    RecyclerView locationRecycler;
+    Handler locationRecyclerHandler;
+    ArrayList<LLocation> questLocations;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +73,11 @@ public class ScavengerHuntActivity extends AppCompatActivity implements LTaskAda
                 .fallbackToDestructiveMigration()
                 .allowMainThreadQueries().build();
 
+        setupTaskRecycler();
+        taskRecyclerHandler = createRecyclerHandler(taskRecycler);
+
+        setupLocationRecycler();
+        locationRecyclerHandler = createRecyclerHandler(locationRecycler);
 
         Log.i("DEEP LINKS", "---- Deep Link Works ----");
 
@@ -95,9 +116,43 @@ public class ScavengerHuntActivity extends AppCompatActivity implements LTaskAda
 //        for (String place : locationList) Log.i("LOCAL ARRAY -- ", place);
         // ----
 
-//        Spinner spinner = findViewById(R.id.locationSpinner);
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, locationList);
+//        locationList.add("one place");
+//        locationList.add("another place");
+        spinner = findViewById(R.id.locationSpinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, locationList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
+
+
+//        spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                String potato = parent.getItemAtPosition(position).toString();
+//                Log.i("POTOTA", potato);
+//
+//            }
+//        });
+
+//        Button spinnerButton = findViewById(R.id.spinnerButton);
+//        spinnerButton.setOnClickListener(v -> {
+//            String selectedLocation = String.valueOf(spinner.getSelectedItem());
+//            Log.i("SelectedLocation", selectedLocation);
+//        });
+    }
+
+    public void setupLocationRecycler() {
+        questLocations = new ArrayList<>();
+        locationRecycler = findViewById(R.id.lLocationRecycler);
+        locationRecycler.setLayoutManager(new LinearLayoutManager(this));
+        locationRecycler.setAdapter(new LLocationAdapter(questLocations, this));
+    }
+
+    public void setupTaskRecycler() {
+        thisLocationTaskList = new ArrayList<>();
+        taskRecycler = findViewById(R.id.lTaskRecycler);
+        taskRecycler.setLayoutManager(new LinearLayoutManager(this));
+        taskRecycler.setAdapter(new LTaskAdapter(thisLocationTaskList, this));
     }
 
     public void activateQuest() {
@@ -107,14 +162,26 @@ public class ScavengerHuntActivity extends AppCompatActivity implements LTaskAda
         LQuest currentQuest = retrieveQuestFromRoom(id);
         for (LLocation location : currentQuest.lLocationList){
             locationList.add(location.name);
+            questLocations.add(location);
         }
+        locationRecyclerHandler.sendEmptyMessage(1);
 
         // ------- Location Spinner -------
         for (String place : locationList) Log.i("LOCAL ARRAY -- ", place);
 
-//        Spinner spinner = findViewById(R.id.locationSpinner);
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, locationList);
     }
+
+    public Handler createRecyclerHandler(RecyclerView rView) {
+        Handler handler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
+            @Override
+            public boolean handleMessage(@NonNull Message msg) {
+                rView.getAdapter().notifyDataSetChanged();
+                return false;
+            }
+        });
+        return handler;
+    }
+
 
     public void queryTasks() {
         Amplify.API.query(ModelQuery.list(
@@ -249,6 +316,18 @@ public class ScavengerHuntActivity extends AppCompatActivity implements LTaskAda
 
     @Override
     public void lTaskHighlighter(View lTaskView, LTask lTask) {
+
+    }
+
+    @Override
+    public void lLocationFormatter(LLocation lLocation) {
+        thisLocationTaskList.clear();
+        for (LTask task : lLocation.lTaskList) thisLocationTaskList.add(task);
+        taskRecyclerHandler.sendEmptyMessage(1);
+    }
+
+    @Override
+    public void lLocationHighlighter(View lLocationView, LLocation lLocation) {
 
     }
 }
