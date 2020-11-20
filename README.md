@@ -11,7 +11,7 @@ Scavenger hunt game developed for Android, that allows parents to create a task-
 [Project Documentation](https://drive.google.com/drive/folders/16NnexZzA5fRYzzEOrDPlrTXU8pRyE5RN)
 
 ## Download The App For Android!
-[Download the SnipeHunt App!](app-debug.apk)
+[Download the SnipeHunt App!](app-final.apk)
 
 
 ### How To Play
