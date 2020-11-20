@@ -31,8 +31,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                 .inflate(R.layout.fragment_task, parent, false);
         TaskViewHolder taskViewHolder = new TaskViewHolder(view);
         view.setOnClickListener(v -> {
-            taskListFormatter.taskFormatter(taskViewHolder.task);
             taskListFormatter.taskHighlighter(view, taskViewHolder.task);
+            taskListFormatter.taskFormatter(taskViewHolder.task);
 
         });
         return taskViewHolder;
