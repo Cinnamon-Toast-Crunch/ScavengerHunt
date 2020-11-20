@@ -222,7 +222,6 @@ public class ParentProfileActivity extends AppCompatActivity implements QuestAda
         }
         lastView = questView;
         questView.setBackgroundColor(Color.LTGRAY);
-
     }
 
     @Override
