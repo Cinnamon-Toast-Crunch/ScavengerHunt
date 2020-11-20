@@ -327,9 +327,10 @@ public class ScavengerHuntActivity extends AppCompatActivity implements LTaskAda
 
         Toast toast = Toast.makeText(getApplicationContext(),
                 "You scored " + lTask.pointValue + " points!!!", Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.TOP| Gravity.LEFT, 200, 300);
-        TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
-        toastMessage.setTextColor(Color.rgb(255,51,255));
+//        toast.setGravity(Gravity.TOP| Gravity.LEFT, 200, 300);
+//        View toastView = toast.getView();
+//        TextView toastMessage = toastView.findViewById(android.R.id.message);
+//        toastMessage.setTextColor(Color.rgb(255,51,255));
         toast.show();
         
         pointsScored += lTask.pointValue;
