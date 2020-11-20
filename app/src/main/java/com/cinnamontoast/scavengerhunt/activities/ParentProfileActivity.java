@@ -19,7 +19,9 @@ import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -45,6 +47,8 @@ public class ParentProfileActivity extends AppCompatActivity implements QuestAda
     String message = smsEndpoint + questId;
     String[] numbers = {"12062519102","18649928355","15556842648","19815426325"};
     Button sendBtn;
+    View lastView;
+
 
     // Quest ID will come from highlighting the Quest in the recycler view
     // contacts will come from highlighting the Contacts on the right side of the recycler
@@ -57,6 +61,7 @@ public class ParentProfileActivity extends AppCompatActivity implements QuestAda
     RecyclerView playerRecycler;
     ArrayList<Quest> questOptions;
     ArrayList<Contact> playerOptions;
+    ArrayList<Contact> selectedPlayers = new ArrayList<>();
     Handler questHandler;
     Handler playerHandler;
 
@@ -87,11 +92,8 @@ public class ParentProfileActivity extends AppCompatActivity implements QuestAda
                     if (checkPermission(Manifest.permission.SEND_SMS)){
                         sendSMSMessage();
                     }
-
                 }
-
                 Toast.makeText(getApplicationContext(), "SMS sent.", Toast.LENGTH_LONG).show();
-
             }
         });
 
@@ -121,16 +123,34 @@ public class ParentProfileActivity extends AppCompatActivity implements QuestAda
             );
             this.startActivity(new Intent(this, MainActivity.class));
         });
+
+        Switch addAll = findViewById(R.id.switch1);
+        addAll.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                for(Contact contact : playerOptions){
+                    selectedPlayers.add(contact);
+                }
+                findViewById(R.id.profilePlayerRecycler).setBackgroundColor(Color.LTGRAY);
+            } else {
+                selectedPlayers.clear();
+                findViewById(R.id.profilePlayerRecycler).setBackgroundColor(Color.TRANSPARENT);
+            }
+        });
     }
 
 
 //    ----- SEND SMS METHODS -----
     protected void sendSMSMessage() {
 
-        SmsManager sms = SmsManager.getDefault();
-        for (String number : numbers){
-            sms.sendTextMessage(number,null,message,null,null);
-            Log.i("----- DEEP LINK SMS ----", "DEEP LINK SENT to " + number + " message of " + message );
+        if(selectedPlayers.size() > 0) {
+            SmsManager sms = SmsManager.getDefault();
+            //for (String number : numbers){
+            for (Contact number : selectedPlayers) {
+                sms.sendTextMessage(number.getPhoneNumber(), null, message, null, null);
+                Log.i("----- DEEP LINK SMS ----", "DEEP LINK SENT to " + number + " message of " + message);
+            }
+        }else {
+            Toast.makeText(getApplicationContext(), "No players have been selected.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -211,7 +231,6 @@ public class ParentProfileActivity extends AppCompatActivity implements QuestAda
         Log.i("MyAmplify.selectedQuest", selectedQuest.toString());
     }
 
-    View lastView;
     @Override
     public void questHighlighter(View questView, Quest quest) {
         if(lastView != null){
@@ -223,17 +242,17 @@ public class ParentProfileActivity extends AppCompatActivity implements QuestAda
 
     @Override
     public void contactFormatter(Contact contact) {
-        if (playerOptions.contains(contact)) {
-            playerOptions.remove(contact);
+        if (selectedPlayers.contains(contact)) {
+            selectedPlayers.remove(contact);
         } else {
-            playerOptions.add(contact);
+            selectedPlayers.add(contact);
         }
-        Log.i("MyAmplify.playerOptions", playerOptions.toString());
+        Log.i("MyAmplify.playerOptions", selectedPlayers.toString());
     }
 
     @Override
     public void contactHighlighter(View contactView, Contact contact) {
-        if(playerOptions.contains(contact)){
+        if(selectedPlayers.contains(contact)){
             contactView.setBackgroundColor(Color.TRANSPARENT);
         } else {
             contactView.setBackgroundColor(Color.LTGRAY);
