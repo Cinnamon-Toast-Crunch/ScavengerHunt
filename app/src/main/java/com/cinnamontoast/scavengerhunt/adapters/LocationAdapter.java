@@ -42,6 +42,8 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
         view.setOnClickListener(v -> {
             locationListFormatter.locationFormatter(locationViewHolder.location);
 
+            locationListFormatter.locationHighlighter(view, locationViewHolder.location);
+
         });
         return locationViewHolder;
     }
@@ -68,6 +70,8 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
 
     public static interface LocationListFormatter {
         public void locationFormatter(Location location);
+
+        public void locationHighlighter(View locationView, Location location);
     }
 
 }

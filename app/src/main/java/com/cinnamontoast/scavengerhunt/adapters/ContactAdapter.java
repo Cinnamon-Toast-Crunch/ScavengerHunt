@@ -32,7 +32,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         ContactViewHolder contactViewHolder = new ContactViewHolder(view);
         view.setOnClickListener(v -> {
             contactListFormatter.contactFormatter(contactViewHolder.contact);
-
+            contactListFormatter.contactHighlighter(view, contactViewHolder.contact);
         });
         return contactViewHolder;
     }
@@ -59,5 +59,6 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
     }
     public static interface ContactListFormatter{
         public void contactFormatter(Contact contact);
+        public void contactHighlighter(View contactView, Contact contact);
     }
 }

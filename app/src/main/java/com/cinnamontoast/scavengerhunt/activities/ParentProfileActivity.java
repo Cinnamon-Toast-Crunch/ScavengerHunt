@@ -214,13 +214,14 @@ public class ParentProfileActivity extends AppCompatActivity implements QuestAda
         Log.i("MyAmplify.selectedQuest", selectedQuest.toString());
     }
 
+    View lastView;
     @Override
     public void questHighlighter(View questView, Quest quest) {
-        if (selectedQuest == quest) {
-            questView.setBackgroundColor(Color.RED);
-        } else {
-            questView.setBackgroundColor(Color.GREEN);
+        if(lastView != null){
+            lastView.setBackgroundColor(Color.TRANSPARENT);
         }
+        lastView = questView;
+        questView.setBackgroundColor(Color.LTGRAY);
     }
 
     @Override
@@ -231,5 +232,14 @@ public class ParentProfileActivity extends AppCompatActivity implements QuestAda
             playerOptions.add(contact);
         }
         Log.i("MyAmplify.playerOptions", playerOptions.toString());
+    }
+
+    @Override
+    public void contactHighlighter(View contactView, Contact contact) {
+        if(playerOptions.contains(contact)){
+            contactView.setBackgroundColor(Color.TRANSPARENT);
+        } else {
+            contactView.setBackgroundColor(Color.LTGRAY);
+        }
     }
 }

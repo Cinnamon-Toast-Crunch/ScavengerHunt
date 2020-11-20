@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.os.Handler;
@@ -75,6 +76,8 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
     Quest emptyQuest;
 
     Button itemButton;
+
+    View lastView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -371,6 +374,16 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
         itemButton.setVisibility(View.VISIBLE);
     }
 
+
+    @Override
+    public void locationHighlighter(View locationView, Location location) {
+        if(lastView != null){
+            lastView.setBackgroundColor(Color.TRANSPARENT);
+        }
+        lastView = locationView;
+        locationView.setBackgroundColor(Color.LTGRAY);
+    }
+
     //================= Populate Task recycler =============
     public void populateTasks(Location location){
         Amplify.API.query(
@@ -401,6 +414,15 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
            selectedTasks.add(task);
            pointTotal += task.getPointValue();
        }
+    }
+
+    @Override
+    public void taskHighlighter(View taskView, Task task) {
+      if(selectedTasks.contains(task)){
+          taskView.setBackgroundColor(Color.TRANSPARENT);
+      } else {
+          taskView.setBackgroundColor(Color.LTGRAY);
+      }
     }
 
     //=========== Save Quest =================================
