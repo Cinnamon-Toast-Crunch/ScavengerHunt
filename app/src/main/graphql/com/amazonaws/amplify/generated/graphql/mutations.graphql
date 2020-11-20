@@ -426,6 +426,7 @@ mutation CreateQuest(
         lat
         lon
         totalPoints
+        taskList
         createdAt
         updatedAt
       }
@@ -451,6 +452,7 @@ mutation UpdateQuest(
         lat
         lon
         totalPoints
+        taskList
         createdAt
         updatedAt
       }
@@ -476,6 +478,7 @@ mutation DeleteQuest(
         lat
         lon
         totalPoints
+        taskList
         createdAt
         updatedAt
       }
@@ -496,6 +499,7 @@ mutation CreateLocationInstance(
     lat
     lon
     totalPoints
+    taskList
     tasks {
       items {
         id
@@ -521,6 +525,7 @@ mutation UpdateLocationInstance(
     lat
     lon
     totalPoints
+    taskList
     tasks {
       items {
         id
@@ -546,6 +551,7 @@ mutation DeleteLocationInstance(
     lat
     lon
     totalPoints
+    taskList
     tasks {
       items {
         id
@@ -575,6 +581,7 @@ mutation CreateTaskJoiner(
       lat
       lon
       totalPoints
+      taskList
       tasks {
         nextToken
       }
@@ -616,6 +623,7 @@ mutation UpdateTaskJoiner(
       lat
       lon
       totalPoints
+      taskList
       tasks {
         nextToken
       }
@@ -657,6 +665,7 @@ mutation DeleteTaskJoiner(
       lat
       lon
       totalPoints
+      taskList
       tasks {
         nextToken
       }

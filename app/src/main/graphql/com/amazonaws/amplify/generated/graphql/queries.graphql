@@ -241,6 +241,7 @@ query GetQuest($id: ID!) {
         lat
         lon
         totalPoints
+        taskList
         createdAt
         updatedAt
       }
@@ -277,6 +278,7 @@ query GetLocationInstance($id: ID!) {
     lat
     lon
     totalPoints
+    taskList
     tasks {
       items {
         id
@@ -304,6 +306,7 @@ query ListLocationInstances(
       lat
       lon
       totalPoints
+      taskList
       tasks {
         nextToken
       }

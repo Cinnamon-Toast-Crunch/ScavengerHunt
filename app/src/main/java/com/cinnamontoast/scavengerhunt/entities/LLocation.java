@@ -22,6 +22,7 @@ public class LLocation {
     public int totalPoints;
     public float lat;
     public float lon;
+    public String taskList;
     @ForeignKey(entity = LQuest.class, parentColumns = "id", childColumns = "lQuestId", onDelete = CASCADE)
     public int lQuestId;
     @Ignore
@@ -40,11 +41,12 @@ public class LLocation {
                 '}';
     }
 
-    public LLocation(String name, int totalPoints, float lat, float lon, int lQuestId) {
+    public LLocation(String name, int totalPoints, float lat, float lon, String taskList, int lQuestId) {
         this.name = name;
         this.totalPoints = totalPoints;
         this.lat = lat;
         this.lon = lon;
+        this.taskList = taskList;
         this.lQuestId = lQuestId;
     }
 
@@ -55,8 +57,8 @@ public class LLocation {
         this.lat = red.lLocation.lat;
         this.lon = red.lLocation.lon;
         this.lQuestId = red.lLocation.lQuestId;
+        this.taskList = red.lLocation.taskList;
         this.lTaskList = this.getTasks(red.lTasks);
-
     }
 
     private List<LTask> getTasks(List<LTaskWithLHints> lTasks) {

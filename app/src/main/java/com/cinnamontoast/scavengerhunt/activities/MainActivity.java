@@ -122,48 +122,68 @@ public class MainActivity extends AppCompatActivity implements QuestAdapter.Ques
 //        Log.i("room", uniqueQuest.toString());
 
         // ------ adding test data to dynamoDB ---------
-//        Quest quest1 = Quest.builder().userId(Amplify.Auth.getCurrentUser().getUserId())
-//                .title("space quest").build();
-//        Quest quest2 = Quest.builder().userId(Amplify.Auth.getCurrentUser().getUserId())
-//                .title("forest quest").build();
-//
-//        LocationInstance location1 = LocationInstance.builder()
-//                .questId(quest1.getId())
-//                .name("moon").build();
-//        LocationInstance location2 = LocationInstance.builder()
-//                .questId(quest1.getId())
-//                .name("mars").build();
-//        LocationInstance location3 = LocationInstance.builder()
-//                .questId(quest2.getId())
-//                .name("rain forest").build();
-//
-//        Amplify.API.mutate(ModelMutation.create(quest1), r -> {}, e -> {});
-//        Amplify.API.mutate(ModelMutation.create(quest2), r -> {}, e -> {});
-//        Amplify.API.mutate(ModelMutation.create(location1), r -> {}, e -> {});
-//        Amplify.API.mutate(ModelMutation.create(location2), r -> {}, e -> {});
-//        Amplify.API.mutate(ModelMutation.create(location3), r -> {}, e -> {});
-//
-//
-//        Location location = Location.builder()
-//                .userId(Amplify.Auth.getCurrentUser().getUserId()).name("snoqualmie").build();
-//
-//        Task task = Task.builder()
-//                .locationId(location.getId()).objective("go snowshoeing").completed(false).build();
-//
-//        Task task2 = Task.builder()
-//                .locationId(location.getId()).objective("find a snowy owl").completed(true).build();
-//
-//        Amplify.API.mutate(ModelMutation.create(location), r -> {}, e -> {});
-//        Amplify.API.mutate(ModelMutation.create(task), r -> {}, e -> {});
-//        Amplify.API.mutate(ModelMutation.create(task2), r -> {}, e -> {});
-//        TaskJoiner join1 = TaskJoiner.builder().locationInstance(location1).task(task).build();
-//        TaskJoiner join2 = TaskJoiner.builder().locationInstance(location1).task(task2).build();
-//        Amplify.API.mutate(ModelMutation.create(join1), r -> {}, e -> {});
-//        Amplify.API.mutate(ModelMutation.create(join2), r -> {}, e -> {});
+//        createFakeQuest();
 
 
 
         checkIfUserSignedIn();
+
+    }
+
+    public void createFakeQuest() {
+        Quest quest1 = Quest.builder().userId(Amplify.Auth.getCurrentUser().getUserId())
+                .title("DUPER quest").build();
+
+        LocationInstance locationInstance1 = LocationInstance.builder()
+                .questId(quest1.getId())
+                .name("moon").build();
+        LocationInstance locationInstance2 = LocationInstance.builder()
+                .questId(quest1.getId())
+                .name("mars").build();
+
+        Location location1 = Location.builder()
+                .userId(Amplify.Auth.getCurrentUser().getUserId()).name("snoqualmie").build();
+        Location location2 = Location.builder()
+                .userId(Amplify.Auth.getCurrentUser().getUserId()).name("hilltop").build();
+
+        Task task1 = Task.builder()
+                .locationId(location1.getId()).objective("go snowshoeing").completed(false).build();
+        Task task2 = Task.builder()
+                .locationId(location1.getId()).objective("find a snowy owl").completed(false).build();
+        Task task3 = Task.builder()
+                .locationId(location2.getId()).objective("climb the hill").completed(false).build();
+        Task task4 = Task.builder()
+                .locationId(location2.getId()).objective("get to top").completed(false).build();
+
+        TaskJoiner join1 = TaskJoiner.builder().locationInstance(locationInstance1).task(task1).build();
+        TaskJoiner join2 = TaskJoiner.builder().locationInstance(locationInstance1).task(task2).build();
+        TaskJoiner join3 = TaskJoiner.builder().locationInstance(locationInstance2).task(task3).build();
+        TaskJoiner join4 = TaskJoiner.builder().locationInstance(locationInstance2).task(task4).build();
+
+        Amplify.API.mutate(ModelMutation.create(quest1), r -> {}, e -> {});
+
+        Amplify.API.mutate(ModelMutation.create(locationInstance1), r -> {}, e -> {});
+        Amplify.API.mutate(ModelMutation.create(locationInstance2), r -> {}, e -> {});
+
+        Amplify.API.mutate(ModelMutation.create(location1), r -> {}, e -> {});
+        Amplify.API.mutate(ModelMutation.create(location2), r -> {}, e -> {});
+
+        Amplify.API.mutate(ModelMutation.create(task1), r -> {}, e -> {});
+        Amplify.API.mutate(ModelMutation.create(task2), r -> {}, e -> {});
+        Amplify.API.mutate(ModelMutation.create(task2), r -> {}, e -> {});
+        Amplify.API.mutate(ModelMutation.create(task2), r -> {}, e -> {});
+
+
+        Amplify.API.mutate(ModelMutation.create(join1), r -> {}, e -> {});
+        Amplify.API.mutate(ModelMutation.create(join2), r -> {}, e -> {});
+        Amplify.API.mutate(ModelMutation.create(join3), r -> {}, e -> {});
+        Amplify.API.mutate(ModelMutation.create(join4), r -> {}, e -> {});
+
+//        Amplify.API.
+
+    }
+
+    public void resultLogger() {
 
     }
 
