@@ -69,7 +69,7 @@ public class ScavengerHuntActivity extends AppCompatActivity implements LTaskAda
     ArrayList<LLocation> questLocations;
     int pointsScored = 0;
 
-
+    ArrayList<LTask> foundItems = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -323,22 +323,26 @@ public class ScavengerHuntActivity extends AppCompatActivity implements LTaskAda
     @Override
     public void lTaskHighlighter(View lTaskView, LTask lTask) {
 
-        lTaskView.setBackgroundColor(Color.DKGRAY);
+        if (!foundItems.contains(lTask)) {
+            foundItems.add(lTask);
+            lTaskView.setBackgroundColor(Color.DKGRAY);
 
-        Toast toast = Toast.makeText(getApplicationContext(),
-                "You scored " + lTask.pointValue + " points!!!", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "You scored " + lTask.pointValue + " points!!!", Toast.LENGTH_LONG);
 //        toast.setGravity(Gravity.TOP| Gravity.LEFT, 200, 300);
 //        View toastView = toast.getView();
 //        TextView toastMessage = toastView.findViewById(android.R.id.message);
 //        toastMessage.setTextColor(Color.rgb(255,51,255));
-        toast.show();
-        
-        pointsScored += lTask.pointValue;
+            toast.show();
+
+            pointsScored += lTask.pointValue;
+        }
     }
 
     @Override
     public void lLocationFormatter(LLocation lLocation) {
         thisLocationTaskList.clear();
+        setupTaskRecycler();
         for (LTask task : lLocation.lTaskList) thisLocationTaskList.add(task);
         taskRecyclerHandler.sendEmptyMessage(1);
     }
