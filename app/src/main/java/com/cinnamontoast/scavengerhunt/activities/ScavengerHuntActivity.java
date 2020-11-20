@@ -336,6 +336,10 @@ public class ScavengerHuntActivity extends AppCompatActivity implements LTaskAda
             toast.show();
 
             pointsScored += lTask.pointValue;
+            TextView displayPoints = findViewById(R.id.pointTotal);
+            String dpoints = String.valueOf(pointsScored);
+            displayPoints.setBackgroundColor(Color.rgb(204,255,229));
+            displayPoints.setText(dpoints);
         }
     }
 
