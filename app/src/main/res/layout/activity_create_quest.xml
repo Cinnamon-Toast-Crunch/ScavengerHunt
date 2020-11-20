@@ -2,11 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/createquest"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.CreateQuestActivity"
-    android:id="@+id/createquest"
-    >
+    android:background="#7284CD85"
+    tools:context=".activities.CreateQuestActivity">
 
     <TextView
         android:id="@+id/textView8"
@@ -15,6 +15,7 @@
         android:layout_marginTop="20dp"
         android:text="Create Quest"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,6 +27,7 @@
         android:layout_height="105dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
+        android:background="#72FFFFFF"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,6 +44,7 @@
         android:layout_width="180dp"
         android:layout_height="130dp"
         android:layout_marginStart="24dp"
+        android:background="#73FFFFFF"
         android:orientation="vertical"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,6 +61,7 @@
         android:layout_width="180dp"
         android:layout_height="130dp"
         android:layout_marginEnd="24dp"
+        android:background="#73FFFFFF"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/linearLayout3"
@@ -100,6 +104,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="14dp"
         android:text="Quest Preview"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout6" />
@@ -137,6 +142,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Name Your Quest"
+            android:singleLine="true"
             android:textAlignment="center" />
     </com.google.android.material.textfield.TextInputLayout>
 
