@@ -70,6 +70,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login"
+        app:srcCompat="@drawable/treasure"
         tools:srcCompat="@drawable/treasure" />
 
 
