@@ -214,7 +214,14 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
 
                     String item = ((TextView) container.findViewById(R.id.newItemName)).getText().toString();
                     String pointsString = ((TextView) container.findViewById(R.id.newItemPoints)).getText().toString();
-                    int points = Integer.parseInt(pointsString);
+//                    int points = Integer.parseInt(pointsString);
+
+                    int points = 2;
+                    try {
+                        points = Integer.parseInt(pointsString);
+                    }catch(Exception e){
+                        Log.i("MyAmplify", "Going with the default value.");
+                    }
 
                     Task newTask = Task.builder()
                             .locationId(selectedLocation.getId())
@@ -266,7 +273,14 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
 
                     String item = ((TextView) container.findViewById(R.id.newItemName)).getText().toString();
                     String pointsString = ((TextView) container.findViewById(R.id.newItemPoints)).getText().toString();
-                    int points = Integer.parseInt(pointsString);
+//                    int points = Integer.parseInt(pointsString);
+
+                    int points = 2;
+                    try {
+                        points = Integer.parseInt(pointsString);
+                    }catch(Exception e){
+                        Log.i("MyAmplify", "Going with the default value.");
+                    }
 
                     Task newTask = Task.builder()
                             .locationId(selectedLocation.getId())
