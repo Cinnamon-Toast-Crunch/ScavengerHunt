@@ -32,6 +32,7 @@ import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ScavengerHuntActivity extends AppCompatActivity {
@@ -40,6 +41,8 @@ public class ScavengerHuntActivity extends AppCompatActivity {
     public Quest retrievedQuest;
     public LDatabase roomDb;
     ArrayList<String> locationList = new ArrayList<>();
+    public HashMap<String, Task> tasksByJoiner = new HashMap<>();
+    String referenceQuestId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public class ScavengerHuntActivity extends AppCompatActivity {
         roomDb = Room.databaseBuilder(getApplicationContext(), LDatabase.class, "scavengerlocal")
 //        .fallbackToDestructiveMigration()
                 .allowMainThreadQueries().build();
+
 
         Log.i("DEEP LINKS", "---- Deep Link Works ----");
 
@@ -65,7 +69,9 @@ public class ScavengerHuntActivity extends AppCompatActivity {
         Log.i("-- FROM LINK ---", "Custom questId is : " + questId);
 
         // Query AWS
-        getQuestFromCloud(questId);
+        referenceQuestId = questId;
+        queryTasks();
+//        getQuestFromCloud(referenceQuestId);
 
 
 
@@ -86,13 +92,37 @@ public class ScavengerHuntActivity extends AppCompatActivity {
 
     }
 
+    public void queryTasks() {
+        Amplify.API.query(ModelQuery.list(
+                Task.class),
+                response -> {
+                    Log.i("taskjoinerQuery", response.toString());
+
+                    for (Task task : response.getData()) {
+                        Log.i("TaskBeforeJoiner", task.toString());
+                        if (task.getLocations() != null) {
+                            for (TaskJoiner joiner : task.getLocations()){
+//                                Log.i("JoinerAfterTask", joiner.toString());
+                                tasksByJoiner.put(joiner.getId(), task);
+                            }
+                        }
+                    }
+                    Log.i("taskjoinerQuery", tasksByJoiner.toString());
+                    getQuestFromCloud(referenceQuestId);
+                    },
+                error -> {
+                    Log.e("taskjoinerQuery", "oh no", error);
+                }
+                );
+    }
+
     public void addFakeRoomData() {
         LQuest quest = new LQuest("forest quest");
         roomDb.lQuestDao().saveLQuest(quest);
         quest = roomDb.lQuestDao().getLastQuest();
 
-        LLocation location1 = new LLocation("forage the lion's mane mushroom", 15, (float)47.8609, (float)129.9348, quest.id);
-        LLocation location2 = new LLocation("commune with the great horned owl", 50, (float)47.8609, (float)129.9348, quest.id);
+        LLocation location1 = new LLocation("forage the lion's mane mushroom", 15, (float)47.8609, (float)129.9348, "", quest.id);
+        LLocation location2 = new LLocation("commune with the great horned owl", 50, (float)47.8609, (float)129.9348, "", quest.id);
         roomDb.lLocationDao().saveLLocation(location1);
         roomDb.lLocationDao().saveLLocation(location2);
 
@@ -149,25 +179,28 @@ public class ScavengerHuntActivity extends AppCompatActivity {
     public void copyLocationToLocal(LocationInstance locationInstance, int lastQuestId){
         LLocation location = new LLocation(
                 locationInstance.getName(),
-                locationInstance.getTotalPoints() != null ? locationInstance.getTotalPoints() : 1,
-                locationInstance.getLat(),
-                locationInstance.getLon(),
+                locationInstance.getTotalPoints() != null ? locationInstance.getTotalPoints() : 0,
+                locationInstance.getLat() != null ? locationInstance.getLat() : (float) 1,
+                locationInstance.getLon() != null ? locationInstance.getLon() : (float) 1,
+                locationInstance.getTaskList(),
                 lastQuestId);
         roomDb.lLocationDao().saveLLocation(location);
         location = roomDb.lLocationDao().getLastLocation();
         Log.i("receivedLocationInstance", locationInstance.toString());
         Log.i("newLocation", location.toString());
         for (TaskJoiner taskJoiner : locationInstance.getTasks()) {
-            Task task = taskJoiner.getTask();
+            Log.i("incomingJoiner", taskJoiner.toString());
+            Task task = tasksByJoiner.get(taskJoiner.getId());
             copyTaskToLocal(task, location.id);
         }
     }
 
     public void copyTaskToLocal(Task task, int lastLocationId) {
+        Log.i("incomingTask", task.toString());
         LTask lTask = new LTask(task.getObjective(),
                 task.getInstruction(),
                 task.getCompleted(),
-                task.getPointValue(),
+                task.getPointValue() != null ? task.getPointValue() : 1,
                 "",
                 lastLocationId);
         roomDb.lTaskDao().saveLTask(lTask);

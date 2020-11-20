@@ -27,12 +27,14 @@ public final class LocationInstance implements Model {
   public static final QueryField LAT = field("lat");
   public static final QueryField LON = field("lon");
   public static final QueryField TOTAL_POINTS = field("totalPoints");
+  public static final QueryField TASK_LIST = field("taskList");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="ID", isRequired = true) String questID;
   private final @ModelField(targetType="String", isRequired = true) String name;
   private final @ModelField(targetType="Float") Float lat;
   private final @ModelField(targetType="Float") Float lon;
   private final @ModelField(targetType="Int") Integer totalPoints;
+  private final @ModelField(targetType="String") String taskList;
   private final @ModelField(targetType="TaskJoiner") @HasMany(associatedWith = "locationInstance", type = TaskJoiner.class) List<TaskJoiner> tasks = null;
   public String getId() {
       return id;
@@ -58,17 +60,22 @@ public final class LocationInstance implements Model {
       return totalPoints;
   }
   
+  public String getTaskList() {
+      return taskList;
+  }
+  
   public List<TaskJoiner> getTasks() {
       return tasks;
   }
   
-  private LocationInstance(String id, String questID, String name, Float lat, Float lon, Integer totalPoints) {
+  private LocationInstance(String id, String questID, String name, Float lat, Float lon, Integer totalPoints, String taskList) {
     this.id = id;
     this.questID = questID;
     this.name = name;
     this.lat = lat;
     this.lon = lon;
     this.totalPoints = totalPoints;
+    this.taskList = taskList;
   }
   
   @Override
@@ -84,7 +91,8 @@ public final class LocationInstance implements Model {
               ObjectsCompat.equals(getName(), locationInstance.getName()) &&
               ObjectsCompat.equals(getLat(), locationInstance.getLat()) &&
               ObjectsCompat.equals(getLon(), locationInstance.getLon()) &&
-              ObjectsCompat.equals(getTotalPoints(), locationInstance.getTotalPoints());
+              ObjectsCompat.equals(getTotalPoints(), locationInstance.getTotalPoints()) &&
+              ObjectsCompat.equals(getTaskList(), locationInstance.getTaskList());
       }
   }
   
@@ -97,6 +105,7 @@ public final class LocationInstance implements Model {
       .append(getLat())
       .append(getLon())
       .append(getTotalPoints())
+      .append(getTaskList())
       .toString()
       .hashCode();
   }
@@ -110,7 +119,8 @@ public final class LocationInstance implements Model {
       .append("name=" + String.valueOf(getName()) + ", ")
       .append("lat=" + String.valueOf(getLat()) + ", ")
       .append("lon=" + String.valueOf(getLon()) + ", ")
-      .append("totalPoints=" + String.valueOf(getTotalPoints()))
+      .append("totalPoints=" + String.valueOf(getTotalPoints()) + ", ")
+      .append("taskList=" + String.valueOf(getTaskList()))
       .append("}")
       .toString();
   }
@@ -144,6 +154,7 @@ public final class LocationInstance implements Model {
       null,
       null,
       null,
+      null,
       null
     );
   }
@@ -154,7 +165,8 @@ public final class LocationInstance implements Model {
       name,
       lat,
       lon,
-      totalPoints);
+      totalPoints,
+      taskList);
   }
   public interface QuestIdStep {
     NameStep questId(String questId);
@@ -172,6 +184,7 @@ public final class LocationInstance implements Model {
     BuildStep lat(Float lat);
     BuildStep lon(Float lon);
     BuildStep totalPoints(Integer totalPoints);
+    BuildStep taskList(String taskList);
   }
   
 
@@ -182,6 +195,7 @@ public final class LocationInstance implements Model {
     private Float lat;
     private Float lon;
     private Integer totalPoints;
+    private String taskList;
     @Override
      public LocationInstance build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -192,7 +206,8 @@ public final class LocationInstance implements Model {
           name,
           lat,
           lon,
-          totalPoints);
+          totalPoints,
+          taskList);
     }
     
     @Override
@@ -227,6 +242,12 @@ public final class LocationInstance implements Model {
         return this;
     }
     
+    @Override
+     public BuildStep taskList(String taskList) {
+        this.taskList = taskList;
+        return this;
+    }
+    
     /** 
      * WARNING: Do not set ID when creating a new object. Leave this blank and one will be auto generated for you.
      * This should only be set when referring to an already existing object.
@@ -250,13 +271,14 @@ public final class LocationInstance implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String questId, String name, Float lat, Float lon, Integer totalPoints) {
+    private CopyOfBuilder(String id, String questId, String name, Float lat, Float lon, Integer totalPoints, String taskList) {
       super.id(id);
       super.questId(questId)
         .name(name)
         .lat(lat)
         .lon(lon)
-        .totalPoints(totalPoints);
+        .totalPoints(totalPoints)
+        .taskList(taskList);
     }
     
     @Override
@@ -282,6 +304,11 @@ public final class LocationInstance implements Model {
     @Override
      public CopyOfBuilder totalPoints(Integer totalPoints) {
       return (CopyOfBuilder) super.totalPoints(totalPoints);
+    }
+    
+    @Override
+     public CopyOfBuilder taskList(String taskList) {
+      return (CopyOfBuilder) super.taskList(taskList);
     }
   }
   
