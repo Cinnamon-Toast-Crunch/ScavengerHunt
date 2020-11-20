@@ -62,9 +62,6 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
     LayoutInflater layoutInflater;
     RelativeLayout relativeLayout;
     ConstraintLayout constraintLayout;
-
-
-
     RecyclerView taskRecycler;
     RecyclerView locationRecycler;
     RecyclerView questRecycler;
@@ -183,8 +180,12 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
                             response -> Log.i("MyAmplify", "Location created"),
                             error -> Log.e("MyAmplify", "Failed to create Location"));
 
+
+                    selectedLocation = newLoc;
                     setLocationRecycler();
                     populateLocations();
+                    populateTasks(newLoc);
+                    locationHighlighter(locationRecycler, newLoc);
                     popupWindow.dismiss();
                 });
             }
@@ -346,19 +347,11 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
 
                             viewLocation.add(location);
                     }
-
                     locationHandler.sendEmptyMessage(1);
-                    //TODO Location recycler
-//                    taskRecycler = findViewById(R.id.locationRecycler);
-//                    taskRecycler.setLayoutManager(new LinearLayoutManager(this));
-//                    taskRecycler.setAdapter(new LocationAdapter(viewLocation, this));
-
                     Log.i("MyAmplify", "tasks array created");
-
                 },
                 error -> Log.e("MyAmplify", "Failed to load tasks")
         );
-
     }
 
     //======== Grab Location from recyclerview ===========
@@ -370,6 +363,7 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
         viewTasks.clear();
         pointTotal = 0;
 
+        setTaskRecycler();
         populateTasks(location);
         itemButton.setVisibility(View.VISIBLE);
     }
@@ -409,9 +403,12 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
     public void taskFormatter(Task task) {
        if(selectedTasks.contains(task)) {
            selectedTasks.remove(task);
+           System.out.println("removed task " + selectedTasks.size());
+
            pointTotal -= task.getPointValue();
        }else{
            selectedTasks.add(task);
+           System.out.println("added task " + selectedTasks.size());
            pointTotal += task.getPointValue();
        }
     }
@@ -474,7 +471,7 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
 
         if(selectedTasks.size() == 0){
             Context context = getApplicationContext();
-            CharSequence text = "Please select/create an item for this location.";
+            CharSequence text = "Please select an item for this location.";
             int duration = Toast.LENGTH_LONG;
 
             Toast toast = Toast.makeText(context, text, duration);
@@ -487,6 +484,10 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
                 .lon(selectedLocation.getLon())
                 .totalPoints(pointTotal)
                 .build();
+
+            Amplify.API.mutate(ModelMutation.create(instance),
+                    response -> Log.i("MyAmplify", "Instance Task"),
+                    error -> Log.e("MyAmplify", "Failed to create instance"));
 
         for(Task task : selectedTasks){
             TaskJoiner joiner = TaskJoiner.builder()
