@@ -86,10 +86,39 @@ public class ScavengerHuntActivity extends AppCompatActivity {
 
     }
 
+    public void addFakeRoomData() {
+        LQuest quest = new LQuest("forest quest");
+        roomDb.lQuestDao().saveLQuest(quest);
+        quest = roomDb.lQuestDao().getLastQuest();
+
+        LLocation location1 = new LLocation("forage the lion's mane mushroom", 15, (float)47.8609, (float)129.9348, quest.id);
+        LLocation location2 = new LLocation("commune with the great horned owl", 50, (float)47.8609, (float)129.9348, quest.id);
+        roomDb.lLocationDao().saveLLocation(location1);
+        roomDb.lLocationDao().saveLLocation(location2);
+
+        LTask task1loc1 = new LTask("you must find the mushroom on a pine tree", "look for needles and duff", false, 15, "img.url", 1);
+        LTask task2loc1 = new LTask("find the owl and learn from her", "she is in the trees", false, 50, "img.url", 1);
+        roomDb.lTaskDao().saveLTask(task1loc1);
+        roomDb.lTaskDao().saveLTask(task2loc1);
+
+        LHint hint1task1 = new LHint("Check that big tree over there", 1);
+        LHint hint2task1 = new LHint("Not that tree. The other one", 1);
+        roomDb.lHintDao().saveLHint(hint1task1);
+        roomDb.lHintDao().saveLHint(hint2task1);
+
+//        List<LQuest> questList = roomDb.lQuestDao().getAll();
+//        List<LQuestWithLLocations> questLocationsList = roomDb.lQuestDao().getLQuestsWithLocations();
+//        Log.i("room", questLocationsList.toString());
+
+//        LQuest uniqueQuest = retrieveQuestFromRoom(1);
+//        Log.i("room", uniqueQuest.toString());
+    }
+
     public void copyQuestToLocal(){
         LQuest quest = new LQuest(retrievedQuest.getTitle());
         roomDb.lQuestDao().saveLQuest(quest);
         quest = roomDb.lQuestDao().getLastQuest();
+        Log.i("incomingLocations", retrievedQuest.getLocations().toString());
         for (LocationInstance location : retrievedQuest.getLocations()) {
             copyLocationToLocal(location, quest.id);
         }
@@ -118,9 +147,16 @@ public class ScavengerHuntActivity extends AppCompatActivity {
     }
 
     public void copyLocationToLocal(LocationInstance locationInstance, int lastQuestId){
-        LLocation location = new LLocation(locationInstance.getName(), locationInstance.getTotalPoints(), locationInstance.getLat(), locationInstance.getLon(), lastQuestId);
+        LLocation location = new LLocation(
+                locationInstance.getName(),
+                locationInstance.getTotalPoints() != null ? locationInstance.getTotalPoints() : 1,
+                locationInstance.getLat(),
+                locationInstance.getLon(),
+                lastQuestId);
         roomDb.lLocationDao().saveLLocation(location);
         location = roomDb.lLocationDao().getLastLocation();
+        Log.i("receivedLocationInstance", locationInstance.toString());
+        Log.i("newLocation", location.toString());
         for (TaskJoiner taskJoiner : locationInstance.getTasks()) {
             Task task = taskJoiner.getTask();
             copyTaskToLocal(task, location.id);
@@ -128,7 +164,12 @@ public class ScavengerHuntActivity extends AppCompatActivity {
     }
 
     public void copyTaskToLocal(Task task, int lastLocationId) {
-        LTask lTask = new LTask(task.getObjective(), task.getInstruction(), task.getCompleted(), task.getPointValue(), "", lastLocationId);
+        LTask lTask = new LTask(task.getObjective(),
+                task.getInstruction(),
+                task.getCompleted(),
+                task.getPointValue(),
+                "",
+                lastLocationId);
         roomDb.lTaskDao().saveLTask(lTask);
         LTask recentTask = roomDb.lTaskDao().getLastTask();
         for (Hint hint : task.getHints()) {
@@ -137,7 +178,9 @@ public class ScavengerHuntActivity extends AppCompatActivity {
     }
 
     public void copyHintToLocal(Hint hint, int lastTaskId) {
-        LHint lHint = new LHint(hint.getContent(), lastTaskId);
+        LHint lHint = new LHint(
+                hint.getContent(),
+                lastTaskId);
     }
 
     public LQuest retrieveQuestFromRoom(int questId){

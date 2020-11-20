@@ -228,6 +228,11 @@ public class MainActivity extends AppCompatActivity implements QuestAdapter.Ques
 
     }
 
+    @Override
+    public void locationHighlighter(View locationView, Location location) {
+
+    }
+
     public void setupButtons() {
         Button login = findViewById(R.id.login);
         login.setOnClickListener(view -> this.startActivity(new Intent(this, SignInActivity.class)));

@@ -32,6 +32,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         TaskViewHolder taskViewHolder = new TaskViewHolder(view);
         view.setOnClickListener(v -> {
             taskListFormatter.taskFormatter(taskViewHolder.task);
+            taskListFormatter.taskHighlighter(view, taskViewHolder.task);
 
         });
         return taskViewHolder;
@@ -61,5 +62,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     }
     public static interface TaskListFormatter{
         public void taskFormatter(Task task);
+        public void taskHighlighter(View taskView, Task task);
     }
 }
