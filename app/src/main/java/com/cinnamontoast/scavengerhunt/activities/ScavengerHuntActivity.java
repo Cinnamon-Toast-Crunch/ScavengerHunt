@@ -7,17 +7,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
@@ -63,6 +67,8 @@ public class ScavengerHuntActivity extends AppCompatActivity implements LTaskAda
     RecyclerView locationRecycler;
     Handler locationRecyclerHandler;
     ArrayList<LLocation> questLocations;
+    int pointsScored = 0;
+
 
 
     @Override
@@ -317,6 +323,16 @@ public class ScavengerHuntActivity extends AppCompatActivity implements LTaskAda
     @Override
     public void lTaskHighlighter(View lTaskView, LTask lTask) {
 
+        lTaskView.setBackgroundColor(Color.DKGRAY);
+
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "You scored " + lTask.pointValue + " points!!!", Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.TOP| Gravity.LEFT, 200, 300);
+        TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+        toastMessage.setTextColor(Color.rgb(255,51,255));
+        toast.show();
+        
+        pointsScored += lTask.pointValue;
     }
 
     @Override
