@@ -60,7 +60,6 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
     Location selectedLocation;
     PopupWindow popupWindow;
     LayoutInflater layoutInflater;
-    RelativeLayout relativeLayout;
     ConstraintLayout constraintLayout;
     RecyclerView taskRecycler;
     RecyclerView locationRecycler;
@@ -180,12 +179,14 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
                             response -> Log.i("MyAmplify", "Location created"),
                             error -> Log.e("MyAmplify", "Failed to create Location"));
 
-
-                    selectedLocation = newLoc;
+                    selectedLocation = null;
                     setLocationRecycler();
                     populateLocations();
-                    populateTasks(newLoc);
-                    locationHighlighter(locationRecycler, newLoc);
+                    selectedTasks.clear();
+                    pointTotal = 0;
+                    viewTasks.clear();
+                    setTaskRecycler();
+                    itemButton.setVisibility(View.INVISIBLE);
                     popupWindow.dismiss();
                 });
             }
@@ -477,12 +478,24 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
         }else {
+            String taskIds = "";
+            int counter = 0;
+            for(Task task : selectedTasks){
+                if(counter == 0) {
+                    taskIds = task.getId();
+                    counter++;
+                }else {
+                    taskIds += "," + task.getId();
+                }
+            }
+
         LocationInstance instance = LocationInstance.builder()
                 .questId(emptyQuest.getId())
                 .name(selectedLocation.getName())
                 .lat(selectedLocation.getLat())
                 .lon(selectedLocation.getLon())
                 .totalPoints(pointTotal)
+                .taskList(taskIds)
                 .build();
 
             Amplify.API.mutate(ModelMutation.create(instance),
@@ -505,6 +518,7 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
 
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
+
         selectedTasks.clear();
         pointTotal = 0;
         questLocations.add(selectedLocation);
@@ -515,10 +529,6 @@ public class CreateQuestActivity extends AppCompatActivity implements LocationAd
         populateLocations();
         setTaskRecycler();
         setLocationRecycler();
-
-
-        }
-        });
+        }});
     }
-
 }
